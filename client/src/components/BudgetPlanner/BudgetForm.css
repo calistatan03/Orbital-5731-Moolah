@@ -1,0 +1,53 @@
+.new-budget__controls {
+  margin-left: 30%;
+  margin-right: 25%;
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.new-budget__control label {
+  font: inherit;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.new-budget__control input {
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 20rem;
+  max-width: 100%;
+}
+
+.new-budget__actions { 
+  margin-left: 21rem;
+}
+
+
+.new-budget__actions .cancel { 
+  position: absolute;
+  display: flex;
+  font: inherit;
+  cursor: pointer;
+  margin-left: 22rem;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  border: none;
+}
+
+.new-budget__actions .submit { 
+  position: absolute;
+  display: flex;
+  font: inherit;
+  cursor: pointer;
+  margin-left: 30rem;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  border: none;
+
+}
+
