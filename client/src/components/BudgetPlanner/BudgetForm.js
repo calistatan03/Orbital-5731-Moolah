@@ -24,27 +24,30 @@ export default function BudgetForm(props) {
   }
 
   return (
-  <form onSubmit={submitHandler}>
-    <div className="new-budget__controls">
-      <div className="new-budget__control">
-        <label>Category</label>
-        <input type="text" value={enteredCategory} onChange={categoryChangeHandler} />
+    <div className="budget-form_wrapper">
+      <form onSubmit={submitHandler}>
+      <div className="new-budget__controls">
+        <div className="new-budget__control">
+          <label>Category</label>
+          <input type="text" value={enteredCategory} onChange={categoryChangeHandler} />
+        </div>
+        <div className="new-budget__control">
+          <label>Amount</label>
+          <input type='number' 
+            min="0.01" 
+            step="0.01" 
+            value={enteredAmount}
+            onChange={amountChangeHandler}/>
+        </div>
       </div>
-      <div className="new-budget__control">
-        <label>Amount</label>
-        <input type='number' 
-          min="0.01" 
-          step="0.01" 
-          value={enteredAmount}
-          onChange={amountChangeHandler}/>
-      </div>
-    </div>
-    <div className="new-budget__actions">
-      <button className="cancel" type="cancel" onClick={props.onCancel}>Cancel</button>
-      <button className="submit" type='submit' onClick={submitHandler}>Add Budget</button>
+      <div className="new-budget__actions">
+        <button className="cancel" type="cancel" onClick={props.onCancel}>Cancel</button>
+        <button className="submit" type='submit' onClick={submitHandler}>Add Budget</button>
 
-    </div>
-  </form>
+      </div>
+    </form>
+  </div>
+  
   )
 
 }

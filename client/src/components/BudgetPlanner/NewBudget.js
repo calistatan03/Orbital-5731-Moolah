@@ -14,12 +14,23 @@ export default function NewBudget(props) {
     setIsEditing(false); 
   }
 
+  // to generate a random color for the budget created
+  function generateRandomColor() { 
+    const existingBudgetLength = 2; 
+    return `${existingBudgetLength * 34} 65% 50%`
+  }
+
   function saveBudgetDataHandler(enteredBudgetData) { 
+    // create a new budget 
     const budgetData = { 
       ...enteredBudgetData, 
-      id: Math.random().toString() 
+      // the below is a Crypto API built into javascript, allows us to create
+      // a random ID 
+      id: crypto.randomUUID(),
+      color: generateRandomColor()
+  
     }; 
-    props.onAddBudget(budgetData); 
+    props.onAddBudgetChart(budgetData);
     setIsEditing(false); 
   }
 

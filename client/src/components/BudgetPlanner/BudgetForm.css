@@ -1,3 +1,4 @@
+
 .new-budget__controls {
   margin-left: 30%;
   margin-right: 25%;
@@ -24,7 +25,8 @@
 }
 
 .new-budget__actions { 
-  margin-left: 21rem;
+  margin-top: 3rem;
+  margin-left: 26rem;
 }
 
 

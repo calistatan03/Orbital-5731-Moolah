@@ -1,3 +1,10 @@
+.main_container .welcome_message { 
+	font: inherit;
+	
+	
+}
+
+
 * {
 	box-sizing: border-box;
 }
