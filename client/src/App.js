@@ -2,7 +2,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
-import Display from "./components/BudgetPlanner/Dashboard";
+import Dashboard from "./components/BudgetPlanner/Dashboard";
 
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
 			<Route path="/signup" exact element={<Signup />} />
 			<Route path="/login" exact element={<Login />} />
 			<Route path="/" element={<Navigate replace to="/login" />} />
-			<Route path = "/budgetplanner" exact element = {<Display/>} />
+			<Route path = "/budgetplanner" exact element = {<Dashboard/>} />
 		</Routes>
 
 		</div>

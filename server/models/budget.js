@@ -11,7 +11,7 @@ const budgetSchema = new mongoose.Schema({
   amount: {type: Number}
 })
 
-const categories = mongoose.model("category", budgetSchema);
-const budgets = mongoose.model("budget", budgetSchema);
+const Category = mongoose.model("category", budgetSchema);
+const Budget = mongoose.model("budget", budgetSchema);
 
-module.exports = { budgets, categories };
+module.exports = { Budget, Category };
