@@ -1,0 +1,26 @@
+.split {
+    display: flex;
+    height: 100vh; 
+}
+
+.form {
+    width: 35%; 
+    background-color: #FAE8A0;
+    justify-content: center;
+  }
+
+  .new_transaction {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .doughnutchart {
+    flex-grow: 1; 
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+  }
+  
+  
+  

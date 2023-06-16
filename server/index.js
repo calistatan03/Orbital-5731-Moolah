@@ -8,6 +8,8 @@ const connection = require("./db");
 const userRoutes = require('./routes/user');
 const authRoutes = require('./routes/auth');
 const budgetRoutes = require('./routes/budget');
+const expenseRoutes = require('./routes/tracker');
+const transactionRoutes = require('./routes/addtransaction');
 
 //connect to mongodb database
 connection();
@@ -20,6 +22,8 @@ app.use(cors());
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/budgetplanner", budgetRoutes);
+app.use("/api/expensetracker", expenseRoutes);
+app.use("/api/add-transaction", transactionRoutes);
 
 //set up port
 const port = process.env.PORT || 8080;

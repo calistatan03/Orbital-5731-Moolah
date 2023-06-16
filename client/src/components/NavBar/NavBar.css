@@ -14,10 +14,18 @@
 
 .moolah-title {
   font-size: 1.5rem;
+  font-weight: bold;
   color: white;
   margin: .5rem;
   color: white;
   margin-left: 20px;
+
+}
+
+.moolahlogo {
+  width: 60px; 
+  height: auto;
+  margin-top: -10px; 
 }
 
 .navbar-links ul {
