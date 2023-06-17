@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './NavBar.css';
+import moolahlogo from '../../images/moolahlogo.png'
 
 export default function NavBar() {
 	const handleLogout = () => {
@@ -10,7 +11,9 @@ export default function NavBar() {
 	return (
 		<div className="main_container">
 			<nav className="navbar">
-				<div className="moolah-title">Moolah!</div>
+				<div className="moolah-title">Moolah!
+				<img src={moolahlogo} alt="Logo" className="moolahlogo" />
+				</div>
 				<Link to="#" className="toggle-button">
 					<span className="bar"></span>
 					<span className="bar"></span>
