@@ -1,0 +1,62 @@
+.transaction-list {
+    list-style-type: none;
+  }
+  
+  .transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    margin-bottom: 10px;
+    background-color: #dbc3ec;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .transaction-item.expense {
+    background-color: rgba(212, 153, 239, 0.61); 
+  }
+  
+  .transaction-item.income {
+    background-color: rgba(234, 206, 147, 0.658); 
+  }
+  
+  .transaction-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .trans_name {
+    font-style: oblique;
+    flex: 1;
+  }
+
+  .trans_category {
+    font-weight: bold;
+    width: 100px;
+    text-align: center;
+  }
+
+  .trans_amt {
+    font-style:italic;
+    text-align: right;
+  }
+
+  .delete-icon {
+    position: absolute;
+    right: 13rem;
+    margin-bottom: 6px;
+    cursor: pointer;
+    transition: color 0.3s;
+    color: grey;
+    font-size: 24px;
+  }
+
+  .delete-icon:hover {
+    color: red;
+  }
+
+  .historytext {
+    font-style: italic;
+    text-align: center;
+    margin-top: 40px;
+  }
