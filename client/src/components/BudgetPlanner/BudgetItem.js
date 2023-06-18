@@ -1,6 +1,5 @@
 import './BudgetItem.css'; 
 import ChartBar from './ChartBar';
-import NewBudget from './NewBudget';
 
 export default function BudgetItem(props) { 
 

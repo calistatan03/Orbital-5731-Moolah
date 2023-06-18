@@ -58,6 +58,26 @@
 
 }
 
+.add_budget_button { 
+  height: 15rem;
+}
+
+.add_budget_button .button { 
+    margin: 45%;
+    margin-top: 5rem;
+    width: 12rem;
+    font: inherit;
+    cursor: pointer;
+    padding: 1rem 2rem;
+    border: 1px solid #3bb19b;
+    background-color: white;
+    color: #3bb19b;
+    border-radius: 12px;
+    position: absolute;
+    text-decoration: none;
+  
+}
+
 .logout_button {
   border: none;
   margin-top: 5px;

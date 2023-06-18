@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './NewBudget.css';
 import BudgetForm from './BudgetForm';
+import { Link } from 'react-router-dom';
 
 export default function NewBudget(props) { 
 
@@ -26,8 +27,8 @@ export default function NewBudget(props) {
       ...enteredBudgetData, 
       // the below is a Crypto API built into javascript, allows us to create
       // a random ID 
-      id: crypto.randomUUID(),
-      color: generateRandomColor()
+      //id: crypto.randomUUID(),
+      //color: generateRandomColor()
   
     }; 
     props.onAddBudgetChart(budgetData);
@@ -35,7 +36,7 @@ export default function NewBudget(props) {
   }
 
   return <div className="new-budget">
-    {!isEditing && <button className="button" onClick={startEditingHandler}>Add New Budget</button>}
+    {!isEditing && <Link to="/add-budget" className="button" onClick={startEditingHandler}>Add New Budget</Link>}
     {isEditing && <BudgetForm onSaveBudgetData={saveBudgetDataHandler} onCancel={stopEditingHandler}/>}
   </div>
 

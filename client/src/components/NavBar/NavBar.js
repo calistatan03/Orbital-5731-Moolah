@@ -12,7 +12,7 @@ export default function NavBar() {
 		<div className="main_container">
 			<nav className="navbar">
 				<div className="moolah-title">Moolah!
-				<img src={moolahlogo} alt="Logo" className="moolahlogo" />
+					<img src={moolahlogo} alt="Logo" className="moolahlogo" />
 				</div>
 				<Link to="#" className="toggle-button">
 					<span className="bar"></span>
