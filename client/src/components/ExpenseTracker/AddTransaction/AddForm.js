@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-export default function AddForm(props) {
+export default function AddForm({onSaveTransactionData}) {
   const [enteredName, setEnteredName] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [enteredAmount, setEnteredAmount] = useState(0);
@@ -36,7 +36,7 @@ export default function AddForm(props) {
         'http://localhost:8080/api/add-transaction',
         transactionData);
 
-      props.onSaveTransactionData(response.data);
+      onSaveTransactionData(response.data);
       setEnteredName('');
       setSelectedCategory('');
       setEnteredAmount('');
@@ -48,6 +48,8 @@ export default function AddForm(props) {
       console.error(error);
     }
   }
+
+  
 
   return (
     <div className="transaction-form_wrapper">
