@@ -8,6 +8,7 @@ export default function AddForm({onSaveTransactionData}) {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [enteredAmount, setEnteredAmount] = useState(0);
   const [error, setError] = useState('');
+  
 
   function nameChangeHandler(event) {
     setEnteredName(event.target.value);

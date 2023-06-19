@@ -6,7 +6,6 @@ export default function TransactionList({ transactions, onDeleteTransaction }) {
     const handleDelete = (id) => {
       onDeleteTransaction(id);
     };
-  
     return (
       <div>
         <h1 className="historytext">Transaction History</h1>

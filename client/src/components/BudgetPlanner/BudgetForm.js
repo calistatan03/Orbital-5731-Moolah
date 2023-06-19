@@ -52,11 +52,16 @@ export default function BudgetForm(props) {
     <div>
       <NavBar/>
       <div className="budget-form_wrapper">
-        <form onSubmit={submitHandler}>
+        <form className="budget-form" onSubmit={submitHandler}>
         <div className="new-budget__controls">
           <div className="new-budget__control">
             <label>Category</label>
-            <input type="text" value={enteredCategory} onChange={categoryChangeHandler} />
+            <input 
+            placeholder="Groceries, Transport, Food..."
+            type="text" 
+            value={enteredCategory} 
+            onChange={categoryChangeHandler}
+            className="category_input with-shadow" />
           </div>
           <div className="new-budget__control">
             <label>Amount</label>
@@ -64,7 +69,8 @@ export default function BudgetForm(props) {
               min="0.01" 
               step="0.01" 
               value={enteredAmount}
-              onChange={amountChangeHandler}/>
+              onChange={amountChangeHandler}
+              className="amount_input with-shadow"/>
           </div>
         </div>
         <div className="new-budget__actions">

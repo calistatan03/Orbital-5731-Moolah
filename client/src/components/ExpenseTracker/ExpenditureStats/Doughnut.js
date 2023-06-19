@@ -9,7 +9,7 @@ import axios from 'axios';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function DoughnutChart({transactions}) {
-  
+
   const [transactionList, setTransactionList] = useState(transactions);
 
   const expenseTotal = transactions
