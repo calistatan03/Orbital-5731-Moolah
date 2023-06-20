@@ -2,11 +2,12 @@ const router = require("express").Router();
 const Transaction = require('../models/transaction');
 
 router.post("/", async (req, res) => {
-  let { name, category, amount } = req.body;
+  let { title, date, category, amount } = req.body;
 
   try {
     const create = await Transaction.create({
-      name,
+      title,
+      date,
       category,
       amount,
     });
