@@ -5,7 +5,7 @@ const Bill = require('../models/bill');
 router.post("/", async (req, res) => { 
 
   // extracting properties from req.body 
-  const { title, amount, numOfMembers, memberNames } = req.body;
+  const { title, amount, numOfMembers, memberNames, paidMember } = req.body;
   
   try {
     
@@ -13,7 +13,8 @@ router.post("/", async (req, res) => {
       title,
       amount,
       numOfMembers,
-      memberNames
+      memberNames,
+      paidMember
     });
 
     const newBill = await bill.save(); 
