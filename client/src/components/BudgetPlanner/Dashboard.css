@@ -7,6 +7,10 @@
   justify-content: space-between;
 }
 
+.budget_list { 
+  margin-top: 2%;
+}
+
 .display_top_text h2 { 
   font: inherit;
   margin-left: 20rem;
@@ -59,7 +63,7 @@
 }
 
 .add_budget_button { 
-  height: 15rem;
+  height: 13rem;
 }
 
 .add_budget_button .button { 
@@ -67,6 +71,7 @@
     margin-top: 5rem;
     width: 12rem;
     font: inherit;
+    font-size: 14px;
     cursor: pointer;
     padding: 1rem 2rem;
     border: 1px solid #3bb19b;
@@ -75,7 +80,17 @@
     border-radius: 12px;
     position: absolute;
     text-decoration: none;
-  
+    align-items: center;
+}
+
+.add_budget_button div { 
+  display: inline-flex;
+}
+
+.add_budget_button .icon { 
+  font-size: 15px;
+  display: inline-flex;
+
 }
 
 .logout_button {

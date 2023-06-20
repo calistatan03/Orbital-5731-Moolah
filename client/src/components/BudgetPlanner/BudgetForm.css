@@ -1,3 +1,13 @@
+.budget-form_wrapper { 
+  height: 11rem;
+  align-items: center;
+}
+
+
+.with-shadow { 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 
 .new-budget__controls {
   margin-left: 30%;
@@ -13,6 +23,7 @@
   font: inherit;
   margin-bottom: 0.5rem;
   display: block;
+  font-weight: bold;
 }
 
 .new-budget__control input {

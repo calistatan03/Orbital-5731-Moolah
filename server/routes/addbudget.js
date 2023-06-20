@@ -14,9 +14,20 @@ router.post("/", async (req, res) => {
     });
 
     const newBudget = await budget.save(); 
-    res.status(200).json(newBudget);
+    return res.status(200).json(newBudget);
   } catch (error) {
     return res.status(400).json({ message: `Error while creating budget: ${error}` });
+  }
+});
+
+
+// retrieve all budgets from database 
+router.get("/", async (req, res) => {
+  try {
+    const budgets = await Budget.find();
+    return res.json(budgets);
+  } catch (error) {
+    return res.status(500).json({ message: `Error while retrieving budget: ${error}` });
   }
 });
   
@@ -34,5 +45,28 @@ router.post("/", async (req, res) => {
     console.log(error.message)
   }*/
 
+// delete a single budget 
+router.delete("/:_id", async (req, res) => {
+  const budgetId = req.params._id;
+
+  try {
+    const deletedBudget = await Budget.findByIdAndDelete(budgetId);
+
+    if (!deletedBudget) {
+      return res.status(404).json({ message: 'Budget not found' });
+    }
+
+    return res.json({ message: 'Budget deleted successfully' });
+  } catch (error) {
+    return res.status(500).json({ message: `Error while deleting transaction: ${error}` });
+  }
+});
+
+// find a budget based on category 
+router.get("/:_id", async (req, res) => { 
+  const budgetCategory = req.params.amount;
+
+
+})
 
 module.exports = router; 
