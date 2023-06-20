@@ -16,6 +16,7 @@ export default function AddForm() {
   const [enteredNumOfMembers, setEnteredNumOfMembers] = useState(0); 
   const [memberNames, setMemberNames] = useState([{memberName: ""}]);
   const [paidMember, setPaidMember] = useState("");
+  const [enteredDate, setEnteredDate] = useState('');
   //const [memberNameList, setMemberNameList] = useState([{memberName: "Me"}])
 
   function titleChangeHandler(event) { 
@@ -24,6 +25,10 @@ export default function AddForm() {
 
   function amountChangeHandler(event) { 
     setEnteredAmount(event.target.value); 
+  }
+
+  function dateChangeHandler(event) { 
+    setEnteredDate(event.target.value); 
   }
 
   function numChangeHandler(event) { 
@@ -36,6 +41,7 @@ export default function AddForm() {
     const billData = {
       title: enteredTitle,
       amount: +enteredAmount,
+      date: new Date(enteredDate),
       numOfMembers: enteredNumOfMembers,
       memberNames: memberNames, 
       paidMember: paidMember
@@ -50,6 +56,7 @@ export default function AddForm() {
       setEnteredTitle('');
       setEnteredAmount('');
       setEnteredNumOfMembers('');
+      setEnteredDate('');
       setMemberNames([{memberName: "Me"}]);
       setPaidMember('');
     } catch (error) {
@@ -112,6 +119,17 @@ export default function AddForm() {
         </div>
 
         <div className="new-bill__controls">
+          <label>Date</label>
+          <input 
+            type="date"
+            className="form-input with-shadow"
+            min="2000-01-01"
+            max="2030-01-01" 
+            value={enteredDate}
+            onChange={dateChangeHandler}/>
+        </div>
+
+        <div className="new-bill__controls">
           <label>Number of Members</label>
           <input 
             type="number"
@@ -122,7 +140,7 @@ export default function AddForm() {
             onChange={numChangeHandler} />
         </div>
 
-        <div className="new-bill__controls">
+        <div className="new-bill__control">
         <label>Name of Member</label>
         {memberNames.length > 0 && memberNames.map((memberNames, index) => (
           <div key={index}>
@@ -131,8 +149,8 @@ export default function AddForm() {
               className="form-input with-shadow"
               type="text"
               onChange={event => addMemberHandler(event, index)}/>
-            <button onClick={() => deleteMemberHandler(index)} className="delete" type="button"><RemoveIcon/></button>
-            <button onClick={addAnotherMemberHandler} className="add" type="button"><AddIcon/></button>
+            <button onClick={() => deleteMemberHandler(index)} className="delete_btn" type="button"><RemoveIcon/></button>
+            <button onClick={addAnotherMemberHandler} className="add_btn" type="button"><AddIcon/></button>
           </div>
         ))}
         </div>

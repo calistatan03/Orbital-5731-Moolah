@@ -13,9 +13,8 @@
   margin-top: 3rem;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0.5px;
   margin-bottom: 3rem;
-  text-align: left;
   justify-content: center;
   align-items: center;
 }
@@ -23,8 +22,9 @@
 .new-bill__controls label {
   font: inherit;
   margin-bottom: 0.5rem;
-  display: block;
   font-weight: bold;
+  display: block;
+
 }
 
 .new-bill__controls input {
@@ -33,6 +33,33 @@
   border-radius: 6px;
   border: 1px solid #ccc;
   width: 20rem;
+  max-width: 100%;
+}
+
+.new-bill__control { 
+  margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5px;
+    margin-bottom: 3rem;
+    text-align: left;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-bill__control label { 
+  font: inherit;
+  margin-bottom: 0.5rem;
+  display: block;
+  font-weight: bold;
+}
+
+.new-bill__control input { 
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 15rem;
   max-width: 100%;
 }
 
@@ -47,7 +74,7 @@
   color: #fff;
   cursor: pointer;
   margin-top: 20px;
-  margin-left: 11rem;
+  margin-left: 4rem;
 }
 
 .submit_btn:hover {
@@ -64,7 +91,7 @@
   background-color: #f6a624;
   color: #ffffff;
   cursor: pointer;
-  margin-left: 6.3rem;
+  margin-left: 11.1rem;
 }
 
 .cancel_btn:hover {
@@ -82,4 +109,33 @@
   text-align: center;
   margin-bottom: 20px;
   font-size: 30px;
+}
+
+.delete_btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+  background-color: rgb(203, 203, 203);
+  color: #ffffff;
+  cursor: pointer;
+  margin-left: 2px;
+  margin-right: 2px;
+
+}
+
+
+.add_btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+  background-color: rgb(203, 203, 203);
+  color: #ffffff;
+  cursor: pointer;
+
 }

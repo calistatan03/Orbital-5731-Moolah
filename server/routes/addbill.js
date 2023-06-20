@@ -5,13 +5,14 @@ const Bill = require('../models/bill');
 router.post("/", async (req, res) => { 
 
   // extracting properties from req.body 
-  const { title, amount, numOfMembers, memberNames, paidMember } = req.body;
+  const { title, amount, date, numOfMembers, memberNames, paidMember } = req.body;
   
   try {
     
     const bill = new Bill({
       title,
       amount,
+      date,
       numOfMembers,
       memberNames,
       paidMember
@@ -23,20 +24,17 @@ router.post("/", async (req, res) => {
     return res.status(400).json({ message: `Error while creating bill: ${error}` });
   }
 });
+
+// fetch all bill records from database 
+router.get("/", async (req, res) => {
+  try {
+    const bills = await Bill.find();
+    return res.json(bills);
+  } catch (error) {
+    return res.status(500).json({ message: `Error while retrieving bill: ${error}` });
+  }
+});
   
-  /*creating a new 'Document' from the Budget model 
-  let budget = new Budget({ 
-    category, amount, id,
-  })
-
-
-  try { 
-    budget = await budget.save() 
-    res.send(budget)
-  } catch(error) { 
-    res.status(500).send(error.message)
-    console.log(error.message)
-  }*/
 
 
 module.exports = router; 
