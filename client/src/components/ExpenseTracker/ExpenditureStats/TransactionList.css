@@ -1,62 +1,61 @@
 .transaction-list {
-    list-style-type: none;
-  }
-  
-  .transaction-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 50px;
-    margin-bottom: 10px;
-    background-color: #dbc3ec;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .transaction-item.expense {
-    background-color: rgba(212, 153, 239, 0.61); 
-  }
-  
-  .transaction-item.income {
-    background-color: rgba(234, 206, 147, 0.658); 
-  }
-  
-  .transaction-item:last-child {
-    margin-bottom: 0;
-  }
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
 
-  .trans_name {
-    font-style: oblique;
-    flex: 1;
-  }
+.transaction-item {
+  display: flex;
+  flex-direction: row;
+  column-gap: 1rem;
+  align-items: flex-start;
+  padding: 5px 20px;
+  margin-bottom: 10px;
+  background-color: #dbc3ec;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
 
-  .trans_category {
-    font-weight: bold;
-    width: 100px;
-    text-align: center;
-  }
+.trans_title {
+  text-align: left;
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 5px;
+  flex-grow: 1;
+}
 
-  .trans_amt {
-    font-style:italic;
-    text-align: right;
-  }
+.trans_info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
 
-  .delete-icon {
-    position: absolute;
-    right: 13rem;
-    margin-bottom: 6px;
-    cursor: pointer;
-    transition: color 0.3s;
-    color: grey;
-    font-size: 24px;
-  }
+.trans_date,
+.trans_category,
+.trans_amt {
+  color: #fff;
+  margin-bottom: 5px;
+}
 
-  .delete-icon:hover {
-    color: red;
-  }
 
-  .historytext {
-    font-style: italic;
-    text-align: center;
-    margin-top: 40px;
-  }
+.delete-icon {
+  position: absolute;
+  left: 20px;
+  bottom: 10%;
+  cursor: pointer;
+  transition: color 0.3s;
+  color: #fefcfc;
+  font-size: 20px;
+}
+
+.delete-icon:hover {
+  color: #585656;
+}
+
+.historytext {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 24px;
+  font-weight: bold;
+}

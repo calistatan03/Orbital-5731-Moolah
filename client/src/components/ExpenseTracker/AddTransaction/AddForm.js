@@ -2,20 +2,25 @@ import './AddForm.css';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function AddForm({onSaveTransactionData}) {
-  const [enteredName, setEnteredName] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [enteredCategory, setEnteredCategory] = useState('');
   const [enteredAmount, setEnteredAmount] = useState(0);
   const [error, setError] = useState('');
-  
+  const [enteredDate, setEnteredDate] = useState('');
+  const [enteredTitle, setEnteredTitle] = useState('');
 
-  function nameChangeHandler(event) {
-    setEnteredName(event.target.value);
+  function titleChangeHandler(event) { 
+    setEnteredTitle(event.target.value); 
+  }
+  
+  function dateChangeHandler(event) { 
+    setEnteredDate(event.target.value); 
   }
 
   function categoryChangeHandler(event) {
-    setSelectedCategory(event.target.value);
+    setEnteredCategory(event.target.value);
   }
 
   function amountChangeHandler(event) {
@@ -25,8 +30,9 @@ export default function AddForm({onSaveTransactionData}) {
   async function submitHandler(event) {
     event.preventDefault();
     const transactionData = {
-      name: enteredName,
-      category: selectedCategory,
+      title: enteredTitle,
+      date: enteredDate,
+      category: enteredCategory,
       amount: enteredAmount,
     };
 
@@ -38,8 +44,9 @@ export default function AddForm({onSaveTransactionData}) {
         transactionData);
 
       onSaveTransactionData(response.data);
-      setEnteredName('');
-      setSelectedCategory('');
+      setEnteredTitle('');
+      setEnteredDate('');
+      setEnteredCategory('');
       setEnteredAmount('');
       setError('');
     } catch (error) {
@@ -56,29 +63,37 @@ export default function AddForm({onSaveTransactionData}) {
     <div className="transaction-form_wrapper">
       <form onSubmit={submitHandler}>
         <div className="new-transaction__controls">
-          <div className="new-transaction__control">
-            <h1 className="new_trans">New Transaction</h1>
-            <label>Name</label>
+        <h1 className="new_trans">New Transaction</h1>
+        <div className="new-transaction__control">
+            <label>Title</label>
             <input
               type="text"
-              value={enteredName}
-              onChange={nameChangeHandler}
               className="form-input with-shadow"
+              value={enteredTitle}
+              onChange={titleChangeHandler}
+              style={{ width: '20rem', height: '2.5rem' }}
             />
           </div>
+        <div className="new-transaction__control">
+          <label>Date</label>
+          <input 
+            type="date"
+            className="form-input with-shadow"
+            min="2000-01-01"
+            max="2030-01-01" 
+            value={enteredDate}
+            onChange={dateChangeHandler}/>
+        </div>
           <div className="new-transaction__control">
             <label>Category</label>
-            <select
-              name="category"
+            <input
+              type="text"
               className="form-input with-shadow"
-              value={selectedCategory}
+              value={enteredCategory}
               onChange={categoryChangeHandler}
               style={{ width: '20rem', height: '2.5rem' }}
-            >
-              <option value="" disabled selected>Select category</option>
-              <option value="Expense">Expense</option>
-              <option value="Income">Income</option>
-            </select>
+              placeholder='Food, Clothes, Groceries etc.'
+            />
           </div>
           <div className="new-transaction__control">
             <label>Amount</label>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
@@ -11,34 +11,76 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export default function DoughnutChart({transactions}) {
 
   const [transactionList, setTransactionList] = useState(transactions);
+  const [expenseData, setExpenseData] = useState([]);
+  const [totalExpense, setTotalExpense] = useState(0);
+  const [categoryNames, setCategoryNames] = useState([]);
+  const [labels, setLabels] = useState([]);
+  const [categoryColors, setCategoryColors] = useState([]);
 
-  const expenseTotal = transactions
-    .filter((transaction) => transaction.category === 'Expense')
-    .reduce((total, transaction) => total + transaction.amount, 0);
 
-  const incomeTotal = transactions
-    .filter((transaction) => transaction.category === 'Income')
-    .reduce((total, transaction) => total + transaction.amount, 0);
+  //whenever the 'transactions' passed to the DoughnutChart changes, the 'updateExpenseData' function will be called to recalculate the expense data and update the state variables
+  useEffect(() => {
+    updateExpenseData();
+    setCategoryColors(generateCategoryColors());
+  }, [transactions]);
 
-  const data = {
-    datasets: [
-      {
-        data: [expenseTotal, incomeTotal],
-        backgroundColor: ['#934CFA', 'rgb(255, 205, 86)'],
-        hoverOffset: 4,
-        borderRadius: 20,
-        spacing: 10,
-      },
-    ],
+  const generateCategoryColors = () => {
+    const colors = [
+      '#934CFA',
+      '#FFCD56',
+      '#FF6384',
+      '#36A2EB',
+      '#FF9F40',
+    ];
+
+    const uniqueCategories = [...new Set(transactions.map((transaction) => transaction.category))];
+    const categoryColors = {};
+
+    uniqueCategories.forEach((category, index) => {
+      categoryColors[category] = colors[index % colors.length];
+    });
+
+    return categoryColors;
   };
 
+  const updateExpenseData = () => {
+    const expenseCategories = {};
+
+    transactions.forEach((transaction) => {
+      if (expenseCategories[transaction.category]) {
+        expenseCategories[transaction.category] += transaction.amount;
+      } else {
+        expenseCategories[transaction.category] = transaction.amount;
+      }
+    });
+
+    
+    const categoryNames = Object.keys(expenseCategories);
+    const data = Object.values(expenseCategories); //Object.values to get an array of expense amounts for each category
+    setExpenseData(data);
+    const totalExpenseAmount = data.reduce((total, amount) => total + amount, 0);
+    setTotalExpense(totalExpenseAmount);
+
+    setLabels(categoryNames); 
+    setCategoryNames(categoryNames);
+  };
+  
+  
   const options = {
     cutout: 200,
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: (cat) => {
+            const labelIndex = cat.dataIndex;
+            const value = cat.parsed;
+            const percentage = ((value / totalExpense) * 100).toFixed(2);
+            return `${percentage}%`;
+          }
+        }
+      }
+    }
   };
-
-  const totalExpenseText = `-$${expenseTotal.toFixed(2)}`;
-  const totalIncomeText = `+$${incomeTotal.toFixed(2)}`;
-
   
   const deleteTransaction = async (id) => {
     try {
@@ -61,12 +103,24 @@ export default function DoughnutChart({transactions}) {
       <div className="split2">
         <div className="doughnut">
           <h1 className="statistics">Expenditure Statistics</h1>
-          <Doughnut data={data} options={options} />
-          <div className="total-expense-text">{totalExpenseText}</div>
-          <div className="total-income-text">{totalIncomeText}</div>
-        </div>
+          <Doughnut data={{
+              datasets: [
+                {
+                  data: expenseData,
+                  backgroundColor: ['#934CFA', '#FFCD56', '#FF6384', '#36A2EB', '#FF9F40'],
+                  hoverOffset: 4,
+                  borderRadius: 20,
+                  spacing: 10,
+                },
+              ],
+              labels: categoryNames,
+            }}
+            options={options}
+          />
+          <div className="total-expense-text">Total Expense: ${totalExpense.toFixed(2)}</div>
+        </div>  
         <div className="history">
-          <TransactionList transactions={transactions} onDeleteTransaction={deleteTransaction}></TransactionList>
+          <TransactionList transactions={transactions} categoryColors={categoryColors} onDeleteTransaction={deleteTransaction}></TransactionList>
           <Link to="/add-transaction" className="add_button">Add New Transaction Here</Link>
         </div>
       </div>

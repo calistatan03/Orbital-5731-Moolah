@@ -39,10 +39,10 @@
     text-align: center;
     border: none;
     border-radius: 4px;
-    background-color: #934CFA;
+    background-color: rgba(85, 16, 120, 0.459);
     color: #fff;
     cursor: pointer;
-    margin-left: 3rem;
+    margin-top: 1rem;
   }
   
   .add_button:hover {
@@ -55,27 +55,14 @@
   
   .total-expense-text {
     position: absolute; 
-    top: 53%; 
+    top: 65%; 
     left: 50%; 
     transform: translate(-50%, -50%); 
-    font-size: 50px; 
+    font-size: 30px; 
     font-weight: bold; 
     text-align: center;
     color: #934CFA;
-    padding: 10px 20px;
+    padding: 20px 60px;
     border-radius: 9999px;
     background-color: rgba(193, 91, 240, 0.2);
 }
-
-  .total-income-text {
-    position: absolute; 
-    top: 65%; 
-    left: 28%;
-    font-size: 50px; 
-    font-weight: bold; 
-    text-align: center;
-    color: rgb(255, 205, 86);
-    padding: 10px 20px;
-  border-radius: 9999px;
-  background-color: rgba(237, 222, 56, 0.2);
-  }
