@@ -5,7 +5,6 @@ import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export default function AddForm({onSaveTransactionData}) {
-  const [date, setDate] = useState(null);
   const [enteredCategory, setEnteredCategory] = useState('');
   const [enteredAmount, setEnteredAmount] = useState(0);
   const [error, setError] = useState('');

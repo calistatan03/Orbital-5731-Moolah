@@ -1,3 +1,13 @@
+.budget-form_wrapper { 
+  height: 11rem;
+  align-items: center;
+}
+
+
+.with-shadow { 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 
 .new-budget__controls {
   margin-left: 30%;
@@ -13,6 +23,7 @@
   font: inherit;
   margin-bottom: 0.5rem;
   display: block;
+  font-weight: bold;
 }
 
 .new-budget__control input {
@@ -31,25 +42,38 @@
 
 
 .new-budget__actions .cancel { 
+  
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+  background-color: #934CFA;
+  color: #fff;
+  cursor: pointer;
   position: absolute;
   display: flex;
   font: inherit;
-  cursor: pointer;
   margin-left: 22rem;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  border: none;
+
 }
 
-.new-budget__actions .submit { 
+.new-budget__actions .submit {
+  
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+  background-color: #934CFA;
+  color: #fff;
+  cursor: pointer;
   position: absolute;
   display: flex;
   font: inherit;
-  cursor: pointer;
   margin-left: 30rem;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  border: none;
 
 }
 

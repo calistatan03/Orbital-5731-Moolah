@@ -1,0 +1,29 @@
+.budget_item_category { 
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  display: block;
+  color: white;
+
+}
+
+.budget_item_category h2 { 
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.card { 
+  border: none;
+  background-color:rgb(170, 115, 221);
+  padding: 1rem 1rem;
+  text-align: center;
+  width: 7rem;
+
+}
+
+.budget_item_amount h2 { 
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+}

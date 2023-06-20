@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import './NewBudget.css';
-import BudgetForm from './BudgetForm';
 import { Link } from 'react-router-dom';
+import AddForm from './AddForm';
+import './OpenForm.css';
 
-export default function NewBudget(props) { 
+export default function OpenForm(props) { 
 
   const [isEditing, setIsEditing] = useState(false); 
 
@@ -21,23 +21,25 @@ export default function NewBudget(props) {
     return `${existingBudgetLength * 34} 65% 50%`
   }
 
-  function saveBudgetDataHandler(enteredBudgetData) { 
-    // create a new budget 
-    const budgetData = { 
-      ...enteredBudgetData, 
+  function saveBillDataHandler(enteredBillData) { 
+    // create a new bill 
+    const billData = { 
+      ...enteredBillData, 
       // the below is a Crypto API built into javascript, allows us to create
       // a random ID 
       //id: crypto.randomUUID(),
       //color: generateRandomColor()
   
     }; 
-    props.onAddBudgetChart(budgetData);
+    props.onAddBudgetChart(billData);
     setIsEditing(false); 
   }
 
-  return <div className="new-budget">
-    {!isEditing && <Link to="/add-budget" className="button" onClick={startEditingHandler}>Add New Budget</Link>}
-    {isEditing && <BudgetForm onSaveBudgetData={saveBudgetDataHandler} onCancel={stopEditingHandler}/>}
+  return <div className="new-bill">
+    {!isEditing && <Link to="/add-bill" className="button" onClick={startEditingHandler}>Add New Bill</Link>}
+    {isEditing && <AddForm onSaveBillData={saveBillDataHandler} onCancel={stopEditingHandler}/>}
   </div>
 
 }
+
+

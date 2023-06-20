@@ -1,19 +1,20 @@
-import './BudgetItem.css'; 
-import ChartBar from './ChartBar';
-import NewBudget from './NewBudget';
+import "./BudgetItem.css";
 
-export default function BudgetItem(props) { 
-
-  return ( 
-    <div class="card" className='budget-item'>
-      <div className='budget-item__description'> 
-        <h2>{props.category}</h2>
-        <div className='budget-item__amount'>${props.amount}</div>
-      </div>
-      <div className="budget_chart">
-        <ChartBar/>
-      </div>
-    </div>
+// props should be a single budget object 
+export default function BudgetItem({budget}) { 
+  return (
+    <>
+      <li>
+        <div className="card">
+          <div className="budget_item_category">
+            <h2>{budget.category}</h2>
+          </div>
+          <div className='budget_item_amount'>
+            <h2>${budget.amount}</h2>
+          </div>
+        </div>
+      </li>
+    </>
   )
 
 }

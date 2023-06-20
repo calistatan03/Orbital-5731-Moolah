@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import './NavBar.css';
 import moolahlogo from '../../images/moolahlogo.png'
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function NavBar() {
 	const handleLogout = () => {
@@ -12,7 +13,7 @@ export default function NavBar() {
 		<div className="main_container">
 			<nav className="navbar">
 				<div className="moolah-title">Moolah!
-				<img src={moolahlogo} alt="Logo" className="moolahlogo" />
+					<img src={moolahlogo} alt="Logo" className="moolahlogo" />
 				</div>
 				<Link to="#" className="toggle-button">
 					<span className="bar"></span>
@@ -25,7 +26,7 @@ export default function NavBar() {
 						<li><Link to="/budgetplanner">Budget Planner</Link></li>
 						<li><Link to="/billsplitter">Bill Splitter</Link></li> 
 						<li><button className="logout_button" onClick={handleLogout}>
-							Logout
+							<LogoutIcon/>
 						</button>
 						</li>
 					</ul>

@@ -82,7 +82,35 @@
     margin-left: 6.3rem;
   }
   
-  .view_stats:hover {
-    background-color: #e8aa19;
-  }
-  
+.view_stats:hover {
+  background-color: #e8aa19;
+}
+
+.delete_btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+  background-color: rgb(203, 203, 203);
+  color: #ffffff;
+  cursor: pointer;
+  margin-left: 2px;
+  margin-right: 2px;
+
+}
+
+
+.add_btn { 
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+  background-color: rgb(203, 203, 203);
+  color: #ffffff;
+  cursor: pointer;
+
+}

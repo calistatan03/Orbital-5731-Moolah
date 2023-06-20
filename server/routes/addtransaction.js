@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Transaction = require('../models/transaction');
 
+// save the new budget data 
 router.post("/", async (req, res) => {
   let { title, date, category, amount } = req.body;
 
