@@ -9,9 +9,10 @@ export default function OwingDetails({bills}) {
 
   // array of bills 
   const whoOwesUser = bills.filter((bill) => bill.paidMember === "Me");
-  const userOwesWho = bills.filter((bill) => bill.paidMember !== "Me");
+  const userOwesWho = bills.filter((bill) => bill.paidMember != "Me");
 
   // allow users to mark bill as resolved/paid (aka delete) 
+
 
 
 
@@ -19,11 +20,9 @@ export default function OwingDetails({bills}) {
     <div className="container">
       <div className="split2">
         <div className="who-user-owes">
-          <h1>Owed by You</h1>
           <UserOwes userOwesWho={userOwesWho}/> 
         </div>
         <div className="who-owes-user">
-          <h1>Who Owes You</h1>
           <WhoOwesUser whoOwesUser={whoOwesUser}/>
         </div>
       </div>
