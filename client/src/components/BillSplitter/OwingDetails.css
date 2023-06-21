@@ -3,3 +3,15 @@
   height: 100vh;
 }
 
+.who-owers-user { 
+  width: 45%; 
+  float: right;
+  align-items: center;
+
+}
+
+.who-user-owes {
+  width: 45%;
+  float: left;
+}
+

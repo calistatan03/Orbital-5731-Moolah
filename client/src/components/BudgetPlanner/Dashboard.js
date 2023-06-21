@@ -5,10 +5,9 @@ import './Dashboard.css';
 import '../HomePage/HomePage.css';
 import BudgetsList from './BudgetsList';
 import NavBar from '../NavBar/NavBar';
-import NewBudget from './NewBudget';
 import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Display() { 
   const handleLogout = () => {
@@ -16,20 +15,35 @@ export default function Display() {
 		window.location.reload();
 	};
 
-  const deleteBudget = async (id) => {
+  const [transactions, setTransactions] = useState([]);
+  const [budgets, setBudgets] = useState([]);
+
+  useEffect(() => {
+    fetchBudgets();
+    fetchExpenses();
+  }, []);
+
+  // fetch budget data from database 
+  async function fetchBudgets() {
     try {
-      await axios.delete(`http://localhost:8080/api/add-budget/${id}`);
-      /*setBudgets((prevBudgets) =>
-      prevBudgets.filter((budget) => budget._id !== id)
-    );
-      // Fetch updated transactions after deletion
       const response = await axios.get('http://localhost:8080/api/add-budget');
-      const updatedBudgets = response.data;
-      setBudgets(updatedBudgets);*/
+      setBudgets(response.data);
+    } catch (error) {
+      console.error(error.response);
+    }
+  }
+
+  // fetch expenses data from database 
+  async function fetchExpenses() { 
+    try {
+      const response = await axios.get('http://localhost:8080/api/add-transaction');
+      setTransactions(response.data);
     } catch (error) {
       console.error(error);
     }
-  };
+  }
+ 
+
   
   return (
     <div className="main_container">
@@ -41,7 +55,7 @@ export default function Display() {
         </Link>
       </div>
       <div className="budget_list">
-        <BudgetsList onDeleteBudget={deleteBudget}></BudgetsList>
+        <BudgetsList transactions={transactions} budgets={budgets}></BudgetsList>
       </div>
 		</div>
   )

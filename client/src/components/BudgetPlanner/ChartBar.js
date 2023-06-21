@@ -1,15 +1,35 @@
 import { purple } from '@mui/material/colors';
 import './ChartBar.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // props should be a single budget object
 // find based on id? 
-export default function ChartBar({budget}) { 
+export default function ChartBar({filteredTransactions, budget}) { 
   const [filledAmount, setFilledAmount] = useState(0); 
+  const [remainder, setRemainder] = useState(0);
+  const [totalExpensesAmount, setTotalExpensesAmount] = useState(0);
+  const percentage = 100;
 
   // find expenses based on category => sum up ALL expenses.amount and present 
   // as fraction of total budget.amount 
 
+  useEffect(() => { 
+    totalExpensesAmountFunction(); 
+  }, [])
+
+  function totalExpensesAmountFunction() { 
+    const totalExpensesAmount = filteredTransactions.reduce((prev, curr) => prev + curr.amount, 0);
+    setTotalExpensesAmount(totalExpensesAmount);
+    const remainderAmount = budget.amount - totalExpensesAmount;
+    const percentage = ((totalExpensesAmount / budget.amount) * 100).toFixed(1);
+  if (remainderAmount < 0) { 
+    setRemainder(0);
+    setFilledAmount(100);
+  } else { 
+    setRemainder(remainderAmount);
+    setFilledAmount(percentage);
+  }
+  } 
 
     const containerStyles = {
     height: 20,
@@ -21,7 +41,7 @@ export default function ChartBar({budget}) {
 
   const fillerStyles = {
     height: '100%',
-    width: `20%`,
+    width: `${filledAmount}%`,
     backgroundColor: "#6a5acd",
     borderRadius: 'inherit',
     textAlign: 'right',
@@ -35,21 +55,27 @@ export default function ChartBar({budget}) {
   }
 
 
-  let barFillHeight = '0%';
-
-  return (<div className="container">
+  return (
+  <div className="chart_bar_container">
     <div className="remaining">
-      <h2>Remaining ${budget.amount}</h2>
+      <h2>Remaining ${remainder}</h2>
     </div>
     <div className="chart-bar">
-      <div className="chhart-bar__outer" style={containerStyles}>
+      <div className="chart-bar__outer with-shadow" style={containerStyles}>
         <div className="chart-bar__fill"
           style={fillerStyles}>
-            <span style={labelStyles}>20%</span>
+            <span style={labelStyles}>
+              {filledAmount}%
+            </span>
         </div>
       </div>
+    </div>
+    <div className="howmuch_outof_howmuch">
+      <h3>${totalExpensesAmount} of ${budget.amount} spent</h3>
+    </div>
   </div>
-  </div>)
+  )
+  
 
 }
 

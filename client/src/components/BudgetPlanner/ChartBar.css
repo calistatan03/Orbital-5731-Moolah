@@ -1,26 +1,50 @@
-.container { 
-  width: 80%; 
-  position: relative; 
+.chart_bar_container { 
+  margin-top: 1px;
+  width: 87%; 
+  gap: 0.3rem;
 }
 
-.remaining { 
-  position: absolute; 
-  margin-top: 0.4%;
+
+.with-shadow {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+.chart-bar { 
+  margin-top: -13px;
+  margin-bottom: -15px;
+
+}
+
+.remaining {
+  margin-top: 3px; 
   margin-left: 30px;
+}
+
+.howmuch_outof_howmuch { 
+  margin-left: 30px;
+}
+
+.howmuch_outof_howmuch h3 { 
+  align-items: left;
+  font-size: 7px;
+  font: inherit;
+  white-space: nowrap;
+  color: rgb(101, 96, 96)
 }
 
 
 .remaining h2 { 
   align-items: left;
-  font-size: 12px;
+  font-size: 13px;
   font: inherit;
   white-space: nowrap;
+  font-weight: bold;
 }
 
-.chart-bar { 
-  margin-top: 4%;
-  margin-bottom: 2%;
-}
+
+
+
 
 /*.chart-bar {
   height: 20;

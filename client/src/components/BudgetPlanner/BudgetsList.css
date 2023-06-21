@@ -9,7 +9,22 @@
   font-weight: bold;
 }
 
-.list { 
+.no_budgets {
+  align-items: center;
+}
+
+.no_budgets h2 { 
+  font: inherit;
+  position: absolute;
+  font-size: 17px;
+}
+
+.budgetlist { 
+  list-style-type: none;
+}
+
+
+/*.budget_list { 
   list-style-type: none;
   display: flex;
   justify-content: space-between;
@@ -20,8 +35,9 @@
   background-color: #dbc3ec;
   border-radius: 10px;
   position: relative;
+  width: 100%;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+}*/
 
 .no-budgets-text { 
   text-align: center;

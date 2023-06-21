@@ -76,14 +76,13 @@ export default function BudgetForm(props) {
         <div className="new-budget__actions">
           <Link to="/budgetplanner">
           <button type="button" className="cancel">
-            Cancel
+            View Budgets
           </button>
           </Link>
           <button className="submit" type='submit' onClick={submitHandler}>Add Budget</button>
         </div>
       </form>
     </div>
-    <BudgetsList/>
   </div>
   
   )

@@ -1,14 +1,15 @@
 import './UserOweItem.css';
 
-export default function UserOweItem({billData}) { 
+export default function UserOweItem({onDeleteBill, billData}) { 
+  const handleDelete = (id) => {
+      onDeleteBill(id);
+  };
 
   const amountToPay = (billData.amount / billData.numOfMembers).toFixed(2);
   const date = new Date(billData.date); 
   const month = date.toLocaleString('en-US', {month: 'long'});
   const day = date.toLocaleString('en-US', {day: '2-digit'});
   const year = date.getFullYear(); 
-
-
   const title = billData.title; 
   const paidMember = billData.paidMember; 
 
@@ -26,7 +27,7 @@ export default function UserOweItem({billData}) {
           <div className="title">{title}</div>
           <div className="owe-message">You owe {paidMember} ${amountToPay}</div>
         </span>
-        <span><div className="paid_button_div"><button className="paid_button">Paid!</button></div></span>
+        <span><div className="paid_button_container"><button onClick={() => handleDelete(billData._id)} className="paid_button">Paid!</button></div></span>
       </li>
 
     </div>

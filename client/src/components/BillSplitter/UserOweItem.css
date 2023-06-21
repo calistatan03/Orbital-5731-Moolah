@@ -5,6 +5,17 @@
 .list { 
   background-color:#dbc3ec;
   width: 28rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  column-gap: 1rem;
+  align-items: flex-start;
+  padding: 5px 20px;
+  margin-bottom: 10px;
+  background-color: #dbc3ec;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .title { 
@@ -30,7 +41,19 @@
 
 .paid_button { 
   border-radius: 7px;
+  font-size: 14px;
+  margin-left: 1rem;
   margin-top: 2rem;
+}
+
+.paid_button_container { 
+  font-size: 0; 
+  width: 5rem;
+}
+
+.owe-message { 
+  display: block;
+  width: 12rem;
 }
 
 .paid_button_div { 
