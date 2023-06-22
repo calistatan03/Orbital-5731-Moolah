@@ -1,6 +1,5 @@
 import './UserOwes.css';
 import { useState } from 'react';
-import UserOweItem from './UserOweItem';
 import WhoOwesUserItem from './WhoOwesUserItem';
 import WhoOwesUserGroup from './WhoOwesUserGroup';
 

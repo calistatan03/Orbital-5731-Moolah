@@ -1,17 +1,12 @@
 .split2 {
   display: flex;
-  height: 100vh;
 }
 
 .who-owers-user { 
-  width: 45%; 
-  float: right;
-  align-items: center;
-
+  width: 50%; 
 }
 
 .who-user-owes {
-  width: 45%;
-  float: left;
+  width: 50%;
 }
 

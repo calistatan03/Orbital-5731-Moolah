@@ -62,26 +62,32 @@
 
 }
 
+.add_budget button { 
+  position: absolute;
+    font: inherit;
+    margin: 45%;
+    width: 12rem;
+    padding: 1rem 2rem;
+    text-align: center;
+    font-size: 1rem;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    background-color: rgba(85, 16, 120, 0.459);
+    color: #fff;
+    cursor: pointer;
+    margin-top: 5rem;
+}
+
+.add_budget button:hover { 
+  background-color: #7F37D6;
+}
+
 .add_budget_button { 
   height: 13rem;
 }
 
-.add_budget_button .button { 
-    margin: 45%;
-    margin-top: 5rem;
-    width: 12rem;
-    font: inherit;
-    font-size: 14px;
-    cursor: pointer;
-    padding: 1rem 2rem;
-    border: 1px solid #3bb19b;
-    background-color: white;
-    color: #3bb19b;
-    border-radius: 12px;
-    position: absolute;
-    text-decoration: none;
-    align-items: center;
-}
 
 .add_budget_button div { 
   display: inline-flex;

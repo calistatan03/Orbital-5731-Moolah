@@ -49,9 +49,8 @@ export default function Display() {
     <div className="main_container">
 			<NavBar/>
       <div className="add_budget_button">
-        <Link to="/add-budget" className="button">
-          <AddIcon className="icon"/>
-          <div>Add New Budget</div>
+        <Link to="/add-budget" className="add_budget">
+          <button>Add New Budget</button>
         </Link>
       </div>
       <div className="budget_list">

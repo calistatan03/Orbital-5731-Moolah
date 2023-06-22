@@ -36,7 +36,7 @@ export default function OpenForm(props) {
   }
 
   return <div className="new-bill">
-    {!isEditing && <Link to="/add-bill" className="button" onClick={startEditingHandler}>Add New Bill</Link>}
+    {!isEditing && <Link to="/add-bill" className="add_bill_button"><button>Add New Bill</button></Link>}
     {isEditing && <AddForm onSaveBillData={saveBillDataHandler} onCancel={stopEditingHandler}/>}
   </div>
 
