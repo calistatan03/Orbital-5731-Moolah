@@ -52,6 +52,7 @@ export default function BudgetForm(props) {
     <div>
       <NavBar/>
       <div className="budget-form_wrapper">
+        <h1>New Budget</h1>
         <form className="budget-form" onSubmit={submitHandler}>
         <div className="new-budget__controls">
           <div className="new-budget__control">
@@ -74,12 +75,12 @@ export default function BudgetForm(props) {
           </div>
         </div>
         <div className="new-budget__actions">
+          <button className="submit" type='submit' onClick={submitHandler}>Add Budget</button>
           <Link to="/budgetplanner">
-          <button type="button" className="cancel">
+          <button type="button" className="view_budgets">
             View Budgets
           </button>
           </Link>
-          <button className="submit" type='submit' onClick={submitHandler}>Add Budget</button>
         </div>
       </form>
     </div>

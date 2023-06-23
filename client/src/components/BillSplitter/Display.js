@@ -35,14 +35,12 @@ export default function Display() {
   return ( 
     <div>
       <NavBar/>
-      <div className="add_new_bill">
-        <OpenForm/>
-      </div>
       <div className="owing_details">
         <OwingDetails bills={bills}/> 
       </div>
-        
-
+      <div className="add_new_bill">
+        <OpenForm/>
+      </div>
     </div>
   )
 }

@@ -63,6 +63,13 @@
   max-width: 100%;
 }
 
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
 .submit_btn {
   padding: 0.5rem 1rem;
   font-size: 1rem;
@@ -73,8 +80,8 @@
   background-color: #934CFA;
   color: #fff;
   cursor: pointer;
-  margin-top: 20px;
-  margin-left: 4rem;
+  margin-left: 19rem;
+  margin-right: auto;
 }
 
 .submit_btn:hover {
@@ -91,7 +98,7 @@
   background-color: #f6a624;
   color: #ffffff;
   cursor: pointer;
-  margin-left: 11.1rem;
+  margin-left: 17rem;
 }
 
 .cancel_btn:hover {
@@ -137,5 +144,4 @@
   background-color: rgb(203, 203, 203);
   color: #ffffff;
   cursor: pointer;
-
 }

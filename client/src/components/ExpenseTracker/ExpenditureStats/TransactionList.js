@@ -14,8 +14,8 @@ export default function TransactionList({ transactions, categoryColors, onDelete
   
     return (
       <div>
-        <h1 className="historytext">Transaction History</h1>
         <ul className="transaction-list">
+        <h1 className="historytext">Transaction History</h1>
           {transactions.map((transaction) => (
             <li
               key={transaction._id}

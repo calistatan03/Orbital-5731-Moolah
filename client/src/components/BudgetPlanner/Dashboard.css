@@ -74,14 +74,15 @@
     text-align: center;
     border: none;
     border-radius: 4px;
-    background-color: rgba(85, 16, 120, 0.459);
-    color: #fff;
+    background-color: rgba(193, 91, 240, 0.2);
+    color: #7F37D6;
     cursor: pointer;
-    margin-top: 5rem;
+    margin-top: 1rem;
 }
 
 .add_budget button:hover { 
   background-color: #7F37D6;
+  color: white;
 }
 
 .add_budget_button { 
