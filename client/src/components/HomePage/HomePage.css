@@ -3,10 +3,115 @@
 	
 	
 }
-
-
 * {
 	box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.welcome-section {
+  text-align: center;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  animation: slide-up 1s ease-in-out;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.welcome-heading {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #192c7d;
+  margin-bottom: 1rem;
+}
+
+.moolah-logo {
+  width: 500px;
+  height: auto;
+}
+
+.features-section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.expensetracker {
+  width: 300px;
+  padding: 2rem;
+  background-color: rgba(125, 24, 187, 0.963);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.expensetracker:hover {
+  transform: scale(1.05);
+}
+
+.budgetplanner {
+	width: 300px;
+	padding: 2rem;
+	background-color: rgb(208, 61, 93);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	margin: 1.5rem;
+	text-align: center;
+	transition: all 0.3s ease;
+  }
+  
+  .budgetplanner:hover {
+	transform: scale(1.05);
+  }
+
+  .billsplitter {
+	width: 300px;
+	padding: 2rem;
+	background-color: rgb(255, 196, 4);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	margin: 1.5rem;
+	text-align: center;
+	transition: all 0.3s ease;
+  }
+  
+  .billsplitter:hover {
+	transform: scale(1.05);
+  }
+
+.feature-heading {
+  font-size: 1.8rem;
+  color: #f5f6f9;
+  margin-bottom: 1rem;
+}
+
+.feature-description {
+  font-size: 1.2rem;
+  color: #ffffff;
 }
 
 .navbar {
@@ -76,8 +181,6 @@
 	cursor: pointer;
 	margin-right: 20px;
 }
-
-
 
 @media (max-width: 400px) { 
 	.toggle-button { 

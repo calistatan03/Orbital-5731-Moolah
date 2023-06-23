@@ -48,13 +48,13 @@ export default function Display() {
   return (
     <div className="main_container">
 			<NavBar/>
+      <div className="budget_list">
+        <BudgetsList transactions={transactions} budgets={budgets}></BudgetsList>
+      </div>
       <div className="add_budget_button">
         <Link to="/add-budget" className="add_budget">
           <button>Add New Budget</button>
         </Link>
-      </div>
-      <div className="budget_list">
-        <BudgetsList transactions={transactions} budgets={budgets}></BudgetsList>
       </div>
 		</div>
   )

@@ -16,15 +16,27 @@ export default function DoughnutChart({transactions}) {
   const [categoryNames, setCategoryNames] = useState([]);
   const [labels, setLabels] = useState([]);
   const [categoryColors, setCategoryColors] = useState([]);
+  const [selectedDuration, setSelectedDuration] = useState('month');
 
 
   //whenever the 'transactions' passed to the DoughnutChart changes, the 'updateExpenseData' function will be called to recalculate the expense data and update the state variables
   useEffect(() => {
-    updateExpenseData();
-    setCategoryColors(generateCategoryColors());
-  }, [transactions]);
+    const fetchTransactions = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/api/add-transaction/${selectedDuration}`);
+        const fetchedTransactions = response.data;
+        setTransactionList(fetchedTransactions);
+        updateExpenseData(fetchedTransactions);
+        setCategoryColors(generateCategoryColors(fetchedTransactions));
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  const generateCategoryColors = () => {
+    fetchTransactions();
+  }, [selectedDuration]);
+
+  const generateCategoryColors = (transactions) => {
     const colors = [
       '#934CFA',
       '#FFCD56',
@@ -43,7 +55,28 @@ export default function DoughnutChart({transactions}) {
     return categoryColors;
   };
 
-  const updateExpenseData = () => {
+  const updateExpenseData = (transactions) => {
+    const filteredTransactions = transactions.filter((transaction) => {
+      const transactionDate = new Date(transaction.date);
+      const currentDate = new Date();
+
+      let timeDiff;
+      if (selectedDuration === 'week') {
+        timeDiff = Math.ceil(
+          (currentDate.getTime() - transactionDate.getTime()) /
+            (1000 * 3600 * 24 * 7)
+        );
+      } else if (selectedDuration === 'month') {
+        timeDiff =
+          currentDate.getMonth() - transactionDate.getMonth() + 1;
+      } else if (selectedDuration === 'year') {
+        timeDiff =
+          currentDate.getFullYear() - transactionDate.getFullYear();
+    }
+
+    return timeDiff <= 1;
+  });
+
     const expenseCategories = {};
 
     transactions.forEach((transaction) => {
@@ -63,8 +96,13 @@ export default function DoughnutChart({transactions}) {
 
     setLabels(categoryNames); 
     setCategoryNames(categoryNames);
+    setCategoryColors(generateCategoryColors(filteredTransactions));
+    setTransactionList(filteredTransactions);
   };
-  
+
+  const handleDurationChange = (e) => {
+    setSelectedDuration(e.target.value);
+  };
   
   const options = {
     cutout: 200,
@@ -88,10 +126,6 @@ export default function DoughnutChart({transactions}) {
       setTransactionList((prevTransactions) =>
       prevTransactions.filter((transaction) => transaction._id !== id)
     );
-      // Fetch updated transactions after deletion
-      /*const response = await axios.get('http://localhost:8080/api/add-transaction');
-      const updatedTransactions = response.data;
-      setTransactionList(updatedTransactions);*/
     } catch (error) {
       console.error(error);
     }
@@ -102,7 +136,19 @@ export default function DoughnutChart({transactions}) {
     <div className="container">
       <div className="split2">
         <div className="doughnut">
-          <h1 className="statistics">Expenditure Statistics</h1>
+          <label className="statstext">Expenditure Statistics</label>
+          <div className="filter-container">
+            <label htmlFor="durationFilter">Filter By:</label>
+            <select
+              id="durationFilter"
+              value={selectedDuration}
+              onChange={handleDurationChange}
+            >
+              <option value="week">Week</option>
+              <option value="month">Month</option>
+              <option value="year">Year</option>
+            </select>
+          </div>
           <Doughnut data={{
               datasets: [
                 {
@@ -120,7 +166,7 @@ export default function DoughnutChart({transactions}) {
           <div className="total-expense-text">Total Expense: ${totalExpense.toFixed(2)}</div>
         </div>  
         <div className="history">
-          <TransactionList transactions={transactions} categoryColors={categoryColors} onDeleteTransaction={deleteTransaction}></TransactionList>
+          <TransactionList transactions={transactionList} categoryColors={categoryColors} onDeleteTransaction={deleteTransaction}></TransactionList>
           <Link to="/add-transaction" className="add_button">Add New Transaction Here</Link>
         </div>
       </div>

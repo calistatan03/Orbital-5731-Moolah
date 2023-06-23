@@ -63,8 +63,8 @@ export default function AddForm({onSaveTransactionData}) {
     <div className="transaction-form_wrapper">
       <form onSubmit={submitHandler}>
         <div className="new-transaction__controls">
-        <h1 className="new_trans">New Transaction</h1>
         <div className="new-transaction__control">
+        <label className="new_trans-label">New Transaction</label>
             <label>Title</label>
             <input
               type="text"
@@ -106,9 +106,7 @@ export default function AddForm({onSaveTransactionData}) {
               className="form-input with-shadow"
             />
           </div>
-        </div>
         <div className="submit_transaction">
-          <div className="button_container">
           <button type="submit" className="submit_btn">
             Add Transaction
           </button>
@@ -117,7 +115,7 @@ export default function AddForm({onSaveTransactionData}) {
             View Expenditure Statistics
           </button>
           </Link>
-        </div>
+      </div>
       </div>
       </form>
     </div>

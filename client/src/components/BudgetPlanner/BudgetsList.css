@@ -1,11 +1,9 @@
 .main_container h1 { 
   font: inherit;
-  margin-left: 10rem;
-  margin-top: 6rem;
+  margin-left: 50px;
   font-weight: bold;
   font-size: 30px;
   text-align: left;
-  margin-top: 40px;
   font-weight: bold;
 }
 
