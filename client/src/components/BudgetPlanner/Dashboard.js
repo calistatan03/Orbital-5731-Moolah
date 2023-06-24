@@ -42,7 +42,7 @@ export default function Display() {
       console.error(error);
     }
   }
- 
+
 
   
   return (

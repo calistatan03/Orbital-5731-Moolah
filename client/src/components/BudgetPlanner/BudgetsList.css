@@ -14,6 +14,8 @@
 .no_budgets h2 { 
   font: inherit;
   position: absolute;
+  width: 100%;
+  text-align: center;
   font-size: 17px;
 }
 

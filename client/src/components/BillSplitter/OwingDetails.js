@@ -14,8 +14,6 @@ export default function OwingDetails({bills}) {
   // allow users to mark bill as resolved/paid (aka delete) 
 
 
-
-
   return (
     <div className="container">
       <div className="split2">

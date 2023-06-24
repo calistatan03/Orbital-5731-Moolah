@@ -33,7 +33,7 @@ export default function BudgetsList({transactions, budgets}) {
 
   if (budgets.length === 0) { 
     return <div className="main_container">
-      <div>
+      <div className="header">
           <h1>Existing Budgets</h1>
         </div>
         <div className="no_budgets">
