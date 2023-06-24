@@ -5,7 +5,7 @@ const cors = require("cors");
 const connection = require("./db");
 
 const corsOptions = {
-  origin: 'https://moolah.onrender.com',
+  origin: 'https://orbital-moolah.onrender.com',
 };
 
 app.use(cors(corsOptions));
