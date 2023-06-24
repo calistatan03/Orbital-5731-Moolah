@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./index.css";
+import moolahlogo from '../../images/moolahlogo.png'
+
 
 export default function Login() {
 	const [data, setData] = useState({ email: "", password: "" });

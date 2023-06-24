@@ -19,7 +19,7 @@ export default function ChartBar({filteredTransactions, budget}) {
 
   function totalExpensesAmountFunction() { 
     const totalExpensesAmount = filteredTransactions.reduce((prev, curr) => prev + curr.amount, 0);
-    setTotalExpensesAmount(totalExpensesAmount);
+    setTotalExpensesAmount(totalExpensesAmount.toFixed(2));
     const remainderAmount = budget.amount - totalExpensesAmount;
     const percentage = ((totalExpensesAmount / budget.amount) * 100).toFixed(1);
   if (remainderAmount < 0) { 
