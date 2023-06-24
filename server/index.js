@@ -4,6 +4,12 @@ const app = express();
 const cors = require("cors");
 const connection = require("./db");
 
+const corsOptions = {
+  origin: 'https://moolah.onrender.com',
+};
+
+app.use(cors(corsOptions));
+
 //import routes
 const userRoutes = require('./routes/user');
 const authRoutes = require('./routes/auth');
