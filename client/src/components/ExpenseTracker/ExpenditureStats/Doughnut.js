@@ -23,7 +23,7 @@ export default function DoughnutChart({transactions}) {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/add-transaction/${selectedDuration}`);
+        const response = await axios.get(`https://orbital-5731-moolah.onrender.com/api/add-transaction/${selectedDuration}`);
         const fetchedTransactions = response.data;
         setTransactionList(fetchedTransactions);
         updateExpenseData(fetchedTransactions);
@@ -122,7 +122,7 @@ export default function DoughnutChart({transactions}) {
   
   const deleteTransaction = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/add-transaction/${id}`);
+      await axios.delete(`https://orbital-5731-moolah.onrender.com/api/add-transaction/${id}`);
       setTransactionList((prevTransactions) =>
       prevTransactions.filter((transaction) => transaction._id !== id)
     );
