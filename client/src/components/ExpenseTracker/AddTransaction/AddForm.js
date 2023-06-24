@@ -40,7 +40,7 @@ export default function AddForm({onSaveTransactionData}) {
 
     try {
       const response = await axios.post(
-        'http://localhost:8080/api/add-transaction',
+        'https://orbital-5731-moolah.onrender.com/api/add-transaction',
         transactionData);
 
       onSaveTransactionData(response.data);
