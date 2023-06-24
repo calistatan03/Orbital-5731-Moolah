@@ -50,7 +50,7 @@ export default function AddForm() {
     console.log(billData); 
 
     try {
-      const response = await axios.post('http://localhost:8080/api/add-bill', billData);
+      const response = await axios.post('https://orbital-5731-moolah.onrender.com/api/add-bill', billData);
       console.log(response);
       //onSaveTransactionData(response.data);
       setEnteredTitle('');
