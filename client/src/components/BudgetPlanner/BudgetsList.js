@@ -18,12 +18,12 @@ export default function BudgetsList({transactions, budgets}) {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/add-budget/${id}`);
+      await axios.delete(`https://orbital-5731-moolah.onrender.com/api/add-budget/${id}`);
       setBudgetData((prevBudgets) =>
       prevBudgets.filter((budget) => budget._id !== id)
     );
       // Fetch updated transactions after deletion
-      /*const response = await axios.get('http://localhost:8080/api/add-transaction');
+      /*const response = await axios.get('https://orbital-5731-moolah.onrender.com/api/add-transaction');
       const updatedTransactions = response.data;
       setTransactionList(updatedTransactions);*/
     } catch (error) {
