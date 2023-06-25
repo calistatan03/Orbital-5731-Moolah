@@ -90,4 +90,6 @@ export default function BudgetForm(props) {
 
 }
 
+module.exports = BudgetForm;
+
 // <button className="cancel" type="cancel" onClick={props.onCancel}>Cancel</button>

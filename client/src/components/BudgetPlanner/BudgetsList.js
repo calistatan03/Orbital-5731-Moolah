@@ -55,7 +55,6 @@ export default function BudgetsList({transactions, budgets}) {
             <div>
               <BudgetItem className="description" transactions={transactions} budget={budget} onDeleteBudget={handleDelete}/>
             </div>
-            
           )
         })}
         </ul>

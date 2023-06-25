@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, BrowserRouter } from "react-router-dom";
 import "./index.css";
 
 export default function Signup() {
@@ -11,7 +11,6 @@ export default function Signup() {
 		password: "",
 	});
 	const [error, setError] = useState("");
-	const navigate = useNavigate();
 
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value });
@@ -22,6 +21,7 @@ export default function Signup() {
 		try {
 			const url = "https://orbital-5731-moolah.onrender.com/api/users";
 			const { data: res } = await axios.post(url, data);
+			const navigate = useNavigate();
 			navigate("/login");
 			console.log(res.message);
 		} catch (error) {
@@ -36,6 +36,7 @@ export default function Signup() {
 	};
 
 	return (
+		<BrowserRouter> 
 		<div className="signup_container">
 			<div className="signup_form_container">
 				<div className="left_card">
@@ -46,9 +47,10 @@ export default function Signup() {
 					</Link></>
 				</div>
 				<div className="right">
-					<form className="form_container" onSubmit={handleSubmit}>
+					<form data-testid="signup-form" className="form_container" onSubmit={handleSubmit}>
 						<h1>Create Account</h1>
 						<input
+							data-testid="first-name"
 							type="text"
 							placeholder="First Name"
 							name="firstName"
@@ -58,6 +60,7 @@ export default function Signup() {
 							className="input"
 						/>
 						<input
+							data-testid="last-name"
 							type="text"
 							placeholder="Last Name"
 							name="lastName"
@@ -67,6 +70,7 @@ export default function Signup() {
 							className="input"
 						/>
 						<input
+							data-testid="email"
 							type="email"
 							placeholder="Email"
 							name="email"
@@ -76,6 +80,7 @@ export default function Signup() {
 							className="input"
 						/>
 						<input
+							data-testid="password"
 							type="password"
 							placeholder="Password"
 							name="password"
@@ -92,5 +97,6 @@ export default function Signup() {
 				</div>
 			</div>
 		</div>
+		</BrowserRouter>
 	);
 };

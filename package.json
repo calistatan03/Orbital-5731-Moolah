@@ -12,5 +12,14 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^29.5.0",
+    "save-dev": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "babel-jest": "^29.5.0",
+    "identity-obj-proxy": "^3.0.0"
+  },
+  "type": "module"
 }

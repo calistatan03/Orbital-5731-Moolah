@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, BrowserRouter } from "react-router-dom";
 import "./index.css";
 import moolahlogo from '../../images/moolahlogo.png'
 
@@ -32,12 +32,13 @@ export default function Login() {
 	};
 
 	return (
-		<div className="login_container">
+		<div data-testid="login-1" className="login_container">
 			<div className="login_form_container">
 				<div className="left">
-					<form className="form_container" onSubmit={handleSubmit}>
+					<form data-testid="login-form" className="form_container" onSubmit={handleSubmit}>
 						<h1>Login to Your Account</h1>
 						<input
+							data-testid="email"
 							type="email"
 							placeholder="Email"
 							name="email"
@@ -47,6 +48,7 @@ export default function Login() {
 							className="input"
 						/>
 						<input
+							data-testid="password"
 							type="password"
 							placeholder="Password"
 							name="password"
@@ -63,11 +65,13 @@ export default function Login() {
 				</div>
 				<div className="right">
 					<h1>Don't have an account?</h1>
+					<BrowserRouter>
 					<Link to="/signup">
 						<button type="button" className="white_btn">
 							Sign Up
 						</button>
 					</Link>
+					</BrowserRouter>
 				</div>
 			</div>
 		</div>
