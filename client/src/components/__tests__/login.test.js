@@ -33,7 +33,7 @@ describe("Login component", () => {
     await waitFor(() => expect(axios.post).toHaveBeenCalledTimes(1));
 
     // Assert that the login request was made with the correct credentials
-    expect(axios.post).toHaveBeenCalledWith("https://orbital-5731-moolah.onrender.com/api/auth", {
+    expect(axios.post).toHaveBeenCalledWith("/api/user", {
       email: "test@example.com",
       password: "password123!",
     });

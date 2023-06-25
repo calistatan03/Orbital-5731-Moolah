@@ -1,7 +1,6 @@
 import { render, screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
 import Signup from '../Signup/index';
 import axios from 'axios';
-import signupController from '../../../../server/controllers/Signup/signup';
 
 // Begin the test
 describe("SignUp component", () => {
@@ -34,7 +33,7 @@ describe("SignUp component", () => {
     await waitFor(() => expect(axios.post).toHaveBeenCalledTimes(1));
 
     // Assert that the account creation request was made with the correct data
-    expect(axios.post).toHaveBeenCalledWith("https://orbital-5731-moolah.onrender.com/api/users", {
+    expect(axios.post).toHaveBeenCalledWith("/api/user", {
       email: "test@example.com",
       password: "password123",
       firstName: "Tom",

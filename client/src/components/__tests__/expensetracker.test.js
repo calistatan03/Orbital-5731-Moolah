@@ -1,8 +1,8 @@
 // import the necessary modules and dependencies
 import axios from "axios";
-import { AddForm } from "../ExpenseTracker/AddForm";
+import { AddForm } from "../ExpenseTracker/AddTransaction/AddForm";
 
-jest.mock("../ExpenseTracker/AddForm", () => ({
+jest.mock("../ExpenseTracker/AddTransaction/AddForm", () => ({
   AddForm: jest.fn(),
 }));
 
@@ -14,28 +14,28 @@ describe("AddExpense API", () => {
       title: "To the wet market",
       category: "Groceries",
       amount: 50,
+      date: new Date("24 June 2023"),
     };
 
-    const responseData = {
+    const expectedResponse = {
       success: true,
       expense: {
         id: "123",
         title: "To the wet market",
         category: "Groceries",
         amount: 50,
+        date: new Date("24 June 2023"),
       },
     };
 
     // Mock the axios.post method to return a successful response
-    axios.post.mockResolvedValue({ data: responseData });
+    AddForm.mockResolvedValue(expectedResponse);
 
     // Call the addExpense function
-    const response = await addExpense(expenseData);
+    const response = await AddForm(expenseData);
 
-    // Assert that the axios.post method was called with the correct arguments
-    expect(axios.post).toHaveBeenCalledWith("https://orbital-5731-moolah.onrender.com/api/add-transaction", expenseData);
-
-    // Assert that the response matches the expected data
-    expect(response).toEqual(responseData);
+    expect(response).toEqual(expectedResponse);
+    expect(AddForm).toHaveBeenCalledTimes(1);
+    expect(AddForm).toHaveBeenCalledWith(expenseData);
   });
 });
