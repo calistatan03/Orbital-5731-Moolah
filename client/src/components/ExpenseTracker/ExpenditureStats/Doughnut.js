@@ -23,7 +23,9 @@ export default function DoughnutChart({transactions}) {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get(`https://orbital-5731-moolah.onrender.com/api/add-transaction/${selectedDuration}`);
+        const url2 = 'https://localhost:8080/api/add-transaction';
+        const url = 'https://orbital-5731-moolah.onrender.com/api/add-transaction';
+        const response = await axios.get(`https://localhost:8080/api/add-transaction/${selectedDuration}`);
         const fetchedTransactions = response.data;
         setTransactionList(fetchedTransactions);
         updateExpenseData(fetchedTransactions);

@@ -1,20 +1,28 @@
 import { Link } from 'react-router-dom';
 import './NavBar.css';
+import { useLogout } from '../../hooks/useLogout'
 import moolahlogo from '../../images/moolahlogo.png'
 import LogoutIcon from '@mui/icons-material/Logout';
+import {useAuthContext} from '../../hooks/useAuthContext';
 
 export default function NavBar() {
+	const {user} = useAuthContext()
+
+	const { logout } = useLogout()
+	
 	const handleLogout = () => {
-		localStorage.removeItem("token");
-		window.location.reload();
+		logout();
 	};
 
 	return (
 		<div className="main_container">
 			<nav className="navbar">
-				<div className="moolah-title">Moolah!
-					<img src={moolahlogo} alt="Logo" className="moolahlogo" />
-				</div>
+					<Link to="/" className="link_to_homepage">
+					<div className="moolah-title">Moolah!
+						<img src={moolahlogo} alt="Logo" className="moolahlogo" />
+					</div>
+				</Link>
+
 				<Link to="#" className="toggle-button">
 					<span className="bar"></span>
 					<span className="bar"></span>

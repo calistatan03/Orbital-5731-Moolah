@@ -1,10 +1,37 @@
 //register route
 const router = require("express").Router(); //imports the Express Router module and creates a new router object that can be used to define routes
 const req = require("express/lib/request");
-const {User, validate} = require("../models/user"); //User model represents a user in the database, and the validate function is used to validate user data.
+const jwt = require('jsonwebtoken');
+const {User} = require("../models/user"); //User model represents a user in the database, and the validate function is used to validate user data.
 const bcrypt = require("bcrypt"); // imports the bcrypt module, which is used for password hashing and salting.
+const requireAuth = require('../middleware/requireAuth');
 
+router.use(requireAuth);
+
+// create a json web token 
+const createToken = (_id) => { 
+    return jwt.sign({_id}, process.env.JWTPRIVATEKEY, {expiresIn: "7d"})
+
+}
+
+// sign up route 
 router.post("/", async (req, res) => { //handles the request when a client sends a POST request to create a new user.
+    
+    const {firstName, lastName, email, password} = req.body; 
+    try { 
+        const user = await User.signup(firstName, lastName, email, password)
+
+        // create a token (and send the token back to the browser)
+        const token = createToken(user._id);
+
+        res.status(200).json({email, token})
+    } catch (error) { 
+        res.status(400).json({error: error.message})
+    }
+
+})
+
+/*
     try {
         const {error} = validate(req.body);
         if(error)
@@ -23,5 +50,6 @@ router.post("/", async (req, res) => { //handles the request when a client sends
         res.status(500).send({message: "Internal Server Error"})
     }
 })
+*/
 
 module.exports = router; //exports the router object so that it can be used in other parts of the application

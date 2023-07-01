@@ -1,3 +1,5 @@
+// connects the backend to the mongodb database
+
 const mongoose = require('mongoose');
 
 const connection = () => {

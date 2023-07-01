@@ -32,8 +32,9 @@ export default function BudgetForm(props) {
     console.log(budgetData);
 
     try { 
-
-      const response = await axios.post("https://orbital-5731-moolah.onrender.com/api/add-budget", budgetData); 
+      const url2 = 'https://localhost:8080/api/add-budget';
+      const url = 'https://orbital-5731-moolah.onrender.com/api/add-budget';
+      const response = await axios.post(url2, budgetData); 
       console.log(response);
 
       //props.onSaveBudgetData(response.data);
@@ -89,7 +90,5 @@ export default function BudgetForm(props) {
   )
 
 }
-
-module.exports = BudgetForm;
 
 // <button className="cancel" type="cancel" onClick={props.onCancel}>Cancel</button>

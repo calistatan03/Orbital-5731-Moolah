@@ -8,7 +8,7 @@ const corsOptions = {
   origin: 'https://orbital-moolah.onrender.com',
 };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 //import routes
 const userRoutes = require('./routes/user');
@@ -36,6 +36,5 @@ app.use("/api/add-budget", addBudgetRoutes);
 app.use("/api/add-bill", addBillRoutes);
 
 //set up port
-const port = process.env.PORT || 8080;
-app.listen(port, ()  => console.log(`Server is running on port: ${port}`));
+app.listen(8080, ()  => console.log(`Server is running on port: 8080`));
 

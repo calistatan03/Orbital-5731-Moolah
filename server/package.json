@@ -24,6 +24,7 @@
     "mongoose": "^7.3.0",
     "mongoose-dateonly": "^1.0.6",
     "nodemon": "^2.0.22",
-    "react-bootstrap": "^2.7.4"
+    "react-bootstrap": "^2.7.4",
+    "validator": "^13.9.0"
   }
 }

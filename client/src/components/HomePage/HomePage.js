@@ -3,12 +3,15 @@ import { Link } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
 import moolahlogo2 from '../../images/moolahlogo2.png';
 import './HomePage.css';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 export default function HomePage() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     window.location.reload();
   };
+
+  const {user} = useAuthContext()
 
   return (
     <div className="main-container">

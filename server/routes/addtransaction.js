@@ -1,16 +1,21 @@
 const router = require("express").Router();
 const Transaction = require('../models/transaction');
+const requireAuth = require('../middleware/requireAuth');
+// require auth for all transaction routes 
+router.use(requireAuth);
 
 // save the new budget data 
 router.post("/", async (req, res) => {
   let { title, date, category, amount } = req.body;
 
   try {
+    const user_id = req.user._id;
     const create = await Transaction.create({
       title,
       date,
       category,
       amount,
+      user_id
     });
 
     return res.json(create);

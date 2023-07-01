@@ -1,25 +1,27 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link, BrowserRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./index.css";
-import moolahlogo from '../../images/moolahlogo.png'
-
+import { useLogin } from '../../hooks/useLogin';
 
 export default function Login() {
-	const [data, setData] = useState({ email: "", password: "" });
-	const [error, setError] = useState("");
-
-	const handleChange = ({ currentTarget: input }) => {
-		setData({ ...data, [input.name]: input.value });
-	};
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const {login, error, isLoading} = useLogin();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		try {
-			const url = "https://orbital-5731-moolah.onrender.com/api/auth";
+
+		await login(email, password);
+		/*try {
+			const url2 = "https://localhost:8080/api/auth/login";
+			const url = "https://orbital-5731-moolah.onrender.com/api/auth/login";
 			const { data: res } = await axios.post(url, data);
 			localStorage.setItem("token", res.data);
 			window.location = "/";
+			
+			// include snackbar message 
+
 		} catch (error) {
 			if (
 				error.response &&
@@ -28,7 +30,7 @@ export default function Login() {
 			) {
 				setError(error.response.data.message);
 			}
-		}
+		} */
 	};
 
 	return (
@@ -42,8 +44,8 @@ export default function Login() {
 							type="email"
 							placeholder="Email"
 							name="email"
-							onChange={handleChange}
-							value={data.email}
+							onChange={(e) => setEmail(e.target.value)}
+							value={email}
 							required
 							className="input"
 						/>
@@ -52,8 +54,8 @@ export default function Login() {
 							type="password"
 							placeholder="Password"
 							name="password"
-							onChange={handleChange}
-							value={data.password}
+							onChange={(e) => setPassword(e.target.value)}
+							value={password}
 							required
 							className="input"
 						/>
@@ -65,15 +67,17 @@ export default function Login() {
 				</div>
 				<div className="right">
 					<h1>Don't have an account?</h1>
-					<BrowserRouter>
 					<Link to="/signup">
 						<button type="button" className="white_btn">
 							Sign Up
 						</button>
 					</Link>
-					</BrowserRouter>
 				</div>
 			</div>
 		</div>
 	);
 };
+
+const Form = ({email, setEmail, password, setPassword}) => { 
+
+}

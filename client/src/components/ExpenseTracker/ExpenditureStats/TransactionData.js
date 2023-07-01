@@ -17,7 +17,9 @@ export default function TransactionData() {
 
   async function fetchData() {
     try {
-      const response = await axios.get('https://orbital-5731-moolah.onrender.com/api/add-transaction');
+      const url2 = 'https://localhost:8080/api/add-transaction';
+      const url = 'https://orbital-5731-moolah.onrender.com/api/add-transaction';
+      const response = await axios.get(url2);
       setTransactions(response.data);
     } catch (error) {
       console.error(error);

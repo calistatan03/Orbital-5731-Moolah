@@ -20,7 +20,9 @@ export default function Display() {
 
   async function fetchData() {
     try {
-      const response = await axios.get('https://orbital-5731-moolah.onrender.com/api/add-bill');
+      const url2 = 'https://localhost:8080/api/add-bill';
+      const url = 'https://orbital-5731-moolah.onrender.com/api/add-bill';
+      const response = await axios.get(url2);
       setBills(response.data);
     } catch (error) {
       console.error(error);

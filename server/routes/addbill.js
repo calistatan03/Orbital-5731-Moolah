@@ -1,5 +1,8 @@
 const router = require("express").Router(); //imports the Express Router module and creates a new router object that can be used to define routes
 const Bill = require('../models/bill');
+const requireAuth = require('../middleware/requireAuth');
+// require auth for all bill routes
+router.use(requireAuth);
 
 // create a new bill 
 router.post("/", async (req, res) => { 
@@ -8,14 +11,15 @@ router.post("/", async (req, res) => {
   const { title, amount, date, numOfMembers, memberNames, paidMember } = req.body;
   
   try {
-    
+    const user_id = req.user._id;
     const bill = new Bill({
       title,
       amount,
       date,
       numOfMembers,
       memberNames,
-      paidMember
+      paidMember,
+      user_id
     });
 
     const newBill = await bill.save(); 

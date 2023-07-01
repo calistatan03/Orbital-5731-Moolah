@@ -1,28 +1,29 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate, BrowserRouter } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./index.css";
+import { useSignup } from '../../hooks/useSignup';
 
 export default function Signup() {
-	const [data, setData] = useState({
-		firstName: "",
-		lastName: "",
-		email: "",
-		password: "",
-	});
-	const [error, setError] = useState("");
-
-	const handleChange = ({ currentTarget: input }) => {
-		setData({ ...data, [input.name]: input.value });
-	};
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState(''); 
+	const [firstName, setFirstName] = useState('')
+	const [lastName, setLastName] = useState('');
+	const navigate = useNavigate();
+	const {signup, error, isLoading} = useSignup(); 
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		try {
-			const url = "https://orbital-5731-moolah.onrender.com/api/users";
-			const { data: res } = await axios.post(url, data);
-			const navigate = useNavigate();
+
+		await signup(firstName, lastName, email, password)
+		/*try {
+	
+			const url2 = "https://localhost:8080/api/users/signup";
+			const url = "https://orbital-5731-moolah.onrender.com/api/users/signup";
+			const { data: res } = await axios.post(url2, data);
+
 			navigate("/login");
+			
 			console.log(res.message);
 		} catch (error) {
 			if (
@@ -32,11 +33,11 @@ export default function Signup() {
 			) {
 				setError(error.response.data.message);
 			}
-		}
+		}*/
 	};
 
 	return (
-		<BrowserRouter> 
+
 		<div className="signup_container">
 			<div className="signup_form_container">
 				<div className="left_card">
@@ -54,8 +55,8 @@ export default function Signup() {
 							type="text"
 							placeholder="First Name"
 							name="firstName"
-							onChange={handleChange}
-							value={data.firstName}
+							onChange={(e) => setFirstName(e.target.value)}
+							value={firstName}
 							required
 							className="input"
 						/>
@@ -64,8 +65,8 @@ export default function Signup() {
 							type="text"
 							placeholder="Last Name"
 							name="lastName"
-							onChange={handleChange}
-							value={data.lastName}
+							onChange={(e) => setLastName(e.target.value)}
+							value={lastName}
 							required
 							className="input"
 						/>
@@ -74,8 +75,8 @@ export default function Signup() {
 							type="email"
 							placeholder="Email"
 							name="email"
-							onChange={handleChange}
-							value={data.email}
+							onChange={(e) => setEmail(e.target.value)}
+							value={email}
 							required
 							className="input"
 						/>
@@ -84,19 +85,19 @@ export default function Signup() {
 							type="password"
 							placeholder="Password"
 							name="password"
-							onChange={handleChange}
-							value={data.password}
+							onChange={(e) => setPassword(e.target.value)}
+							value={password}
 							required
 							className="input"
 						/>
 						{error && <div className="error_msg">{error}</div>}
-						<button type="submit" className="sign_up_button">
+						<button disabled={isLoading} type="submit" className="sign_up_button">
 							Sign Up
 						</button>
 					</form>
 				</div>
 			</div>
 		</div>
-		</BrowserRouter>
+
 	);
 };

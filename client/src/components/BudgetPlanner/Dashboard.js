@@ -26,7 +26,9 @@ export default function Display() {
   // fetch budget data from database 
   async function fetchBudgets() {
     try {
-      const response = await axios.get('https://orbital-5731-moolah.onrender.com/api/add-budget');
+      const url2 = 'https://localhost:8080/api/add-budget';
+      const url = 'https://orbital-5731-moolah.onrender.com/api/add-budget';
+      const response = await axios.get(url2);
       setBudgets(response.data);
     } catch (error) {
       console.error(error.response);
