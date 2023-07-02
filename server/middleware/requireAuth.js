@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken');
+const {User} = require('../models/user');
 
 const requireAuth = async (req, res, next) => { 
   // verify that user is authenticated 
-  const { authorization } = req.headers
+  const { authorization } = req.headers;
 
   if (!authorization) { 
     return res.status(401).json({error: 'Authorization token required'})
@@ -20,7 +21,7 @@ const requireAuth = async (req, res, next) => {
 
     // using the id from the payload, try to find this user from the database 
     // we are attaching the data to a property called 'user' of the request body 
-    req.user = await User.findOne({ _id }).select('_id');
+    req.user = await User.findOne({ _id: _id }).select('_id');
     next()
 
   } catch (error) { 

@@ -2,7 +2,7 @@ const router = require("express").Router(); //imports the Express Router module 
 const Budget = require('../models/budget');
 const requireAuth = require('../middleware/requireAuth');
 // require auth for all budget routes
-router.use(requireAuth);
+router.use(requireAuth)
 
 // create a new budget 
 router.post("/", async (req, res) => { 
@@ -29,7 +29,8 @@ router.post("/", async (req, res) => {
 // retrieve all budgets from database 
 router.get("/", async (req, res) => {
   try {
-    const budgets = await Budget.find();
+    const user_id = req.user._id;
+    const budgets = await Budget.find({ user_id});
     return res.json(budgets);
   } catch (error) {
     return res.status(500).json({ message: `Error while retrieving budget: ${error}` });

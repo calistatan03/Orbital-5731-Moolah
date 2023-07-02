@@ -4,8 +4,6 @@ const {User} = require("../models/user");
 const Joi = require("joi");
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
-const requireAuth = require('../middleware/requireAuth');
-
 
 // login route 
 
@@ -21,10 +19,12 @@ router.post("/", async (req, res) => {
     try { 
         const user = await User.login(email, password)
 
+        const { firstName, lastName } = user; 
+
         // create a token (and send the token back to the browser)
         const token = createToken(user._id);
 
-        res.status(200).json({email, token})
+        res.status(200).json({email, firstName, lastName, token})
     } catch (error) { 
         res.status(400).json({error: error.message})
     }

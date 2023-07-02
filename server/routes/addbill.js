@@ -7,6 +7,8 @@ router.use(requireAuth);
 // create a new bill 
 router.post("/", async (req, res) => { 
 
+  const user_id = req.user._id
+
   // extracting properties from req.body 
   const { title, amount, date, numOfMembers, memberNames, paidMember } = req.body;
   
@@ -31,8 +33,10 @@ router.post("/", async (req, res) => {
 
 // fetch all bill records from database 
 router.get("/", async (req, res) => {
+
+  const user_id = req.user._id;
   try {
-    const bills = await Bill.find();
+    const bills = await Bill.find({user_id});
     return res.json(bills);
   } catch (error) {
     return res.status(500).json({ message: `Error while retrieving bill: ${error}` });

@@ -9,6 +9,7 @@ import BudgetForm from "./components/BudgetPlanner/BudgetForm";
 import Display from "./components/BillSplitter/Display";
 import AddForm from "./components/BillSplitter/AddForm";
 import NavBar from "./components/NavBar/NavBar";
+import Profile from "./components/Profile/Profile"
 import { useAuthContext } from './hooks/useAuthContext';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
 					<Route path = "/add-budget" exact element = {user ? <BudgetForm/> : <Navigate to="/login"/>}/>
 					<Route path = "/billsplitter" exact element = {user ? <Display/> : <Navigate to="/login"/>}/>
 					<Route path = "/add-bill" exact element = {user ? <AddForm/> : <Navigate to="/login"/>}/>
+					<Route path = "/profile" exact element = {user ? <Profile/> : <Navigate to="/login"/>}/>
 				</Routes>
 			</Router>
 		</div>

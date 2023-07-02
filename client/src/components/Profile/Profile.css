@@ -1,0 +1,9 @@
+.user_details { 
+  display: flex;
+  justify-content: center;
+}
+
+.main_card { 
+  justify-content: center;
+}
+

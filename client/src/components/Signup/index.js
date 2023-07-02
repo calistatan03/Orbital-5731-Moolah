@@ -15,7 +15,7 @@ export default function Signup() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		await signup(firstName, lastName, email, password)
+		await signup(firstName, lastName, email, password);
 		/*try {
 	
 			const url2 = "https://localhost:8080/api/users/signup";

@@ -3,8 +3,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
+import {useAuthContext} from '../../../hooks/useAuthContext'
 
 export default function AddForm({onSaveTransactionData}) {
+
+  const {user} = useAuthContext()
   const [enteredCategory, setEnteredCategory] = useState('');
   const [enteredAmount, setEnteredAmount] = useState(0);
   const [error, setError] = useState('');
@@ -39,11 +42,15 @@ export default function AddForm({onSaveTransactionData}) {
     console.log(transactionData);
 
     try {
-      const url2 = 'https://localhost:8080/api/add-transaction';
+      const url2 = 'http://localhost:8080/api/add-transaction';
       const url = 'https://orbital-5731-moolah.onrender.com/api/add-transaction';
       const response = await axios.post(
         url2,
-        transactionData);
+        transactionData, { 
+          headers: { 
+            'Authorization': `Bearer ${user.token}`
+          }
+        });
 
       onSaveTransactionData(response.data);
       setEnteredTitle('');

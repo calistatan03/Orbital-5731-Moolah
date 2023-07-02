@@ -17,7 +17,7 @@ export default function HomePage() {
     <div className="main-container">
       <NavBar></NavBar>
       <div className="welcome-section">
-	  <h1 className="welcome-heading">Welcome to Moolah!</h1>
+	  <h1 className="welcome-heading">Welcome to Moolah, {user.firstName}!</h1>
         <div className="logo-section">
           <img src={moolahlogo2} className="moolah-logo" alt="Moolah! Logo" />
         </div>

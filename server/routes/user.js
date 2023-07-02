@@ -4,9 +4,7 @@ const req = require("express/lib/request");
 const jwt = require('jsonwebtoken');
 const {User} = require("../models/user"); //User model represents a user in the database, and the validate function is used to validate user data.
 const bcrypt = require("bcrypt"); // imports the bcrypt module, which is used for password hashing and salting.
-const requireAuth = require('../middleware/requireAuth');
 
-router.use(requireAuth);
 
 // create a json web token 
 const createToken = (_id) => { 
@@ -24,7 +22,7 @@ router.post("/", async (req, res) => { //handles the request when a client sends
         // create a token (and send the token back to the browser)
         const token = createToken(user._id);
 
-        res.status(200).json({email, token})
+        res.status(200).json({email, firstName, lastName, token})
     } catch (error) { 
         res.status(400).json({error: error.message})
     }
