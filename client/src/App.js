@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
@@ -8,25 +8,31 @@ import OpenForm from "./components/ExpenseTracker/AddTransaction/OpenForm";
 import BudgetForm from "./components/BudgetPlanner/BudgetForm";
 import Display from "./components/BillSplitter/Display";
 import AddForm from "./components/BillSplitter/AddForm";
+import NavBar from "./components/NavBar/NavBar";
+import Profile from "./components/Profile/Profile"
+import { useAuthContext } from './hooks/useAuthContext';
 
 function App() {
-	const user = localStorage.getItem("token");
+	const { user } = useAuthContext()
+	//const user = localStorage.getItem("token");
 
 	return (
 		<div>
-			<Routes>
-			{user && <Route path="/" exact element={<HomePage />} />}
-			<Route path="/signup" exact element={<Signup />} />
-			<Route path="/login" exact element={<Login />} />
-			<Route path="/" element={<Navigate replace to="/login" />} />
-			<Route path = "/budgetplanner" exact element = {<Dashboard/>} />
-			<Route path = "/expensetracker" exact element = {<Stats />} />
-			<Route path = "/add-transaction" exact element = {<OpenForm/>}/>
-			<Route path = "/add-budget" exact element = {<BudgetForm/>}/>
-			<Route path = "/billsplitter" exact element = {<Display/>}/>
-			<Route path = "/add-bill" exact element = {<AddForm/>}/>
-		</Routes>
-
+			<Router>
+				<Routes>
+					{user && <Route path="/" exact element={<HomePage />} />}
+					<Route path="/signup" element={!user ? <Signup /> : <Navigate to="/"/>} />
+					<Route path="/login" element={!user ? <Login/> : <Navigate to="/"/>}/>
+					<Route path="/" element={<Navigate replace to="/login" />} />
+					<Route path = "/budgetplanner" exact element = {user ? <Dashboard/> : <Navigate to="/login"/>} />
+					<Route path = "/expensetracker" exact element = {user ? <Stats /> : <Navigate to="/login"/>} />
+					<Route path = "/add-transaction" exact element = {user ? <OpenForm/> : <Navigate to="/login"/>}/>
+					<Route path = "/add-budget" exact element = {user ? <BudgetForm/> : <Navigate to="/login"/>}/>
+					<Route path = "/billsplitter" exact element = {user ? <Display/> : <Navigate to="/login"/>}/>
+					<Route path = "/add-bill" exact element = {user ? <AddForm/> : <Navigate to="/login"/>}/>
+					<Route path = "/profile" exact element = {user ? <Profile/> : <Navigate to="/login"/>}/>
+				</Routes>
+			</Router>
 		</div>
 
 

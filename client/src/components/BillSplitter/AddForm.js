@@ -6,8 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import './AddForm.css';
 import axios from 'axios';
 import RemoveIcon from '@mui/icons-material/Remove';
-
-
+import {useAuthContext} from '../../hooks/useAuthContext';
 
 export default function AddForm() { 
 
@@ -17,6 +16,8 @@ export default function AddForm() {
   const [memberNames, setMemberNames] = useState([{memberName: ""}]);
   const [paidMember, setPaidMember] = useState("");
   const [enteredDate, setEnteredDate] = useState('');
+  const [error, setError] = useState('');
+  const { user } = useAuthContext(); 
   //const [memberNameList, setMemberNameList] = useState([{memberName: "Me"}])
 
   function titleChangeHandler(event) { 
@@ -38,6 +39,7 @@ export default function AddForm() {
   async function submitHandler(event) { 
     event.preventDefault();
 
+
     const billData = {
       title: enteredTitle,
       amount: +enteredAmount,
@@ -50,15 +52,30 @@ export default function AddForm() {
     console.log(billData); 
 
     try {
-      const response = await axios.post('https://orbital-5731-moolah.onrender.com/api/add-bill', billData);
+
+      const url2 = 'http://localhost:8080/api/add-bill';
+      const url = 'https://orbital-5731-moolah.onrender.com/api/add-bill';
+      const response = await axios.post(url2, billData, { 
+        headers: { 
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
+
       console.log(response);
-      //onSaveTransactionData(response.data);
-      setEnteredTitle('');
-      setEnteredAmount('');
-      setEnteredNumOfMembers('');
-      setEnteredDate('');
-      setMemberNames([{memberName: "Me"}]);
-      setPaidMember('');
+
+      if (!response.ok) { 
+        setError(response.error); 
+
+      }
+
+      if (response.ok) { 
+        setEnteredTitle('');
+        setEnteredAmount('');
+        setEnteredNumOfMembers('');
+        setEnteredDate('');
+        setMemberNames([{memberName: "Me"}]);
+        setPaidMember('');
+      }
     } catch (error) {
       console.error(error);
     }

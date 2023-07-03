@@ -4,8 +4,11 @@ import './Stats.css';
 import DoughnutChart from './Doughnut';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuthContext } from '../../../hooks/useAuthContext';
 
 export default function Stats() {
+  
+  const {user} = useAuthContext()
     const handleLogout = () => {
 		localStorage.removeItem("token");
 		window.location.reload();
@@ -19,7 +22,13 @@ export default function Stats() {
 
   async function fetchData() {
     try {
-      const response = await axios.get('https://orbital-5731-moolah.onrender.com/api/add-transaction');
+      const url2 = 'http://localhost:8080/api/add-transaction';
+      const url = 'https://orbital-5731-moolah.onrender.com/api/add-transaction';
+      const response = await axios.get(url2, { 
+        headers: { 
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
       setTransactions(response.data);
     } catch (error) {
       console.error(error);

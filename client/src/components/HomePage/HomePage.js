@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
 import moolahlogo2 from '../../images/moolahlogo2.png';
 import './HomePage.css';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 export default function HomePage() {
   const handleLogout = () => {
@@ -10,11 +11,13 @@ export default function HomePage() {
     window.location.reload();
   };
 
+  const {user} = useAuthContext()
+
   return (
     <div className="main-container">
       <NavBar></NavBar>
       <div className="welcome-section">
-	  <h1 className="welcome-heading">Welcome to Moolah!</h1>
+	  <h1 className="welcome-heading">Welcome to Moolah, {user.firstName}!</h1>
         <div className="logo-section">
           <img src={moolahlogo2} className="moolah-logo" alt="Moolah! Logo" />
         </div>

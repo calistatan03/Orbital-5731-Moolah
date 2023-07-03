@@ -4,9 +4,12 @@ import axios from 'axios';
 import NavBar from "../NavBar/NavBar";
 import BudgetsList from "./BudgetsList";
 import { Link } from 'react-router-dom';
+import {useAuthContext} from "../../hooks/useAuthContext";
 
 
 export default function BudgetForm(props) { 
+
+  const {user} = useAuthContext();
 
   const [enteredCategory, setEnteredCategory] = useState('');
   const [enteredAmount, setEnteredAmount] = useState(0);
@@ -24,16 +27,40 @@ export default function BudgetForm(props) {
   async function submitHandler(event) { 
     event.preventDefault(); 
 
-    const budgetData = { 
+    if (user) { 
+      const budgetData = { 
       category: enteredCategory,
       amount: +enteredAmount,
     };
 
     console.log(budgetData);
 
-    try { 
+    const response = await fetch('http://localhost:8080/api/add-budget', { 
+      method: 'POST',
+      body: JSON.stringify(budgetData),
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
+      }
+    })
+    
+    const json = await response.json() 
 
-      const response = await axios.post("https://orbital-5731-moolah.onrender.com/api/add-budget", budgetData); 
+    if (!response.ok) { 
+      setError(json.error) 
+    }
+    if (response.ok) { 
+      setEnteredAmount('');
+      setEnteredCategory('');
+      setError(null);
+    }
+
+    /*try { 
+
+
+      const url2 = 'https://localhost:8080/api/add-budget';
+      const url = 'https://orbital-5731-moolah.onrender.com/api/add-budget';
+      const response = await axios.post(url2, budgetData); 
       console.log(response);
 
       //props.onSaveBudgetData(response.data);
@@ -41,8 +68,10 @@ export default function BudgetForm(props) {
       setEnteredCategory('');
       setError('');
       } catch (error) { 
-        console.log(error.response);
-    }
+
+    }*/
+
+      } 
 
       //props.onSaveBudgetData(response.data);
   
@@ -89,7 +118,5 @@ export default function BudgetForm(props) {
   )
 
 }
-
-module.exports = BudgetForm;
 
 // <button className="cancel" type="cancel" onClick={props.onCancel}>Cancel</button>

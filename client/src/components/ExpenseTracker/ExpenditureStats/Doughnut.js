@@ -5,11 +5,14 @@ import { Doughnut } from 'react-chartjs-2';
 import './Doughnut.css';
 import TransactionList from './TransactionList';
 import axios from 'axios';
+import { useAuthContext } from '../../../hooks/useAuthContext';
+import { Unstable_Grid2 } from '@mui/material';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function DoughnutChart({transactions}) {
 
+  const {user} = useAuthContext(); 
   const [transactionList, setTransactionList] = useState(transactions);
   const [expenseData, setExpenseData] = useState([]);
   const [totalExpense, setTotalExpense] = useState(0);
@@ -22,8 +25,15 @@ export default function DoughnutChart({transactions}) {
   //whenever the 'transactions' passed to the DoughnutChart changes, the 'updateExpenseData' function will be called to recalculate the expense data and update the state variables
   useEffect(() => {
     const fetchTransactions = async () => {
+
       try {
-        const response = await axios.get(`https://orbital-5731-moolah.onrender.com/api/add-transaction/${selectedDuration}`);
+        const url2 = 'http://localhost:8080/api/add-transaction';
+        const url = 'https://orbital-5731-moolah.onrender.com/api/add-transaction';
+        const response = await axios.get(`http://localhost:8080/api/add-transaction/${selectedDuration}`, { 
+          headers: { 
+            'Authorization': `Bearer ${user.token}`
+          }
+        });
         const fetchedTransactions = response.data;
         setTransactionList(fetchedTransactions);
         updateExpenseData(fetchedTransactions);
@@ -122,7 +132,13 @@ export default function DoughnutChart({transactions}) {
   
   const deleteTransaction = async (id) => {
     try {
-      await axios.delete(`https://orbital-5731-moolah.onrender.com/api/add-transaction/${id}`);
+      const url2 = `http://localhost:8080/api/add-transaction/${id}`
+      const url = `https://orbital-5731-moolah.onrender.com/api/add-transaction/${id}`
+      await axios.delete(url2, { 
+        headers: { 
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
       setTransactionList((prevTransactions) =>
       prevTransactions.filter((transaction) => transaction._id !== id)
     );

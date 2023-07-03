@@ -7,7 +7,8 @@ const billSchema = new mongoose.Schema({
   date: {type: Date, required: true},
   numOfMembers: {type: Number, required:true}, 
   memberNames: {type: Array, required: true},
-  paidMember: {type: String}
+  paidMember: {type: String},
+  user_id: {type:String, required:true}
 })
 
 const Bill = mongoose.model("bill", billSchema);
