@@ -12,6 +12,7 @@ import NavBar from "./components/NavBar/NavBar";
 import Profile from "./components/Profile/Profile"
 import { useAuthContext } from './hooks/useAuthContext';
 
+
 function App() {
 	const { user } = useAuthContext()
 	//const user = localStorage.getItem("token");
