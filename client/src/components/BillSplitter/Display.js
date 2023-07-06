@@ -6,6 +6,7 @@ import OwingDetails from './OwingDetails';
 import './Display.css';
 import {useAuthContext} from '../../hooks/useAuthContext'
 
+
 export default function Display() { 
 
   const {user} = useAuthContext(); 
@@ -17,9 +18,7 @@ export default function Display() {
 
   const [bills, setBills] = useState([]);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  
 
   async function fetchData() {
     try {

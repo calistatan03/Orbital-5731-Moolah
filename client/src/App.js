@@ -11,14 +11,17 @@ import AddForm from "./components/BillSplitter/AddForm";
 import NavBar from "./components/NavBar/NavBar";
 import Profile from "./components/Profile/Profile"
 import { useAuthContext } from './hooks/useAuthContext';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 
 
 function App() {
 	const { user } = useAuthContext()
 	//const user = localStorage.getItem("token");
+	const client = new QueryClient()
 
 	return (
 		<div>
+			<QueryClientProvider client={client}>
 			<Router>
 				<Routes>
 					{user && <Route path="/" exact element={<HomePage />} />}
@@ -34,6 +37,7 @@ function App() {
 					<Route path = "/profile" exact element = {user ? <Profile/> : <Navigate to="/login"/>}/>
 				</Routes>
 			</Router>
+			</QueryClientProvider>
 		</div>
 
 

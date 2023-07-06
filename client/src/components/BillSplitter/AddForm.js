@@ -118,7 +118,7 @@ export default function AddForm() {
       <NavBar/>
 
       <div className="form-card">
-      <form className="form">
+      <form className="form" onSubmit={submitHandler}>
         <div className="new-bill__controls">
           <h1>New Bill</h1>
           <label>Title</label>
@@ -193,7 +193,6 @@ export default function AddForm() {
           </Link>
           <button className="submit_btn" type='submit' onClick={submitHandler}>Split Bill</button>
         </div>
-
 
       </form>
       </div>
