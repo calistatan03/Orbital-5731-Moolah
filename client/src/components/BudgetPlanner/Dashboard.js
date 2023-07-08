@@ -8,23 +8,34 @@ import NavBar from '../NavBar/NavBar';
 import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import {useAuthContext} from '../../hooks/useAuthContext'
 
 export default function Display() { 
 
   const {user} = useAuthContext(); 
-  const handleLogout = () => {
-		localStorage.removeItem("token");
-		window.location.reload();
-	};
-
   const [transactions, setTransactions] = useState([]);
   const [budgets, setBudgets] = useState([]);
 
-  useEffect(() => {
-    fetchBudgets();
-    fetchExpenses();
-  }, []);
+  const { data: budgetData, isLoading: loadingBudgetData } = useQuery(["budgets"], () => { 
+     return axios.get('http://localhost:8080/api/add-budget', {
+      headers: {
+        'Authorization': `Bearer ${user.token}`
+      }
+    }).then(res => res.data);
+  }, { 
+    placeholderData: [],
+  });
+
+  const { data: transactionData, isLoading: loadingTransactionData } = useQuery(["transactions"], () => { 
+    return axios.get('http://localhost:8080/api/add-transaction', { 
+        headers: { 
+          'Authorization': `Bearer ${user.token}`
+        }
+      }).then(res => res.data);
+  }, { 
+    placeholderData: [],
+  });
 
   // fetch budget data from database 
   async function fetchBudgets() {
@@ -69,7 +80,7 @@ export default function Display() {
     <div className="main_container">
 			<NavBar/>
       <div className="budget_list">
-        <BudgetsList transactions={transactions} budgets={budgets}></BudgetsList>
+        <BudgetsList transactions={transactionData} budgets={budgetData}></BudgetsList>
       </div>
       <div className="add_budget_button">
         <Link to="/add-budget" className="add_budget">
