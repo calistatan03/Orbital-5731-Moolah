@@ -4,21 +4,24 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import OwingDetails from './OwingDetails';
 import './Display.css';
+import { useQuery } from '@tanstack/react-query';
 import {useAuthContext} from '../../hooks/useAuthContext'
 
 
 export default function Display() { 
 
   const {user} = useAuthContext(); 
-
-    const handleLogout = () => {
-		localStorage.removeItem("token");
-		window.location.reload();
-	};
-
   const [bills, setBills] = useState([]);
 
-  
+  const { data: billData, isLoading, isError } = useQuery(["bills"], () => { 
+     return axios.get('http://localhost:8080/api/add-bill', { 
+      headers: { 
+        'Authorization': `Bearer ${user.token}`
+      }
+    }).then(res => res.data);
+  }, { 
+    placeholderData: [],  });
+
 
   async function fetchData() {
     try {
@@ -44,7 +47,7 @@ export default function Display() {
     <div>
       <NavBar/>
       <div className="owing_details">
-        <OwingDetails bills={bills}/> 
+        <OwingDetails bills={billData}/> 
       </div>
       <div className="add_new_bill">
         <OpenForm/>
