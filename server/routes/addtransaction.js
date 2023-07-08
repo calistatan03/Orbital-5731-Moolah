@@ -35,45 +35,44 @@ router.get("/", async (req, res) => {
 });
 
 
-router.get("/:duration", async (req, res) => {
-  const { duration } = req.params;
-  const user_id = req.user._id
+router.get("/:duration/:year?/:month?", async (req, res) => {
+  const { duration, year, month } = req.params;
+  const user_id = req.user._id;
 
   try {
-    const transactions = await Transaction.find({user_id});
-    // Filter transactions based on the duration
-    let filteredTransactions = [];
+    let query = { user_id };
+
     if (duration === 'week') {
-      // Filter transactions for the past week
+      // Fetch transactions for the past week
       const currentDate = new Date();
-      const weekAgo = new Date(currentDate.getTime() - 7 * 24 * 60 * 60 * 1000);
-      filteredTransactions = transactions.filter((transaction) => {
-        const transactionDate = new Date(transaction.date);
-        return transactionDate >= weekAgo && transactionDate <= currentDate;
-      });
-    } else if (duration === 'month') {
-      // Filter transactions for the current month
-      const currentDate = new Date();
-      const monthStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-      filteredTransactions = transactions.filter((transaction) => {
-        const transactionDate = new Date(transaction.date);
-        return transactionDate >= monthStart && transactionDate <= currentDate;
-      });
-    } else if (duration === 'year') {
-      // Filter transactions for the current year
-      const currentDate = new Date();
-      const yearStart = new Date(currentDate.getFullYear(), 0, 1);
-      filteredTransactions = transactions.filter((transaction) => {
-        const transactionDate = new Date(transaction.date);
-        return transactionDate >= yearStart && transactionDate <= currentDate;
-      });
+      const weekAgo = new Date();
+      weekAgo.setDate(weekAgo.getDate() - 7); // Subtract 7 days to get the past week
+      query.date = { $gte: weekAgo, $lte: currentDate };
+    } else if (duration === 'month' && year && month) {
+      // Filter transactions for the selected month and year
+      const selectedMonth = parseInt(month); // Months are zero-based in JavaScript Date
+      const selectedYear = parseInt(year);
+      const startDate = new Date(selectedYear, selectedMonth, 1);
+      const endDate = new Date(selectedYear, selectedMonth + 1, 0, 23, 59, 59);
+      query.date = { $gte: startDate, $lte: endDate };
+    } else if (duration === 'year' && year) {
+      // Filter transactions for the selected year
+      const selectedYear = parseInt(year);
+      const startDate = new Date(selectedYear, 0, 1);
+      const endDate = new Date(selectedYear, 11, 31, 23, 59, 59);
+      query.date = { $gte: startDate, $lte: endDate };
+    } else {
+      return res.status(400).json({ message: 'Invalid duration, year, or month' });
     }
 
-    return res.json(filteredTransactions);
+    const transactions = await Transaction.find(query);
+    return res.json(transactions);
   } catch (error) {
     return res.status(500).json({ message: `Error while retrieving transactions: ${error}` });
   }
 });
+
+
 
 router.delete("/:_id", async (req, res) => {
   const transactionId = req.params._id;
