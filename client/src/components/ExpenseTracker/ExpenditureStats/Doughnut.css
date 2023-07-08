@@ -19,15 +19,13 @@
     }
 
   .filter-container {
-    margin-top: 20px;
-    margin-bottom: 20px;
     display: flex;
-    align-items: center;
+    align-items: centre;
     justify-content: center;
+    margin-bottom: 1rem;
   }
 
   .filter-container label {
-    margin-bottom: 0.5rem;
     display: block;
     font-weight: bold;
     margin-right: 1rem;
