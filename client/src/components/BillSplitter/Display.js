@@ -7,7 +7,6 @@ import './Display.css';
 import { useQuery } from '@tanstack/react-query';
 import {useAuthContext} from '../../hooks/useAuthContext'
 
-
 export default function Display() { 
 
   const {user} = useAuthContext(); 
@@ -23,7 +22,7 @@ export default function Display() {
     placeholderData: [],  });
 
 
-  async function fetchData() {
+  /*async function fetchData() {
     try {
       const url2 = 'http://localhost:8080/api/add-bill';
       const url = 'https://orbital-5731-moolah.onrender.com/api/add-bill';
@@ -36,7 +35,7 @@ export default function Display() {
     } catch (error) {
       console.error(error);
     }
-  }
+  }*/
  
   const handleSaveBillData = (newBillData) => {
     setBills((prevBills) => [...prevBills, newBillData]);
