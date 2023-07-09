@@ -39,6 +39,7 @@ export default function AddForm() {
   async function submitHandler(event) { 
     event.preventDefault();
 
+
     const billData = {
       title: enteredTitle,
       amount: +enteredAmount,
@@ -47,8 +48,6 @@ export default function AddForm() {
       memberNames: memberNames, 
       paidMember: paidMember
     };
-
-    console.log(billData); 
 
     try {
 
@@ -59,8 +58,6 @@ export default function AddForm() {
           'Authorization': `Bearer ${user.token}`
         }
       });
-
-      console.log(response);
 
       if (!response.ok) { 
         setError(response.error); 
@@ -78,7 +75,6 @@ export default function AddForm() {
     } catch (error) {
       console.error(error);
     }
-
   }
 
 
@@ -115,7 +111,6 @@ export default function AddForm() {
   return (
     <div>
       <NavBar/>
-
       <div className="form-card">
       <form className="form" onSubmit={submitHandler}>
         <div className="new-bill__controls">
@@ -192,6 +187,7 @@ export default function AddForm() {
           </Link>
           <button className="submit_btn" type='submit' onClick={submitHandler}>Split Bill</button>
         </div>
+
 
       </form>
       </div>
