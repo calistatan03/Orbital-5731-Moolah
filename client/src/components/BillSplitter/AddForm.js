@@ -39,7 +39,6 @@ export default function AddForm() {
   async function submitHandler(event) { 
     event.preventDefault();
 
-
     const billData = {
       title: enteredTitle,
       amount: +enteredAmount,

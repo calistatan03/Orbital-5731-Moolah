@@ -11,7 +11,7 @@ export default function TransactionList({ transactions, categoryColors, onDelete
       const date = new Date(dateString);
       return date.toLocaleDateString(); // Format the date as per the user's locale
     };
-  
+
     return (
       <div>
         <ul className="transaction-list">

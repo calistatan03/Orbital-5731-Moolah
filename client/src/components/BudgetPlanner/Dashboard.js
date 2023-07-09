@@ -7,15 +7,16 @@ import BudgetsList from './BudgetsList';
 import NavBar from '../NavBar/NavBar';
 import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState, useContext } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import {useAuthContext} from '../../hooks/useAuthContext'
+import { BudgetsContext } from '../../context/BudgetsContext'
 
 export default function Display() { 
 
+  //const { budgets, dispatch } = useBudgetsContext(); 
   const {user} = useAuthContext(); 
-  const [transactions, setTransactions] = useState([]);
-  const [budgets, setBudgets] = useState([]);
+  const queryClient = useQueryClient();
 
   const { data: budgetData, isLoading: loadingBudgetData } = useQuery(["budgets"], () => { 
      return axios.get('http://localhost:8080/api/add-budget', {
@@ -37,7 +38,7 @@ export default function Display() {
     placeholderData: [],
   });
 
-  // fetch budget data from database 
+  /*fetch budget data from database 
   async function fetchBudgets() {
 
     if (user) { 
@@ -49,11 +50,9 @@ export default function Display() {
 
       const json = await response.json() 
 
-      if (response.ok) { 
-        setBudgets(json);
-      }
     }
-    /*
+
+  
     try {
       const url2 = 'https://localhost:8080/api/add-budget';
       const url = 'https://orbital-5731-moolah.onrender.com/api/add-budget';
@@ -61,18 +60,9 @@ export default function Display() {
       setBudgets(response.data);
     } catch (error) {
       console.error(error.response);
-    }*/
-  }
-
-  // fetch expenses data from database 
-  async function fetchExpenses() { 
-    try {
-      const response = await axios.get('https://orbital-5731-moolah.onrender.com/api/add-transaction');
-      setTransactions(response.data);
-    } catch (error) {
-      console.error(error);
     }
-  }
+  }  */
+
 
 
   

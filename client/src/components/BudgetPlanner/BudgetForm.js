@@ -1,15 +1,16 @@
 import './BudgetForm.css';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
 import NavBar from "../NavBar/NavBar";
 import BudgetsList from "./BudgetsList";
 import { Link } from 'react-router-dom';
 import {useAuthContext} from "../../hooks/useAuthContext";
 
-
 export default function BudgetForm(props) { 
 
   const {user} = useAuthContext();
+  //const {budgets, dispatch} = useBudgetsContext(); 
+
 
   const [enteredCategory, setEnteredCategory] = useState('');
   const [enteredAmount, setEnteredAmount] = useState(0);
@@ -24,6 +25,7 @@ export default function BudgetForm(props) {
     setEnteredAmount(event.target.value);
   };
 
+  // submit post request and new budget data 
   async function submitHandler(event) { 
     event.preventDefault(); 
 
