@@ -10,6 +10,7 @@ import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import './BudgetItem.css';
 import { BiTrash } from 'react-icons/bi';
 import { purple } from '@mui/material/colors';
+import { useDeleteBudget } from '../../hooks/useDeleteBudget';
 
 export default function BudgetsList({transactions, budgets}) { 
 
@@ -18,21 +19,24 @@ export default function BudgetsList({transactions, budgets}) {
   
   //const { budgets, setBudgets} = useContext(BudgetsContext);
 
-  const text="No budgets set yet. Set one now!"
-  const queryClient = useQueryClient();
-
-  const deleteBudget = async (id) => { 
-      /*setBudgetData((prevBudgets) =>
-      prevBudgets.filter((budget) => budget._id !== id))*/
-    try { 
-      await axios.delete(`http://localhost:8080/api/add-budget/${id}`, { 
+  const deleteBudgetFunction = (id) => { 
+    return axios.delete(`http://localhost:8080/api/add-budget/${id}`, { 
       headers: { 
         'Authorization': `Bearer ${user.token}`
       }
-    })
-    } catch (error) { 
-      console.error(error);
-    }
+    });
+  }
+
+  const text="No budgets set yet. Set one now!"
+  const { mutate } = useDeleteBudget()
+
+  function deleteBudget(id) { 
+    mutate(id);
+    
+
+      /*setBudgetData((prevBudgets) =>
+      prevBudgets.filter((budget) => budget._id !== id))*/
+    
   }
  /*
     { 
@@ -42,13 +46,15 @@ export default function BudgetsList({transactions, budgets}) {
     }; */
 
   // fetch budget data 
-  const { data: budgetData, isLoading: loadingBudgetData } = useQuery(["budgets"], () => { 
+  const { data: budgetDatas, isLoading: loadingBudgetData } = useQuery(['budgets'], () => { 
      return axios.get('http://localhost:8080/api/add-budget', {
       headers: {
         'Authorization': `Bearer ${user.token}`
       }
     }).then(res => res.data);
   }, { 
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
     placeholderData: [],
   });
 
@@ -61,6 +67,8 @@ export default function BudgetsList({transactions, budgets}) {
         }
       }).then(res => res.data);
   }, { 
+    refetchOnMount: true, 
+    refetchOnWindowFocus: true,
     placeholderData: [],
   }); 
 
@@ -101,8 +109,8 @@ export default function BudgetsList({transactions, budgets}) {
         </div>
         <div>
           <ul className="budgetlist">
-          {budgets.map((budget) => { 
-            return <BudgetItem transactions={transactions} budget={budget} onDeleteBudget={deleteBudget}/>
+          {budgetDatas.map((budget) => { 
+            return <BudgetItem onDeleteBudget={deleteBudget} transactions={transactionData} budget={budget} />
         })}
         </ul>
         </div>

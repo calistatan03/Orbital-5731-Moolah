@@ -18,7 +18,6 @@ export default function UserOwes({userOwesWho}) {
     setData(newData); 
   }
 
-
   return (
     <div className="main_container">
       <h1>Owed By You</h1>
@@ -28,12 +27,7 @@ export default function UserOwes({userOwesWho}) {
             <UserOweItem onDeleteBill={deleteBill} billData={billData} />
           )
       })}
-
       </ul>
-      
-
-
-
     </div>
 
   )

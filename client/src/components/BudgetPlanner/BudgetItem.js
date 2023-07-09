@@ -14,8 +14,8 @@ export default function BudgetItem({budget, onDeleteBudget}) {
   const { user } = useAuthContext();
   const category = budget.category; 
 
-  const deleteBudget = () => { 
-    onDeleteBudget(budget._id);
+  const deleteBudget = (id) => { 
+    onDeleteBudget(id);
   }
 
   // fetch transaction data 
@@ -51,7 +51,7 @@ export default function BudgetItem({budget, onDeleteBudget}) {
         <span className="progress_bar">
            <ChartBar filteredTransactions={filteredTransactions} budget={budget}/> 
         </span>
-        <span className="delete-icon" onClick={() => deleteBudget}>
+        <span className="delete-icon" onClick={() => deleteBudget(budget._id)}>
           <BiTrash></BiTrash>
         </span>
 

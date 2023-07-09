@@ -36,7 +36,7 @@ router.get("/", async (req, res) => {
 
   const user_id = req.user._id;
   try {
-    const bills = await Bill.find(user_id);
+    const bills = await Bill.find({user_id});
     return res.json(bills);
   } catch (error) {
     return res.status(500).json({ message: `Error while retrieving bill: ${error}` });
