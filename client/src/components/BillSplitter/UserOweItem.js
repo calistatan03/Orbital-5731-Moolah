@@ -33,5 +33,4 @@ export default function UserOweItem({onDeleteBill, billData}) {
     </div>
   )
 
-
 }

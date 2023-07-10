@@ -49,8 +49,6 @@ export default function AddForm() {
       paidMember: paidMember
     };
 
-    console.log(billData); 
-
     try {
 
       const url2 = 'http://localhost:8080/api/add-bill';
@@ -60,8 +58,6 @@ export default function AddForm() {
           'Authorization': `Bearer ${user.token}`
         }
       });
-
-      console.log(response);
 
       if (!response.ok) { 
         setError(response.error); 
@@ -79,7 +75,6 @@ export default function AddForm() {
     } catch (error) {
       console.error(error);
     }
-
   }
 
 
@@ -116,9 +111,8 @@ export default function AddForm() {
   return (
     <div>
       <NavBar/>
-
       <div className="form-card">
-      <form className="form">
+      <form className="form" onSubmit={submitHandler}>
         <div className="new-bill__controls">
           <h1>New Bill</h1>
           <label>Title</label>
