@@ -1,6 +1,7 @@
 import { purple } from '@mui/material/colors';
 import './ChartBar.css';
 import { useState, useEffect } from 'react';
+import { addDays, addMonths, addYears } from '@progress/kendo-date-math';
 
 // props should be a single budget object
 // find based on id? 
@@ -9,6 +10,15 @@ export default function ChartBar({filteredTransactions, budget}) {
   const [remainder, setRemainder] = useState(0);
   const [totalExpensesAmount, setTotalExpensesAmount] = useState(0);
   const percentage = 100;
+  const today = Date();
+  const startDate = new Date(budget.startDate); 
+  const startMonth = startDate.toLocaleString('en-US', {month: 'long'});
+  const startDay = startDate.toLocaleString('en-US', {day: '2-digit'});
+  const startYear = startDate.getFullYear(); 
+  const endDate = new Date(budget.endDate); 
+  const endDay = endDate.toLocaleString('en-US', {day: '2-digit'});
+  const endMonth = endDate.toLocaleString('en-US', {month: 'long'});
+  const endYear = endDate.getFullYear(); 
 
   // find expenses based on category => sum up ALL expenses.amount and present 
   // as fraction of total budget.amount 
@@ -70,12 +80,16 @@ export default function ChartBar({filteredTransactions, budget}) {
         </div>
       </div>
     </div>
+    <div className="timeline">
+      <h3 className="startDate">{startDay} {startMonth}, {startYear}</h3>
+      <h3 className="endDate">{endDay} {endMonth}, {endYear}</h3>
+
+    </div>
     <div className="howmuch_outof_howmuch">
       <h3>${totalExpensesAmount} of ${budget.amount} spent</h3>
     </div>
   </div>
   )
-  
 
 }
 

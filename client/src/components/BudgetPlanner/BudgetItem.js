@@ -6,12 +6,16 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query'; 
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useUpdateBudget } from "../../hooks/useUpdateBudgets";
+import { addDays, addWeeks, addMonths, addYears } from "@progress/kendo-date-math";
 
 
 // props should be a single budget object 
 export default function BudgetItem({budget, onDeleteBudget}) {
 
+  const [budgetData, setBudgetData] = useState(budget)
   const { user } = useAuthContext();
+  const today = Date();
   const category = budget.category; 
 
   const deleteBudget = (id) => { 
@@ -29,11 +33,9 @@ export default function BudgetItem({budget, onDeleteBudget}) {
     placeholderData: [],
   });
 
-
-  // filter transactions based on category 
+  // filter transactions based on category AND Date 
   const filteredTransactions = transactionData.filter((transaction) => 
-    transaction.category === budget.category
-  )
+    transaction.category === budget.category).filter((transaction) =>new Date(budget.startDate) <= new Date(transaction.date) && new Date(transaction.date) <= new Date(budget.endDate))
 
   return (
 
