@@ -1,66 +1,87 @@
-.date { 
+.date {
   font: inherit;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 2.5%;
+  margin-left: 2%;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
 }
 
-.list { 
-  background-color:#dbc3ec;
-  width: 28rem;
+
+.title_and_date {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+.list {
+  background-color: #dbc3ec;
+  width: 100%;
   margin-bottom: 1.5rem;
   display: flex;
   flex-direction: row;
   column-gap: 1rem;
+  padding: 5px;
   align-items: flex-start;
-  padding: 5px 20px;
-  margin-bottom: 10px;
   background-color: #dbc3ec;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: relative;
 }
 
-.title { 
+.title {
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
   font-weight: bold;
 }
 
-.day { 
+.day {
   font-size: 1.5rem;
   font-weight: bold;
   padding: 0.01rem 0.25rem;
 }
 
-.month { 
+.item_card {
+  width: 100%;
+}
+
+.month {
   font-size: 1rem;
   font-weight: bold;
 }
 
-.year { 
+.year {
   font-size: 1rem;
 }
 
-.paid_button { 
+.paid_button:hover {
+  background-color: rgb(158, 154, 154)
+}
+
+
+.paid_button {
   border-radius: 7px;
   font-size: 14px;
-  margin-left: 1rem;
-  margin-top: 2rem;
+  border: none;
+  vertical-align: middle;
 }
 
-.paid_button_container { 
-  font-size: 0; 
-  width: 5rem;
+.paid_button_container {
+  font-size: 0;
+  display: inline-block;
 }
 
-.owe-message { 
+.owe-message {
   display: block;
   width: 12rem;
 }
 
-.paid_button_div { 
+.paid_button_div {
   padding: 0.1rem 0.1rem;
 }
- 
-.date_container { 
+
+.date_container {
   display: flex;
   flex-direction: column;
   width: 5.5rem;

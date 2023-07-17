@@ -1,0 +1,17 @@
+.total-amount-owed {
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px 60px;
+  border-radius: 35px;
+  background-color: rgba(255, 0, 0, 0.4);;
+
+}
+
+.total-amount-owed h1 {
+  font-size: 25px;
+}
+
+.total-amount-owed h2 {
+  font-size: 20px;
+}

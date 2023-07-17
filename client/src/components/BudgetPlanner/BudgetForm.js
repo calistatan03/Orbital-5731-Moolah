@@ -66,7 +66,7 @@ export default function BudgetForm(props) {
             category: enteredCategory,
             amount: +enteredAmount,
             recurrence: enteredRecurrence,
-            startDate: new Date(startDate), 
+            startDate: new Date(startDate.setHours(0, 0, 0, 0)), 
             endDate: new Date(newEndDate)
           };
 
@@ -97,7 +97,7 @@ export default function BudgetForm(props) {
           category: enteredCategory,
           amount: +enteredAmount,
           recurrence: enteredRecurrence,
-          startDate: new Date(Date()), 
+          startDate: new Date(Date()).setHours(0, 0, 0, 0), 
           endDate: new Date(endDate)
         };
 

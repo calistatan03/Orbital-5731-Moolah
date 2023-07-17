@@ -31,6 +31,8 @@ export default function BudgetItem({budget, onDeleteBudget}) {
       }).then(res => res.data);
   }, { 
     placeholderData: [],
+    refetchInterval: 2000, 
+    refetchIntervalInBackground: true,
   });
 
   // filter transactions based on category AND Date 

@@ -70,7 +70,7 @@ export default function Display() {
     <div className="main_container">
 			<NavBar/>
       <div className="budget_list">
-        <BudgetsList transactions={transactionData} budgets={budgetData}></BudgetsList>
+        <BudgetsList></BudgetsList>
       </div>
       <div className="add_budget_button">
         <Link to="/add-budget" className="add_budget">

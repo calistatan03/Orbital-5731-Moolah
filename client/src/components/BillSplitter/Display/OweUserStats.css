@@ -1,0 +1,17 @@
+.total-amount-others-owe { 
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px 60px;
+  border-radius: 35px;
+  background-color: #aee1c6;
+
+}
+
+.total-amount-others-owe h1 { 
+  font-size: 25px;
+}
+
+.total-amount-others-owe h2 { 
+  font-size: 20px;
+}

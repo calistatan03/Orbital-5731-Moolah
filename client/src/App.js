@@ -4,8 +4,8 @@ import Stats from "./components/ExpenseTracker/ExpenditureStats/Stats";
 import Dashboard from "./components/BudgetPlanner/Dashboard";
 import OpenForm from "./components/ExpenseTracker/AddTransaction/OpenForm";
 import BudgetForm from "./components/BudgetPlanner/BudgetForm";
-import Display from "./components/BillSplitter/Display";
-import AddForm from "./components/BillSplitter/AddForm";
+import Display from "./components/BillSplitter/Display/Display";
+import AddForm from "./components/BillSplitter/AddBill/AddForm";
 import Profile from "./components/Profile/Profile"
 import { useAuthContext } from './hooks/useAuthContext';
 import {BudgetsContext} from "./context/BudgetsContext";

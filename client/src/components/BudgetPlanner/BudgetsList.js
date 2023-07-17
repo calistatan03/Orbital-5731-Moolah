@@ -14,9 +14,10 @@ import { useDeleteBudget } from '../../hooks/useDeleteBudget';
 import { addDays, addWeeks, addMonths, addYears, durationInMonths, durationInYears } from "@progress/kendo-date-math";
 
 
-export default function BudgetsList({transactions, budgets}) { 
+export default function BudgetsList() { 
 
   const { user } = useAuthContext();
+  const queryClient = useQueryClient();
 
   useEffect(() => {budgetData.forEach(checkDateValidity)})
   
@@ -87,6 +88,8 @@ export default function BudgetsList({transactions, budgets}) {
     }).then(res => res.data);
   }, { 
     refetchOnMount: true,
+    refetchInterval: 1000, 
+    refetchIntervalInBackground: true, 
     refetchOnWindowFocus: true,
     placeholderData: [],
   });
@@ -109,6 +112,8 @@ export default function BudgetsList({transactions, budgets}) {
       }).then(res => res.data);
   }, { 
     refetchOnMount: true, 
+    refetchInterval: 1000,
+    refetchIntervalInBackground: true,
     refetchOnWindowFocus: true,
     placeholderData: [],
   }); 
