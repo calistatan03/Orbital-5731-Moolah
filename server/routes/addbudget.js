@@ -8,14 +8,17 @@ router.use(requireAuth)
 router.post("/", async (req, res) => { 
 
   // extracting properties from req.body 
-  const { category, amount } = req.body;
+  const { category, amount, recurrence, startDate, endDate } = req.body;
   
   try {
     const user_id = req.user._id;
     const budget = new Budget({
       category,
       amount,
-      user_id
+      recurrence,
+      startDate,
+      endDate,
+      user_id,
     });
 
     const newBudget = await budget.save(); 
@@ -30,7 +33,7 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const user_id = req.user._id;
-    const budgets = await Budget.find({ user_id});
+    const budgets = await Budget.find({user_id});
     return res.json(budgets);
   } catch (error) {
     return res.status(500).json({ message: `Error while retrieving budget: ${error}` });
@@ -68,10 +71,24 @@ router.delete("/:_id", async (req, res) => {
   }
 });
 
-// find a budget based on category 
-router.get("/:_id", async (req, res) => { 
-  const budgetCategory = req.params.amount;
+// updating startDate and endDate of budget 
+router.patch("/:_id", async (req, res) => { 
+  const budgetId = req.params._id;
 
+  try { 
+    const budget = await Budget.findByIdAndUpdate(
+      {_id: budgetId}, req.body);
+
+    if (!budget) { 
+      return res.status(404).json(`No task with id: ${id}`);
+    }
+
+    res.status(200).json({message: 'Budget updated successfully'})
+
+  } catch (error) { 
+    return res.status(500).json({message: `Error while updating transaction: ${error}`})
+    console.log(error.message);
+  }
 
 })
 

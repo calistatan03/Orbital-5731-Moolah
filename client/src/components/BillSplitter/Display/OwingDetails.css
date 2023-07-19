@@ -1,14 +1,13 @@
 .split2 {
-  display: flex;
   height: 60%;
 }
 
-.who-owers-user { 
+.who-owers-user-card { 
   width: 50%; 
 
 }
 
-.who-user-owes {
+.who-user-owes-card {
   width: 50%;
 }
 

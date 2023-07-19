@@ -4,22 +4,43 @@ import ChartBar from './ChartBar';
 import { BiTrash } from 'react-icons/bi';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useQuery } from '@tanstack/react-query'; 
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useUpdateBudget } from "../../hooks/useUpdateBudgets";
+import { addDays, addWeeks, addMonths, addYears } from "@progress/kendo-date-math";
 
 
 // props should be a single budget object 
-export default function BudgetItem({transactions, budget, onDeleteBudget}) {
+export default function BudgetItem({budget, onDeleteBudget}) {
 
+  const [budgetData, setBudgetData] = useState([])
+  const { user } = useAuthContext();
+  const today = Date();
   const category = budget.category; 
 
-  
-  // filter transactions based on category 
-  const filteredTransactions = transactions.filter((transaction) => 
-    transaction.category === budget.category
-  )
+  const deleteBudget = (id) => { 
+    onDeleteBudget(id);
+  }
 
-  const handleDelete = (id) => {
-      onDeleteBudget(id);
-    };
+  useEffect(() => { 
+    setBudgetData(budget);
+  }, [budget])
+
+    // fetch transactionData 
+  const { data: transactionData, isLoading: loadingTransactionData } = useQuery(["transactions"], () => { 
+    return axios.get('http://localhost:8080/api/add-transaction', { 
+        headers: { 
+          'Authorization': `Bearer ${user.token}`
+        }
+      }).then(res => res.data);
+  }, { 
+    placeholderData: [],
+    refetchInterval: 1000,
+    refetchIntervalInBackground: true
+  });
+
+  const filteredTransactions = transactionData.filter((transaction) => 
+      transaction.category === budget.category).filter((transaction) =>new Date(budget.startDate) <= new Date(transaction.date) && new Date(transaction.date) <= new Date(budget.endDate))
 
   return (
 
@@ -35,11 +56,12 @@ export default function BudgetItem({transactions, budget, onDeleteBudget}) {
           </div>
         </span>
         <span className="progress_bar">
-           <ChartBar filteredTransactions={filteredTransactions} budget={budget}/> 
+           <ChartBar filteredTransactions = {filteredTransactions} budget={budget}/> 
         </span>
-        <span className="delete-icon" onClick={() => handleDelete(budget._id)}>
+        <span className="delete-icon" onClick={() => deleteBudget(budget._id)}>
           <BiTrash></BiTrash>
         </span>
+
 
     </div>
       
