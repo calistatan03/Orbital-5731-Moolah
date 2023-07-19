@@ -1,4 +1,4 @@
-.budget-form_wrapper { 
+.budget-form_wrapper {
   height: 11rem;
   align-items: center;
   margin-top: 2rem;
@@ -13,7 +13,7 @@
 }
 
 
-.with-shadow { 
+.with-shadow {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -36,6 +36,15 @@
 }
 
 .new-budget__control input {
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 20rem;
+  max-width: 100%;
+}
+
+.new-budget__control select {
   font: inherit;
   padding: 0.5rem;
   border-radius: 6px;
@@ -76,4 +85,3 @@
   cursor: pointer;
   margin-left: 12.5rem;
 }
-

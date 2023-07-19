@@ -4,13 +4,16 @@ import Stats from "./components/ExpenseTracker/ExpenditureStats/Stats";
 import Dashboard from "./components/BudgetPlanner/Dashboard";
 import OpenForm from "./components/ExpenseTracker/AddTransaction/OpenForm";
 import BudgetForm from "./components/BudgetPlanner/BudgetForm";
-import Display from "./components/BillSplitter/Display";
-import AddForm from "./components/BillSplitter/AddForm";
+import Display from "./components/BillSplitter/Display/Display";
+import AddForm from "./components/BillSplitter/AddBill/AddForm";
 import Profile from "./components/Profile/Profile"
 import { useAuthContext } from './hooks/useAuthContext';
 import {BudgetsContext} from "./context/BudgetsContext";
 import { QueryClientProvider, QueryClient, useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from "axios";
+import './App.css';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const HomePage = lazy(() => import("./components/HomePage/HomePage"));
 const Signup = lazy(() => import("./components/Signup"));
@@ -22,6 +25,10 @@ function App() {
 
 	return (
 		<div>
+			<ToastContainer
+				className="toast-position"
+				autoClose= {2000}
+			/>
 			<QueryClientProvider client={client}>
 			<Router>
 				<Suspense> 

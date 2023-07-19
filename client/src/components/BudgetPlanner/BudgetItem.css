@@ -1,4 +1,4 @@
-.budget_item_category { 
+.budget_item_category {
   border: none;
   display: flex;
   flex-direction: column;
@@ -7,21 +7,23 @@
 
 }
 
-.budget_details { 
+.budget_details {
   margin-top: 10px;
+
 }
 
-.budget_item_category h2 { 
+.budget_item_category h2 {
   font-size: 16px;
   font-weight: bold;
 }
 
-.card { 
+.card {
   border: none;
-  background-color:rgb(170, 115, 221);
+  background-color: rgb(170, 115, 221);
   padding: 1rem 1rem;
   text-align: center;
-  width: 7rem;
+  width: 8rem;
+  vertical-align: middle;
 
 }
 
@@ -38,18 +40,18 @@
   color: #585656;
 }
 
-.budget_item_amount h2 { 
+.budget_item_amount h2 {
   font-size: 14px;
   color: white;
   font-weight: bold;
 }
 
-.card_list { 
+.card_list {
   box-shadow: none;
-  
+
 }
 
-.item_container { 
+.item_container {
   display: flex;
   flex-direction: row;
   column-gap: 1rem;
@@ -64,21 +66,21 @@
   position: relative;
 }
 
-.progress_bar { 
-  height: 6.5rem;
+.progress_bar {
+  height: 20%;
   width: 95%;
   align-items: center;
 }
 
-.chart-bar__outer { 
+.chart-bar__outer {
   height: 20;
   width: '100%';
-    background-color: #e0e0de;
-    border-radius: 80px;
-    margin: 30;
+  background-color: #e0e0de;
+  border-radius: 80px;
+  margin: 30;
 }
 
-.cartd_list { 
+.card_list {
   width: 30rem;
 }
 
