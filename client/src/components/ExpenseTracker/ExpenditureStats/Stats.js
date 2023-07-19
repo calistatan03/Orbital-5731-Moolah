@@ -5,14 +5,17 @@ import DoughnutChart from './Doughnut';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuthContext } from '../../../hooks/useAuthContext';
+import TransactionCalendar from '../FeaturePage/TransactionCalendar';
 
 export default function Stats() {
+  const [showDoughnutChart, setShowDoughnutChart] = useState(false); // State to manage the visibility of the chart
+  const [transactionList, setTransactionList] = useState([]);
   
-  const {user} = useAuthContext()
-    const handleLogout = () => {
-		localStorage.removeItem("token");
-		window.location.reload();
-	};
+  const { user } = useAuthContext();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
 
   const [transactions, setTransactions] = useState([]);
 
@@ -29,7 +32,7 @@ export default function Stats() {
           'Authorization': `Bearer ${user.token}`
         }
       });
-      setTransactions(response.data);
+      setTransactionList(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -37,15 +40,24 @@ export default function Stats() {
  
   const handleSaveTransactionData = (newTransactionData) => {
     setTransactions((prevTransactions) => [...prevTransactions, newTransactionData]);
-  };  
+  };
 
+  const handleToggleChart = () => {
+    setShowDoughnutChart((prevShow) => !prevShow); // Toggle the visibility of the chart
+  };
 
   return (
     <div className="main_container">
-		<NavBar/>
-            <div className="doughnutchart">
-            <DoughnutChart transactions={transactions} onSaveTransactionData={handleSaveTransactionData}></DoughnutChart>
-            </div>
-		</div>
-  )
+      <NavBar />
+      <div>
+        <button className="view-stats-btn" onClick={handleToggleChart}>
+          {showDoughnutChart ? 'View Calendar' : 'View Statistics'}
+        </button>
+
+        {showDoughnutChart && <DoughnutChart transactions={transactions} onSaveTransactionData={handleSaveTransactionData} />}
+
+        {!showDoughnutChart && <TransactionCalendar transactions={transactionList} setTransactionList={setTransactionList} />}
+      </div>
+    </div>
+  );
 }
