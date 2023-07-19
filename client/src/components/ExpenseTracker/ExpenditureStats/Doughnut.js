@@ -63,6 +63,8 @@ export default function DoughnutChart({transactions}) {
       '#FF6384',
       '#36A2EB',
       '#FF9F40',
+      '#FF8F40',
+      '#FC9F40'
     ];
 
     const uniqueCategories = [...new Set(transactions.map((transaction) => transaction.category))];
