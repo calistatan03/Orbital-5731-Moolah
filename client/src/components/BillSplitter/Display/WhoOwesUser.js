@@ -5,6 +5,8 @@ import WhoOwesUserItem from './WhoOwesUserItem';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useAuthContext } from '../../../hooks/useAuthContext';
+import { toast } from 'react-toastify';
+
 
 export default function WhoOwesUser({whoOwesUserData}) { 
   const queryClient = useQueryClient();
@@ -22,6 +24,7 @@ export default function WhoOwesUser({whoOwesUserData}) {
       }
     }).then(() => { 
       setData(data.filter((bill) => bill._id !== id));
+      toast.success('Bill settled!')
 
     })
     

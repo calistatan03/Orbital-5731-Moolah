@@ -1,5 +1,5 @@
 import NavBar from "../../NavBar/NavBar";
-import  { useState } from 'react';
+import  { useState, useEffect } from 'react';
 import { Link, BrowserRouter } from 'react-router-dom';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import AddIcon from '@mui/icons-material/Add';
@@ -9,13 +9,16 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import {useAuthContext} from '../../../hooks/useAuthContext';
 import { useFieldArray, useForm } from "react-hook-form";
 import * as yup from 'yup';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function AddForm() { 
 
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredAmount, setEnteredAmount] = useState(0);
   const [enteredNumOfMembers, setEnteredNumOfMembers] = useState(0); 
-  const [memberNames, setMemberNames] = useState(['Me']);
+  const [memberNames, setMemberNames] = useState([]);
   const [paidMember, setPaidMember] = useState("");
   const [enteredDate, setEnteredDate] = useState('');
   const [error, setError] = useState('');
@@ -46,12 +49,10 @@ export default function AddForm() {
 
   async function submitHandler(event) { 
     event.preventDefault();
-    console.log('Function reached')
-    console.log(memberNames);
+
     
     // user paid for bill, others owe him/her 
     if (paidMember === "Me") { 
-      console.log('User is paidMember')
       
       // iterating through the memberNames array to add new properties to each object 
       const updatedMemberNames = memberNames.map((element) => ({
@@ -63,37 +64,30 @@ export default function AddForm() {
     
       )
 
-      console.log('New properties added to each object')
-      console.log(updatedMemberNames)
-
-      updatedMemberNames.forEach((element) => { 
+      await Promise.all(updatedMemberNames.map(async (element) => { 
         try { 
         const url2 = 'http://localhost:8080/api/add-bill';
         const url = 'https://orbital-5731-moolah.onrender.com/api/add-bill';
-        const response =  axios.post(url2, element, { 
+        const response =  await axios.post(url2, element, { 
           headers: { 
             'Authorization': `Bearer ${user.token}`
           }
         });
-        console.log(element);
-        if (!response.ok) { 
-          setError(response.error); 
 
-        }
-
-        if (response.ok) { 
+        if (response.status >= 200) { 
           setEnteredTitle('');
           setEnteredAmount('');
           setEnteredNumOfMembers('');
           setEnteredDate('');
-          setMemberNames([{memberName: "Me"}]);
+          setMemberNames([]);
           setPaidMember('');
+          toast.success('Bill added successfully!')
         }
       } catch (error) {
         console.error(error);
       }
 
-      })
+      }))
       
     } else { 
       // user owes a certain person money 
@@ -114,27 +108,26 @@ export default function AddForm() {
             'Authorization': `Bearer ${user.token}`
           }
         });
-        console.log(billData);
 
         if (!response.ok) { 
           setError(response.error); 
+          console.log('Response not ok?')
 
         }
 
-        if (response.ok) { 
+        if (response.status >= 200) { 
           setEnteredTitle('');
           setEnteredAmount('');
           setEnteredNumOfMembers('');
           setEnteredDate('');
-          setMemberNames([{memberName: "Me"}]);
+          setMemberNames([]);
           setPaidMember('');
+          toast.success('Bill added successfully!')
         }
       } catch (error) {
         console.error(error);
       }
-
     }
-
     }
 
     const fields = [];
@@ -144,23 +137,15 @@ export default function AddForm() {
               className="form-input with-shadow"
               type="text"
               placeholder= 'Member Name'
-              onChange={event => addMemberHandler(event)}/>)
+              onChange={(event) => addMemberHandler(event, i) }
+              />)
     }
   
-
-  function deleteMemberHandler(index) { 
+  function addMemberHandler(event, i) { 
     const values = [...memberNames];
-    values.splice(index, 1); 
-    setMemberNames(values); 
-  }
-
-  function addAnotherMemberHandler(){ 
-    setMemberNames([...memberNames, {memberName:''}])
-  }
-
-  function addMemberHandler(event) { 
-    const values = [...memberNames, event.target.value];
+    values[i-1] = event.target.value;
     setMemberNames(values);
+    console.log(values);
   }
 
   function paidMemberChangeHandler(event) { 
@@ -220,10 +205,10 @@ export default function AddForm() {
             />
         </div>
 
-        <div className="new-bill__control">
+        {enteredNumOfMembers > 1 ? <div className="new-bill__control">
         <label>Name of Other Members</label>
           {fields}
-        </div>
+        </div> : <div></div> }
 
         <div className="new-bill__controls">
           <label>Paid By</label>
@@ -246,8 +231,6 @@ export default function AddForm() {
           </Link>
           <button className="submit_btn" type='submit' onClick={submitHandler}>Split Bill</button>
         </div>
-
-
       </form>
       </div>
     </div>
@@ -266,4 +249,6 @@ export default function AddForm() {
             <button onClick={() => deleteMemberHandler(index)} className="delete_btn" type="button"><RemoveIcon/></button>
             <button onClick={addAnotherMemberHandler} className="add_btn" type="button"><AddIcon/></button>
           </div>
-        ))} */
+        ))} 
+
+ */

@@ -29,9 +29,6 @@ export default function OwingDetails() {
   const userOwesData = billData.filter((bill) => bill.paidMember != "Me")
   const whoOwesUserData = billData.filter((bill) => bill.paidMember === "Me")
 
-  // allow users to mark bill as resolved/paid (aka delete) 
-
-
   return (
     <div className="container">
       <div className="split2">

@@ -9,7 +9,6 @@ import {useAuthContext} from '../../../hooks/useAuthContext'
 import Stats from "./Stats";
 
 export default function Display() { 
-
   const {user} = useAuthContext(); 
 
   const { data: billData, isLoading, isError } = useQuery(["bills"], () => { 

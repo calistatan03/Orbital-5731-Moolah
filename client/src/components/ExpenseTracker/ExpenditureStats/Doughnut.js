@@ -7,6 +7,7 @@ import TransactionList from './TransactionList';
 import axios from 'axios';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { Unstable_Grid2 } from '@mui/material';
+import { toast } from 'react-toastify';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -138,15 +139,17 @@ export default function DoughnutChart({transactions}) {
         headers: { 
           'Authorization': `Bearer ${user.token}`
         }
-      });
+      })
       setTransactionList((prevTransactions) =>
       prevTransactions.filter((transaction) => transaction._id !== id)
+
     );
+    toast.success('Expense deleted successfully!')
+
     } catch (error) {
       console.error(error);
     }
   };
-
 
   return (
     <div className="container">
@@ -189,3 +192,4 @@ export default function DoughnutChart({transactions}) {
     </div>
   );
 }
+

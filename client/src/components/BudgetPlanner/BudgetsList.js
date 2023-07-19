@@ -10,16 +10,17 @@ import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import './BudgetItem.css';
 import { BiTrash } from 'react-icons/bi';
 import { purple } from '@mui/material/colors';
-import { useDeleteBudget } from '../../hooks/useDeleteBudget';
 import { addDays, addWeeks, addMonths, addYears, durationInMonths, durationInYears } from "@progress/kendo-date-math";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-
-export default function BudgetsList() { 
+export default function BudgetsList({budgetData}) { 
 
   const { user } = useAuthContext();
   const queryClient = useQueryClient();
+  const [budgets, setBudgets] = useState([])
 
-  useEffect(() => {budgetData.forEach(checkDateValidity)})
+  useEffect(() => {setBudgets(budgetData); budgets.forEach(checkDateValidity)}, [budgetData])
   
   //const { budgets, setBudgets} = useContext(BudgetsContext);
 
@@ -32,13 +33,16 @@ export default function BudgetsList() {
   }
 
   const text="No budgets set yet. Set one now!"
-  const { mutate } = useDeleteBudget();
 
-  function deleteBudget(id) { 
-    mutate(id);
-
-      /*setBudgetData((prevBudgets) =>
-      prevBudgets.filter((budget) => budget._id !== id))*/
+  async function deleteBudget(id) { 
+    await axios.delete(`http://localhost:8080/api/add-budget/${id}`, { 
+      headers: { 
+        'Authorization': `Bearer ${user.token}`
+      }
+    }).then(() => { 
+      setBudgets(budgets.filter((budget) => budget._id !== id));
+      toast.success('Budget deleted successfully!')
+    })
   }
  /*
     { 
@@ -79,20 +83,7 @@ export default function BudgetsList() {
     } 
   }
 
-  // fetch budget data 
-  const { data: budgetData, isLoading: loadingBudgetData } = useQuery(['budgets'], () => { 
-     return axios.get('http://localhost:8080/api/add-budget', {
-      headers: {
-        'Authorization': `Bearer ${user.token}`
-      }
-    }).then(res => res.data);
-  }, { 
-    refetchOnMount: true,
-    refetchInterval: 1000, 
-    refetchIntervalInBackground: true, 
-    refetchOnWindowFocus: true,
-    placeholderData: [],
-  });
+
 
   function durationInWeeks(d1, d2) { 
     return Math.round((d2 - d1) / (7 * 24 * 60 * 60 * 1000))
@@ -102,21 +93,6 @@ export default function BudgetsList() {
     return Math.round((d2 - d1) / (24 * 60 * 60 * 1000))
 
   }
-
-  // fetch transaction data 
-  const { data: transactionData, isLoading: loadingTransactionData } = useQuery(["transactions"], () => { 
-    return axios.get('http://localhost:8080/api/add-transaction', { 
-        headers: { 
-          'Authorization': `Bearer ${user.token}`
-        }
-      }).then(res => res.data);
-  }, { 
-    refetchOnMount: true, 
-    refetchInterval: 1000,
-    refetchIntervalInBackground: true,
-    refetchOnWindowFocus: true,
-    placeholderData: [],
-  }); 
 
   /*const handleDelete = async (id) => {
     try {
@@ -155,8 +131,8 @@ export default function BudgetsList() {
         </div>
         <div>
           <ul className="budgetlist">
-          {budgetData.map((budget) => { 
-            return <BudgetItem onDeleteBudget={deleteBudget} transactions={transactionData} budget={budget} />
+          {budgets.map((budget) => { 
+            return <BudgetItem onDeleteBudget={deleteBudget} budget={budget} />
         })}
         </ul>
         </div>

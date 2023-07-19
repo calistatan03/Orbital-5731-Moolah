@@ -11,6 +11,9 @@ import { useAuthContext } from './hooks/useAuthContext';
 import {BudgetsContext} from "./context/BudgetsContext";
 import { QueryClientProvider, QueryClient, useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from "axios";
+import './App.css';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const HomePage = lazy(() => import("./components/HomePage/HomePage"));
 const Signup = lazy(() => import("./components/Signup"));
@@ -22,6 +25,10 @@ function App() {
 
 	return (
 		<div>
+			<ToastContainer
+				className="toast-position"
+				autoClose= {2000}
+			/>
 			<QueryClientProvider client={client}>
 			<Router>
 				<Suspense> 

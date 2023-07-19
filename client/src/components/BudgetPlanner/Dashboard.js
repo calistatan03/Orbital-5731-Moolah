@@ -26,6 +26,8 @@ export default function Display() {
     }).then(res => res.data);
   }, { 
     placeholderData: [],
+    refetchInterval: 1000,
+    refetchIntervalInBackground: true
   });
 
   const { data: transactionData, isLoading: loadingTransactionData } = useQuery(["transactions"], () => { 
@@ -36,6 +38,8 @@ export default function Display() {
       }).then(res => res.data);
   }, { 
     placeholderData: [],
+    refetchInterval: 1000,
+    refetchIntervalInBackground: true
   });
 
   /*fetch budget data from database 
@@ -70,7 +74,7 @@ export default function Display() {
     <div className="main_container">
 			<NavBar/>
       <div className="budget_list">
-        <BudgetsList></BudgetsList>
+        <BudgetsList budgetData={budgetData}></BudgetsList>
       </div>
       <div className="add_budget_button">
         <Link to="/add-budget" className="add_budget">

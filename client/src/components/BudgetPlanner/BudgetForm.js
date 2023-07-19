@@ -6,6 +6,9 @@ import BudgetsList from "./BudgetsList";
 import { Link } from 'react-router-dom';
 import {useAuthContext} from "../../hooks/useAuthContext";
 import { addDays, addWeeks, addMonths, addYears, durationInMonths, durationInYears} from '@progress/kendo-date-math';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function BudgetForm(props) { 
 
@@ -90,14 +93,16 @@ export default function BudgetForm(props) {
       setError(null);
       setEnteredDate('');
       setEnteredRecurrence('');
+      toast.success('Budget created successfully!')
     }
 
       } else { 
+
         const budgetData = { 
           category: enteredCategory,
           amount: +enteredAmount,
           recurrence: enteredRecurrence,
-          startDate: new Date(Date()).setHours(0, 0, 0, 0), 
+          startDate: new Date(enteredDate).setHours(0, 0, 0, 0), 
           endDate: new Date(endDate)
         };
 
@@ -109,7 +114,6 @@ export default function BudgetForm(props) {
           'Authorization': `Bearer ${user.token}`
         }
       })
-      
       const json = await response.json() 
 
       if (!response.ok) { 
@@ -121,6 +125,7 @@ export default function BudgetForm(props) {
         setError(null);
         setEnteredDate('');
         setEnteredRecurrence('');
+        toast.success('Budget created successfully!')
       }
    }
     /*try { 

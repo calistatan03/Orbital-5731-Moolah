@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuthContext } from './useAuthContext';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export const useLogin = () => { 
   const [error, setError] = useState(null) 
@@ -31,6 +32,8 @@ export const useLogin = () => {
       dispatch({type: 'LOGIN', payload: json})
       // update loading state
       setIsLoading(false)
+
+      toast.success('Logged in successfully!')
     }
 
   }

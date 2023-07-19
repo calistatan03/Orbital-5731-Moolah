@@ -24,7 +24,9 @@ export default function OwedStats() {
     placeholderData: [],  })
 
   const filteredData = billData.filter((bill) => bill.paidMember != "Me")
-  const totalAmount = filteredData.reduce((total, currentValue) => total = total + currentValue.amount, 0)
+  const totalAmount = new Intl.NumberFormat('en-US', 
+  { minimumFractionDigits: 2, 
+    maximumFractionDigits: 2 }).format(filteredData.reduce((total, currentValue) => total = total + currentValue.amount, 0))
   
 
   return ( 

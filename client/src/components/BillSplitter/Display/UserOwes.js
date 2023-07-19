@@ -4,6 +4,7 @@ import UserOweItem from './UserOweItem';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useAuthContext } from '../../../hooks/useAuthContext';
+import { toast } from 'react-toastify';
 
 export default function UserOwes({userOwesData}) { 
   const { user } = useAuthContext();
@@ -34,6 +35,7 @@ export default function UserOwes({userOwesData}) {
       }
     }).then(() => { 
       setData(data.filter((bill) => bill._id !== id));
+      toast.success('Bill settled!')
     })
   }
 

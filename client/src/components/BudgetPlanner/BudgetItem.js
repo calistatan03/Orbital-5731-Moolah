@@ -13,7 +13,7 @@ import { addDays, addWeeks, addMonths, addYears } from "@progress/kendo-date-mat
 // props should be a single budget object 
 export default function BudgetItem({budget, onDeleteBudget}) {
 
-  const [budgetData, setBudgetData] = useState(budget)
+  const [budgetData, setBudgetData] = useState([])
   const { user } = useAuthContext();
   const today = Date();
   const category = budget.category; 
@@ -22,7 +22,11 @@ export default function BudgetItem({budget, onDeleteBudget}) {
     onDeleteBudget(id);
   }
 
-  // fetch transaction data 
+  useEffect(() => { 
+    setBudgetData(budget);
+  }, [budget])
+
+    // fetch transactionData 
   const { data: transactionData, isLoading: loadingTransactionData } = useQuery(["transactions"], () => { 
     return axios.get('http://localhost:8080/api/add-transaction', { 
         headers: { 
@@ -31,13 +35,12 @@ export default function BudgetItem({budget, onDeleteBudget}) {
       }).then(res => res.data);
   }, { 
     placeholderData: [],
-    refetchInterval: 2000, 
-    refetchIntervalInBackground: true,
+    refetchInterval: 1000,
+    refetchIntervalInBackground: true
   });
 
-  // filter transactions based on category AND Date 
   const filteredTransactions = transactionData.filter((transaction) => 
-    transaction.category === budget.category).filter((transaction) =>new Date(budget.startDate) <= new Date(transaction.date) && new Date(transaction.date) <= new Date(budget.endDate))
+      transaction.category === budget.category).filter((transaction) =>new Date(budget.startDate) <= new Date(transaction.date) && new Date(transaction.date) <= new Date(budget.endDate))
 
   return (
 
@@ -53,7 +56,7 @@ export default function BudgetItem({budget, onDeleteBudget}) {
           </div>
         </span>
         <span className="progress_bar">
-           <ChartBar filteredTransactions={filteredTransactions} budget={budget}/> 
+           <ChartBar filteredTransactions = {filteredTransactions} budget={budget}/> 
         </span>
         <span className="delete-icon" onClick={() => deleteBudget(budget._id)}>
           <BiTrash></BiTrash>
