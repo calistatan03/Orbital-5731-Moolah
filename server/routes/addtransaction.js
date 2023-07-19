@@ -43,11 +43,15 @@ router.get("/:duration/:year?/:month?", async (req, res) => {
     let query = { user_id };
 
     if (duration === 'week') {
-      // Fetch transactions for the past 7 days
       const currentDate = new Date();
-      const sevenDaysAgo = new Date();
-      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7); // Subtract 7 days to get the past 7 days
-      query.date = { $gte: sevenDaysAgo, $lte: currentDate };
+    const sevenDaysAgo = new Date(currentDate);
+    sevenDaysAgo.setDate(currentDate.getDate() - 7);
+    sevenDaysAgo.setHours(0, 0, 0, 0); // Set time to the start of the day
+
+    const endOfToday = new Date(currentDate);
+    endOfToday.setHours(23, 59, 59, 999);
+    query.date = { $gte: sevenDaysAgo, $lte: endOfToday };
+    
     } else if (duration === 'month' && year && month) {
       // Filter transactions for the selected month and year
       const selectedMonth = parseInt(month); // Months are zero-based in JavaScript Date
