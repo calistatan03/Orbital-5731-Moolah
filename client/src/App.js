@@ -11,6 +11,7 @@ import AddForm from "./components/BillSplitter/AddForm";
 import NavBar from "./components/NavBar/NavBar";
 import Profile from "./components/Profile/Profile"
 import { useAuthContext } from './hooks/useAuthContext';
+import TransactionCalendar from "./components/ExpenseTracker/FeaturePage/TransactionCalendar";
 
 
 function App() {

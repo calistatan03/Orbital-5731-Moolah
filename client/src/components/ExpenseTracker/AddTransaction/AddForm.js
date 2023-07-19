@@ -121,7 +121,7 @@ export default function AddForm({onSaveTransactionData}) {
           </button>
           <Link to="/expensetracker">
           <button type="button" className="view_stats">
-            View Expenditure Statistics
+            Back
           </button>
           </Link>
       </div>
