@@ -20,7 +20,10 @@ export default function DoughnutChart({transactions}) {
   const [categoryNames, setCategoryNames] = useState([]);
   const [labels, setLabels] = useState([]);
   const [categoryColors, setCategoryColors] = useState([]);
-  const [selectedDuration, setSelectedDuration] = useState('month');
+  const [selectedDuration, setSelectedDuration] = useState('week');
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
+  const [years, setYears] = useState([]);
 
 
   //whenever the 'transactions' passed to the DoughnutChart changes, the 'updateExpenseData' function will be called to recalculate the expense data and update the state variables
@@ -30,7 +33,7 @@ export default function DoughnutChart({transactions}) {
       try {
         const url2 = 'http://localhost:8080/api/add-transaction';
         const url = 'https://orbital-5731-moolah.onrender.com/api/add-transaction';
-        const response = await axios.get(`http://localhost:8080/api/add-transaction/${selectedDuration}`, { 
+        const response = await axios.get(`http://localhost:8080/api/add-transaction/${selectedDuration}/${selectedYear}/${selectedMonth}`, { 
           headers: { 
             'Authorization': `Bearer ${user.token}`
           }
@@ -45,7 +48,13 @@ export default function DoughnutChart({transactions}) {
     };
 
     fetchTransactions();
-  }, [selectedDuration]);
+  }, [selectedDuration, selectedYear, selectedMonth, user.token]);
+
+  useEffect(() => {
+    const currentYear = new Date().getFullYear();
+    const years = Array.from({ length: currentYear - 2000 + 1 }, (_, index) => currentYear - index);
+    setYears(years);
+  }, []);
 
   const generateCategoryColors = (transactions) => {
     const colors = [
@@ -67,27 +76,6 @@ export default function DoughnutChart({transactions}) {
   };
 
   const updateExpenseData = (transactions) => {
-    const filteredTransactions = transactions.filter((transaction) => {
-      const transactionDate = new Date(transaction.date);
-      const currentDate = new Date();
-
-      let timeDiff;
-      if (selectedDuration === 'week') {
-        timeDiff = Math.ceil(
-          (currentDate.getTime() - transactionDate.getTime()) /
-            (1000 * 3600 * 24 * 7)
-        );
-      } else if (selectedDuration === 'month') {
-        timeDiff =
-          currentDate.getMonth() - transactionDate.getMonth() + 1;
-      } else if (selectedDuration === 'year') {
-        timeDiff =
-          currentDate.getFullYear() - transactionDate.getFullYear();
-    }
-
-    return timeDiff <= 1;
-  });
-
     const expenseCategories = {};
 
     transactions.forEach((transaction) => {
@@ -107,12 +95,24 @@ export default function DoughnutChart({transactions}) {
 
     setLabels(categoryNames); 
     setCategoryNames(categoryNames);
-    setCategoryColors(generateCategoryColors(filteredTransactions));
-    setTransactionList(filteredTransactions);
+    setCategoryColors(generateCategoryColors(transactions));
+    setTransactionList(transactions);
   };
 
   const handleDurationChange = (e) => {
     setSelectedDuration(e.target.value);
+    setSelectedYear(new Date().getFullYear());
+    setSelectedMonth(new Date().getMonth());
+  };
+
+  const handleYearChange = (e) => {
+    const year = parseInt(e.target.value);
+    setSelectedYear(year);
+  };
+
+  const handleMonthChange = (e) => {
+    const month = e.target.value;
+    setSelectedMonth(month);
   };
   
   const options = {
@@ -163,16 +163,82 @@ export default function DoughnutChart({transactions}) {
               value={selectedDuration}
               onChange={handleDurationChange}
             >
-              <option value="week">Week</option>
+              <option value="week">Past Week</option>
               <option value="month">Month</option>
               <option value="year">Year</option>
             </select>
           </div>
-          <Doughnut data={{
+          {selectedDuration === 'month' && (
+            <div className="filter-container">
+              <label htmlFor="yearFilter">Year:</label>
+              <select
+                id="yearFilter"
+                value={selectedYear}
+                onChange={handleYearChange}
+              >
+                {years.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+          <div className="filter-container">
+          {selectedDuration === 'month' && (
+  <div className="filter-container">
+    <label htmlFor="monthFilter">Month:</label>
+    <select
+      id="monthFilter"
+      value={selectedMonth}
+      onChange={handleMonthChange}
+    >
+      <option value={0}>January</option>
+      <option value={1}>February</option>
+      <option value={2}>March</option>
+      <option value={3}>April</option>
+      <option value={4}>May</option>
+      <option value={5}>June</option>
+      <option value={6}>July</option>
+      <option value={7}>August</option>
+      <option value={8}>September</option>
+      <option value={9}>October</option>
+      <option value={10}>November</option>
+      <option value={11}>December</option>
+    </select>
+  </div>
+)}
+
+  {selectedDuration === 'year' && (
+    <>
+      <label htmlFor="yearFilter">Year:</label>
+      <select
+        id="yearFilter"
+        value={selectedYear}
+        onChange={handleYearChange}
+      >
+        {years.map((year) => (
+          <option key={year} value={year}>
+            {year}
+          </option>
+        ))}
+      </select>
+    </>
+  )}
+</div>
+
+          <Doughnut
+            data={{
               datasets: [
                 {
                   data: expenseData,
-                  backgroundColor: ['#934CFA', '#FFCD56', '#FF6384', '#36A2EB', '#FF9F40'],
+                  backgroundColor: [
+                    '#934CFA',
+                    '#FFCD56',
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FF9F40',
+                  ],
                   hoverOffset: 4,
                   borderRadius: 20,
                   spacing: 10,
@@ -182,14 +248,21 @@ export default function DoughnutChart({transactions}) {
             }}
             options={options}
           />
-          <div className="total-expense-text">Total Expense: ${totalExpense.toFixed(2)}</div>
-        </div>  
+          <div className="total-expense-text">
+            Total Expense: ${totalExpense.toFixed(2)}
+          </div>
+        </div>
         <div className="history">
-          <TransactionList transactions={transactionList} categoryColors={categoryColors} onDeleteTransaction={deleteTransaction}></TransactionList>
-          <Link to="/add-transaction" className="add_button">Add New Transaction Here</Link>
+          <TransactionList
+            transactions={transactionList}
+            categoryColors={categoryColors}
+            onDeleteTransaction={deleteTransaction}
+          />
+          <Link to="/add-transaction" className="add_button">
+            Add New Transaction Here
+          </Link>
         </div>
       </div>
     </div>
   );
 }
-
