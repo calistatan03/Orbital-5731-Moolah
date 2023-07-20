@@ -18,7 +18,7 @@ export default function WhoOwesUser({whoOwesUserData}) {
   }, [whoOwesUserData])
 
   async function deleteBill(id) { 
-    await axios.delete(`http://localhost:8080/api/add-bill/${id}`, { 
+    await axios.delete(`https://orbital-5731-moolah.onrender.com/api/add-bill/${id}`, { 
       headers: { 
         'Authorization': `Bearer ${user.token}`
       }
