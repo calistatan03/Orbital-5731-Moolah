@@ -1,4 +1,11 @@
+.statistics {
+  margin: 20px;
+}
 
-.owing_details { 
-  margin-top: 2rem;
+.owing_details {
+  margin: 20px;
+}
+
+.add_new_bill {
+  margin: 20px;
 }

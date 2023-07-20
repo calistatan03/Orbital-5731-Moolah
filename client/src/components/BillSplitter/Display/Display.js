@@ -37,18 +37,18 @@ export default function Display() {
   }*/
 
   
-  return ( 
-    <div>
-      <NavBar/>
-      <div className="statistics"> 
-        <Stats/>
-      </div>
+  return (
+    <div className="display-container">
+      <NavBar />
       <div className="owing_details">
-        <OwingDetails/> 
+        <OwingDetails />
+      </div>
+      <div className="statistics">
+        <Stats />
       </div>
       <div className="add_new_bill">
-        <OpenForm/>
+        <OpenForm />
       </div>
     </div>
-  )
+  );
 }

@@ -10,6 +10,7 @@ export default function OwingDetails() {
   const {user} = useAuthContext();
   const queryClient = useQueryClient();
 
+ 
   // fetch bill data 
   const { data: billData, isLoading, isError } = useQuery(["bills"], () => { 
     return axios.get('http://localhost:8080/api/add-bill', { 

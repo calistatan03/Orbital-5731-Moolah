@@ -26,6 +26,10 @@ const TransactionCalendar = ({ transactions }) => {
 
   return (
     <div>
+      <div className='container'>
+      <h2 className='cal-desc'>CALENDAR</h2>
+      <h3 className='desc2'>View all your monthly transactions at a glance!</h3>
+    </div>
       <Calendar
         localizer={localizer}
         events={events}

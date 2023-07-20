@@ -4,8 +4,8 @@
   text-align: center;
   padding: 20px 60px;
   border-radius: 35px;
-  background-color: #aee1c6;
-
+  background-color: #b3fed6;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .total-amount-others-owe h1 { 
@@ -13,5 +13,6 @@
 }
 
 .total-amount-others-owe h2 { 
-  font-size: 20px;
+  font-size: 30px;
+  font-weight: bold;
 }
