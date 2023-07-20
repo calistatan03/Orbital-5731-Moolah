@@ -19,7 +19,9 @@ export default function Display() {
   const queryClient = useQueryClient();
 
   const { data: budgetData, isLoading: loadingBudgetData } = useQuery(["budgets"], () => { 
-     return axios.get('http://localhost:8080/api/add-budget', {
+     const url2 = 'https://localhost:8080/api/add-budget';
+     const url = 'https://orbital-5731-moolah.onrender.com/api/add-budget';
+     return axios.get(url, {
       headers: {
         'Authorization': `Bearer ${user.token}`
       }
@@ -31,7 +33,9 @@ export default function Display() {
   });
 
   const { data: transactionData, isLoading: loadingTransactionData } = useQuery(["transactions"], () => { 
-    return axios.get('http://localhost:8080/api/add-transaction', { 
+	  const url2 = 'https://localhost:8080/api/add-transaction';
+      const url = 'https://orbital-5731-moolah.onrender.com/api/add-transaction';
+    return axios.get(url, { 
         headers: { 
           'Authorization': `Bearer ${user.token}`
         }
