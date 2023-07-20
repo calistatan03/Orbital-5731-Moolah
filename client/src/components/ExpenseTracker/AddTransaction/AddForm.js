@@ -46,7 +46,7 @@ export default function AddForm({onSaveTransactionData}) {
       const url2 = 'http://localhost:8080/api/add-transaction';
       const url = 'https://orbital-5731-moolah.onrender.com/api/add-transaction';
       const response = await axios.post(
-        url2,
+        url,
         transactionData, { 
           headers: { 
             'Authorization': `Bearer ${user.token}`
