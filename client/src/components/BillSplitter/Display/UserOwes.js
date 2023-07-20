@@ -17,7 +17,9 @@ export default function UserOwes({userOwesData}) {
 
   // fetch bill data 
   const { data: billData, isLoading, isError } = useQuery(["bills"], () => { 
-    return axios.get('http://localhost:8080/api/add-bill', { 
+    const url2 = 'http://localhost:8080/api/add-bill';
+    const url = 'https://orbital-5731-moolah.onrender.com/api/add-bill';
+    return axios.get(url, { 
     headers: { 
       'Authorization': `Bearer ${user.token}`
     }
@@ -29,7 +31,7 @@ export default function UserOwes({userOwesData}) {
   // const filteredData = data.filter((bill) => bill.paidMember != "Me");
 
   async function deleteBill(id) { 
-    await axios.delete(`http://localhost:8080/api/add-bill/${id}`, { 
+    await axios.delete(`https://orbital-5731-moolah.onrender.com/api/add-bill/${id}`, { 
       headers: { 
         'Authorization': `Bearer ${user.token}`
       }
