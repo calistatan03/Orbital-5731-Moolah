@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { Unstable_Grid2 } from '@mui/material';
 import { toast } from 'react-toastify';
+import { useQuery } from '@tanstack/react-query';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -24,31 +25,36 @@ export default function DoughnutChart({transactions}) {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
   const [years, setYears] = useState([]);
+  
 
-
-  //whenever the 'transactions' passed to the DoughnutChart changes, the 'updateExpenseData' function will be called to recalculate the expense data and update the state variables
+  const { data: fetchedTransactions, isLoading, isError } = useQuery(
+    ['transactions', selectedDuration, selectedYear, selectedMonth, user.token],
+    async () => {
+      const url = `http://localhost:8080/api/add-transaction/${selectedDuration}/${selectedYear}/${selectedMonth}`;
+      const response = await axios.get(url, {
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
+      return response.data;
+    },
+    {
+      enabled: Boolean(selectedDuration && selectedYear && selectedMonth && user.token),
+      refetchInterval: 1000, 
+      refetchIntervalInBackground: true, 
+      refetchOnMount: true,
+      refetchOnWindowFocus: true,
+      placeholderData: [],  }
+  );
+  
   useEffect(() => {
-    const fetchTransactions = async () => {
-
-      try {
-        const url2 = 'http://localhost:8080/api/add-transaction';
-        const url = 'https://orbital-5731-moolah.onrender.com/api/add-transaction';
-        const response = await axios.get(`http://localhost:8080/api/add-transaction/${selectedDuration}/${selectedYear}/${selectedMonth}`, { 
-          headers: { 
-            'Authorization': `Bearer ${user.token}`
-          }
-        });
-        const fetchedTransactions = response.data;
-        setTransactionList(fetchedTransactions);
-        updateExpenseData(fetchedTransactions);
-        setCategoryColors(generateCategoryColors(fetchedTransactions));
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchTransactions();
-  }, [selectedDuration, selectedYear, selectedMonth, user.token]);
+    if (fetchedTransactions) {
+      setTransactionList(fetchedTransactions);
+      updateExpenseData(fetchedTransactions);
+      setCategoryColors(generateCategoryColors(fetchedTransactions));
+    }
+  }, [fetchedTransactions]);
+  
 
   useEffect(() => {
     const currentYear = new Date().getFullYear();
@@ -152,6 +158,13 @@ export default function DoughnutChart({transactions}) {
       console.error(error);
     }
   };
+
+  const NoTransactionsMessage = () => (
+    <div className="no-transactions-message">
+      No transactions added yet.
+    </div>
+  );
+
 
   return (
     <div className="container">

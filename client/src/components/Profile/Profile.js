@@ -1,19 +1,27 @@
+import React from 'react';
+import { BiSolidUserCircle } from 'react-icons/bi';
 import NavBar from '../NavBar/NavBar';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import './Profile.css';
 
-export default function Profile() { 
+export default function Profile() {
+  const { user } = useAuthContext();
 
-  const { user } = useAuthContext(); 
-
-  return ( 
-    <div> 
-      <NavBar/> 
-      <div className="user_details"> 
-        <div className="firstName"><h2> First Name: {user.firstName} </h2></div>
-        <div className="lastName"><h2>Last Name: {user.lastName} </h2></div>
-        <div className="email "><h2>Email: {user.email}</h2></div>
+  return (
+    <div>
+      <NavBar />
+      <h1 className="profile-heading">User Profile</h1>
+      <div className="user_details">
+        <div className="icon">
+          <BiSolidUserCircle />
+        </div>
+        <div className="info">
+          <h2>
+            Name: {user.firstName} {user.lastName}
+            </h2>
+          <h2>Email: {user.email}</h2>
+        </div>
       </div>
     </div>
-  )
-
+  );
 }

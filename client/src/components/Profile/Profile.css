@@ -1,9 +1,44 @@
-.user_details { 
+.profile-heading {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #934CFA; 
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #e5ddf056; /* Add a soft background color */
+  border-radius: 8px; /* Add rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  border: 2px solid #934CFA; /* Add a cute border */
+}
+
+
+.user_details {
   display: flex;
+  align-items: center;
   justify-content: center;
+  height: 50vh; 
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  border-radius: 10px;
 }
 
-.main_card { 
-  justify-content: center;
+.icon {
+  font-size: 250px;
+  margin-right: 20px;
 }
 
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.info h2 {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.info h2:first-child {
+  margin-bottom: 10px;
+}

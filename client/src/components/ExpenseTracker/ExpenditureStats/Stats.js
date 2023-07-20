@@ -1,4 +1,5 @@
 import '../../HomePage/HomePage.css';
+import { Link } from 'react-router-dom';
 import NavBar from '../../NavBar/NavBar';
 import './Stats.css'; 
 import DoughnutChart from './Doughnut';
@@ -50,13 +51,17 @@ export default function Stats() {
     <div className="main_container">
       <NavBar />
       <div>
-        <button className="view-stats-btn" onClick={handleToggleChart}>
-          {showDoughnutChart ? 'View Calendar' : 'View Statistics'}
-        </button>
-
         {showDoughnutChart && <DoughnutChart transactions={transactions} onSaveTransactionData={handleSaveTransactionData} />}
 
         {!showDoughnutChart && <TransactionCalendar transactions={transactionList} setTransactionList={setTransactionList} />}
+      </div>
+      <div className="button-container">
+        <button className="view-stats-btn" onClick={handleToggleChart}>
+          {showDoughnutChart ? 'View Calendar' : 'View Statistics'}
+        </button>
+        <Link to="/add-transaction" className="add_button">
+            Add New Transaction Here
+          </Link>
       </div>
     </div>
   );
