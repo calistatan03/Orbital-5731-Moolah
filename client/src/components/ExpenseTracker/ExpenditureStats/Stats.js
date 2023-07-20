@@ -28,7 +28,7 @@ export default function Stats() {
     try {
       const url2 = 'http://localhost:8080/api/add-transaction';
       const url = 'https://orbital-5731-moolah.onrender.com/api/add-transaction';
-      const response = await axios.get(url2, { 
+      const response = await axios.get(url, { 
         headers: { 
           'Authorization': `Bearer ${user.token}`
         }
