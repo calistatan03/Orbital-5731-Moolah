@@ -68,7 +68,7 @@ export default function AddForm() {
         try { 
         const url2 = 'http://localhost:8080/api/add-bill';
         const url = 'https://orbital-5731-moolah.onrender.com/api/add-bill';
-        const response =  await axios.post(url2, element, { 
+        const response =  await axios.post(url, element, { 
           headers: { 
             'Authorization': `Bearer ${user.token}`
           }
@@ -103,7 +103,7 @@ export default function AddForm() {
       try { 
         const url2 = 'http://localhost:8080/api/add-bill';
         const url = 'https://orbital-5731-moolah.onrender.com/api/add-bill';
-        const response =  await axios.post(url2, billData, { 
+        const response =  await axios.post(url, billData, { 
           headers: { 
             'Authorization': `Bearer ${user.token}`
           }
