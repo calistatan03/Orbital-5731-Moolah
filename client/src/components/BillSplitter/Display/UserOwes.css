@@ -1,0 +1,22 @@
+.bill-list { 
+  list-style-type: none;
+  padding: 20px;
+}
+
+.main_container { 
+  border-radius: 7px; 
+  border: 1px;
+  border-color: black;
+}
+
+.bills_container { 
+  align-items: center;
+  border-radius: 10px;
+  background-color: white;
+}
+
+/*  rgba(193, 91, 240, 0.2) */ 
+.with-shadow {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+

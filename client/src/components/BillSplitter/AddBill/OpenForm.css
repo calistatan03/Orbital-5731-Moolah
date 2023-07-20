@@ -1,0 +1,37 @@
+.new-bill button {
+  position: absolute;
+  font: inherit;
+  margin: 45%;
+  width: 12rem;
+  padding: 1rem 2rem;
+  text-align: center;
+  font-size: 1rem;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+  background-color: rgba(193, 91, 240, 0.2);
+  color: #7F37D6;
+  cursor: pointer;
+  margin-top: 3rem;
+}
+
+.new-bill button:hover {
+  background-color: #7F37D6;
+  color: white;
+}
+
+
+/*   margin: 45%;
+  margin-top: 5rem;
+  width: 12rem;
+  font: inherit;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  border: 1px solid #3bb19b;
+  background-color: white;
+  color: #3bb19b;
+  border-radius: 12px;
+  position: absolute;
+  text-align: center;
+  text-decoration: none;*/

@@ -1,0 +1,36 @@
+/* TransactionCalendar.css */
+.rbc-calendar {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .rbc-toolbar {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+  
+  .rbc-btn-group {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .rbc-btn {
+    background-color: #934CFA;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin: 2px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  
+  .rbc-toolbar-label {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  

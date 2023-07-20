@@ -4,6 +4,10 @@
   justify-content: space-between;
 }
 
+.form-input .with-shadow{ 
+  width: 20rem;
+}
+
 .form-card { 
   border-radius: 10px;
   padding: 20px;
@@ -25,6 +29,15 @@
   font-weight: bold;
   display: block;
 }
+
+.new-bill__controls select { 
+  font: inherit;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 20rem;
+    max-width: 100%;
+}
   
 
 .new-bill__controls input {
@@ -45,6 +58,10 @@
     text-align: left;
     justify-content: center;
     align-items: center;
+}
+
+.new-bill__control .form-input { 
+  width: 20rem;
 }
 
 .new-bill__control label { 

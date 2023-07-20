@@ -10,7 +10,7 @@ router.post("/", async (req, res) => {
   const user_id = req.user._id
 
   // extracting properties from req.body 
-  const { title, amount, date, numOfMembers, memberNames, paidMember } = req.body;
+  const { title, amount, date, memberName, paidMember } = req.body;
   
   try {
     const user_id = req.user._id;
@@ -18,8 +18,7 @@ router.post("/", async (req, res) => {
       title,
       amount,
       date,
-      numOfMembers,
-      memberNames,
+      memberName,
       paidMember,
       user_id
     });
@@ -43,6 +42,21 @@ router.get("/", async (req, res) => {
   }
 });
   
+// delete a single from the database (marked as completed)
+router.delete("/:_id", async (req, res) => {
+  const billId = req.params._id;
 
+  try {
+    const deletedBill = await Bill.findByIdAndDelete(billId);
+
+    if (!deletedBill) {
+      return res.status(404).json({ message: 'Bill not found' });
+    }
+
+    return res.json({ message: 'Bill deleted successfully' });
+  } catch (error) {
+    return res.status(500).json({ message: `Error while deleting bill: ${error}` });
+  }
+});
 
 module.exports = router; 

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuthContext } from './useAuthContext';
+import { toast } from 'react-toastify';
 
 export const useSignup = () => { 
   const [error, setError] = useState(null) 
@@ -29,6 +30,8 @@ export const useSignup = () => {
       // update the auth context
       dispatch({type: 'LOGIN', payload: json})
       setIsLoading(false)
+      toast.success('Account created successfully! You are now logged in.')
+      
     }
 
   }

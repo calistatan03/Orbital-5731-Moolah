@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
 import {useAuthContext} from '../../../hooks/useAuthContext'
+import { toast } from 'react-toastify';
 
 export default function AddForm({onSaveTransactionData}) {
 
@@ -50,7 +51,9 @@ export default function AddForm({onSaveTransactionData}) {
           headers: { 
             'Authorization': `Bearer ${user.token}`
           }
-        });
+        }).then(
+          toast.success('Expense logged successfully!')
+        );
 
       onSaveTransactionData(response.data);
       setEnteredTitle('');
@@ -121,7 +124,7 @@ export default function AddForm({onSaveTransactionData}) {
           </button>
           <Link to="/expensetracker">
           <button type="button" className="view_stats">
-            View Expenditure Statistics
+            Back
           </button>
           </Link>
       </div>
