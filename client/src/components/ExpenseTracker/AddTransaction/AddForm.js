@@ -73,10 +73,10 @@ export default function AddForm({onSaveTransactionData}) {
 
   return (
     <div className="transaction-form_wrapper">
+    <h1 className="new_trans-label">New Transaction</h1>
       <form onSubmit={submitHandler}>
         <div className="new-transaction__controls">
         <div className="new-transaction__control">
-        <label className="new_trans-label">New Transaction</label>
             <label>Title</label>
             <input
               type="text"
