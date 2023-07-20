@@ -25,12 +25,11 @@ export default function DoughnutChart({transactions}) {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
   const [years, setYears] = useState([]);
-  
 
   const { data: fetchedTransactions, isLoading, isError } = useQuery(
     ['transactions', selectedDuration, selectedYear, selectedMonth, user.token],
     async () => {
-      const url = `http://localhost:8080/api/add-transaction/${selectedDuration}/${selectedYear}/${selectedMonth}`;
+      const url = `https://orbital-5731-moolah.onrender.com/api/add-transaction/${selectedDuration}/${selectedYear}/${selectedMonth}`;
       const response = await axios.get(url, {
         headers: {
           'Authorization': `Bearer ${user.token}`
@@ -143,7 +142,7 @@ export default function DoughnutChart({transactions}) {
     try {
       const url2 = `http://localhost:8080/api/add-transaction/${id}`
       const url = `https://orbital-5731-moolah.onrender.com/api/add-transaction/${id}`
-      await axios.delete(url2, { 
+      await axios.delete(url, { 
         headers: { 
           'Authorization': `Bearer ${user.token}`
         }
