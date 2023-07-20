@@ -56,12 +56,12 @@ export default function Stats() {
         {!showDoughnutChart && <TransactionCalendar transactions={transactionList} setTransactionList={setTransactionList} />}
       </div>
       <div className="button-container">
-        <button className="view-stats-btn" onClick={handleToggleChart}>
-          {showDoughnutChart ? 'View Calendar' : 'View Statistics'}
-        </button>
-        <Link to="/add-transaction" className="add_button">
+        <Link to="/add-transaction" className="add-button">
             Add New Transaction Here
           </Link>
+          <button className="view-stats-btn" onClick={handleToggleChart}>
+          {showDoughnutChart ? 'View Calendar' : 'View Statistics'}
+        </button>
       </div>
     </div>
   );

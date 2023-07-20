@@ -24,42 +24,42 @@
 
  
 .button-container {
-  position: fixed;
   display: flex;
   flex-direction: column;
-  bottom: 20px;
-  right: 1%;
+  align-items: center;
+  margin-right: 20px;
 }
 
 .view-stats-btn {
-  padding: 0.5rem 3rem;
-  font-size: 1rem;
+  padding: 0.5rem;
   text-decoration: none;
-  text-align: center;
   border: none;
   border-radius: 4px;
   background-color: #934CFA;
   color: #fff;
   cursor: pointer;
-  margin-top: 20px;
-  justify-content: center;
+  margin-bottom: 10px;
+  width: 320px;
 }
 
 .view-stats-btn:hover {
-  background-color: rgba(193, 91, 240, 0.2);;
+  background-color: rgba(193, 91, 240, 0.2);
   color: #934CFA;
 }
 
-.add_button {
+.add-button {
   padding: 0.5rem 3rem;
-  font-size: 1rem;
   text-decoration: none;
-  text-align: center;
   border: none;
   border-radius: 4px;
-  background-color: #934CFA;
-  color: #fff;
+  background-color: rgba(193, 91, 240, 0.2);
+  color: #934CFA;
   cursor: pointer;
-  margin-top: 20px;
-  justify-content: center;
+  width: 320px;
+  text-align: center;
+}
+
+.add-button:hover {
+  background-color: #934CFA;
+  color: white;
 }

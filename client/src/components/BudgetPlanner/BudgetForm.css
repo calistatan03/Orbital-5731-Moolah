@@ -57,7 +57,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
 }
 
 .view_budgets {
@@ -70,7 +69,7 @@
   background-color: #f6a624;
   color: #ffffff;
   cursor: pointer;
-  margin-left: 12rem;
+  width: 200px;
 }
 
 .submit {
@@ -83,5 +82,5 @@
   background-color: #934CFA;
   color: #fff;
   cursor: pointer;
-  margin-left: 12.5rem;
+  width: 200px;
 }

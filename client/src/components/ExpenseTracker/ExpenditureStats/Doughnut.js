@@ -272,9 +272,6 @@ export default function DoughnutChart({transactions}) {
             categoryColors={categoryColors}
             onDeleteTransaction={deleteTransaction}
           />
-          <Link to="/add-transaction" className="add_button">
-            Add New Transaction Here
-          </Link>
         </div>
       </div>
     </div>

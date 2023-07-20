@@ -224,12 +224,12 @@ export default function AddForm() {
         </div>
 
         <div className="actions">
+          <button className="submit_btn" type='submit' onClick={submitHandler}>Split Bill</button>
           <Link to="/billsplitter">
           <button type="button" className="cancel_btn">
             Cancel
           </button>
           </Link>
-          <button className="submit_btn" type='submit' onClick={submitHandler}>Split Bill</button>
         </div>
       </form>
       </div>

@@ -1,17 +1,14 @@
 .transaction-form_wrapper {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100vh; 
+  margin-top: 2rem;
 }
 
-.new_trans-label {
+.transaction-form_wrapper h1 {
+  font: inherit;
   font-weight: bold;
-  text-align: center;
   color: #934CFA;
-  margin-bottom: 1rem;
-  font-size: 35px;
+  text-align: center;
+  font-size: 30px;
 }
 
 .new-transaction__controls {
@@ -45,26 +42,10 @@
 .submit_transaction {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 1rem;
+  align-items: flex-end; 
 }
 
-.submit_btn {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  text-decoration: none;
-  text-align: center;
-  border: none;
-  border-radius: 4px;
-  background-color: #934CFA;
-  color: #fff;
-  cursor: pointer;
-}
-
-.submit_btn:hover {
-  background-color: #612FB0;
-}
-
+.submit_btn,
 .view_stats {
   padding: 0.5rem 1rem;
   font-size: 1rem;
@@ -72,10 +53,22 @@
   text-align: center;
   border: none;
   border-radius: 4px;
+  cursor: pointer;
+  width: 200px;
+}
+
+.submit_btn {
+  background-color: #934CFA;
+  color: #fff;
+}
+
+.submit_btn:hover {
+  background-color: #612FB0;
+}
+
+.view_stats {
   background-color: #f6a624;
   color: #ffffff;
-  cursor: pointer;
-  margin-left: 6.3rem;
 }
 
 .view_stats:hover {
