@@ -73,7 +73,9 @@ export default function BudgetForm(props) {
             endDate: new Date(newEndDate)
           };
 
-        const response = await fetch('http://localhost:8080/api/add-budget', { 
+        const url2 = 'https://localhost:8080/api/add-budget';
+        const url = 'https://orbital-5731-moolah.onrender.com/api/add-budget';
+        const response = await fetch(url, { 
           method: 'POST',
           body: JSON.stringify(budgetData),
           headers: { 
@@ -106,7 +108,9 @@ export default function BudgetForm(props) {
           endDate: new Date(endDate)
         };
 
-        const response = await fetch('http://localhost:8080/api/add-budget', { 
+        const url2 = 'https://localhost:8080/api/add-budget';
+        const url = 'https://orbital-5731-moolah.onrender.com/api/add-budget';
+        const response = await fetch(url, { 
         method: 'POST',
         body: JSON.stringify(budgetData),
         headers: { 
