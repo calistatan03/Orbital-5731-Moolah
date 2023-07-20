@@ -3,6 +3,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./index.css";
 import { useLogin } from '../../hooks/useLogin';
+import Header from "./Header";
+
+const fixedInputClass="rounded-md appearance-none relative block w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+
 
 export default function Login() {
 	const [email, setEmail] = useState("");
@@ -34,7 +38,49 @@ export default function Login() {
 	};
 
 	return (
-		<div data-testid="login-1" className="login_container">
+		<>
+		<div className="min-h-full h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-md w-full space-y-8">
+			<Header/>
+			<form className="mt-8 space-y-6">
+				<div className4="-space-y-px">
+					<div className="my-5">
+								<label className="sr-only">
+								</label>
+								<input
+									onChange={(e) => setEmail(e.target.value)}
+									value={email}
+									name="email"
+									type="email"
+									required
+									className={fixedInputClass}
+									placeholder="Email"
+								/>
+							</div>
+					<div className="my-5">
+								<label className="sr-only">
+								</label>
+								<input
+									onChange={(e) => setPassword(e.target.value)}
+									value={password}
+									name="password"
+									type="password"
+									required
+									className={fixedInputClass}
+									placeholder="Password"
+								/>
+							</div>
+					</div>
+			</form>
+			</div>
+			</div>
+		</>
+		
+	);
+};
+
+/* 
+<div data-testid="login-1" className="login_container">
 			<div className="login_form_container">
 				<div className="left">
 					<form data-testid="login-form" className="form_container" onSubmit={handleSubmit}>
@@ -75,9 +121,4 @@ export default function Login() {
 				</div>
 			</div>
 		</div>
-	);
-};
-
-const Form = ({email, setEmail, password, setPassword}) => { 
-
-}
+			 */ 

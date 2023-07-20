@@ -15,6 +15,8 @@ import axios from "axios";
 import './App.css';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import LoginPage from "./components/Login/LoginPage";
+import SignupPage from "./components/Signup/SignupPage";
 
 const HomePage = lazy(() => import("./components/HomePage/HomePage"));
 const Signup = lazy(() => import("./components/Signup"));
@@ -35,8 +37,8 @@ function App() {
 				<Suspense> 
 				<Routes>
 					{user && <Route path="/" exact element={<HomePage />} />}
-					<Route path="/signup" element={!user ? <Signup /> : <Navigate to="/"/>} />
-					<Route path="/login" element={!user ? <Login/> : <Navigate to="/"/>}/>
+					<Route path="/signup" element={!user ? <SignupPage /> : <Navigate to="/"/>} />
+					<Route path="/login" element={!user ? <LoginPage/> : <Navigate to="/"/>}/>
 					<Route path="/" element={<Navigate replace to="/login" />} />
 					<Route path = "/budgetplanner" exact element = {user ? <Dashboard/> : <Navigate to="/login"/>} />
 					<Route path = "/expensetracker" exact element = {user ? <Stats /> : <Navigate to="/login"/>} />
