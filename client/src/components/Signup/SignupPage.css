@@ -1,8 +1,14 @@
 .auth-form-container,
 .login-form,
 .register-form {
-  display: flex;
-  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.auth-form-container h2 {
+  text-align: center;
+  font-weight: bold;
+  font-family: inherit;
 }
 
 @media screen and (min-width: 600px) {
@@ -12,6 +18,10 @@
     border-radius: 10px;
     margin: 0.5rem;
   }
+}
+
+label {
+  padding: 0.25rem 0;
 }
 
 .error_msg {
@@ -26,22 +36,8 @@
   align-self: center;
 }
 
-.image {
-  width: 30%;
-  height: auto;
-  align-self: center;
-}
-
-label {
-  padding: 0.25rem 0;
-}
-
-.moolahbanner {
-  width: 100%;
-  height: auto;
-}
-
 input {
+  align-self: center;
   margin: 0.5rem 0;
   padding: 1rem;
   border: none;
@@ -59,7 +55,6 @@ button {
   align-self: center;
   color: white;
 }
-
 
 .link-btn {
   background: none;

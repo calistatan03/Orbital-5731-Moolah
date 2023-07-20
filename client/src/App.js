@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage";
-import Signup from "./components/Signup";
-import Login from "./components/Login";
+import SignupPage from "./components/Signup/SignupPage";
+import LoginPage from "./components/Login/LoginPage";
 import Stats from "./components/ExpenseTracker/ExpenditureStats/Stats";
 import Dashboard from "./components/BudgetPlanner/Dashboard";
 import OpenForm from "./components/ExpenseTracker/AddTransaction/OpenForm";
@@ -21,8 +21,8 @@ function App() {
 			<Router>
 				<Routes>
 					{user && <Route path="/" exact element={<HomePage />} />}
-					<Route path="/signup" element={!user ? <Signup /> : <Navigate to="/"/>} />
-					<Route path="/login" element={!user ? <Login/> : <Navigate to="/"/>}/>
+					<Route path="/signup" element={!user ? <SignupPage /> : <Navigate to="/"/>} />
+					<Route path="/login" element={!user ? <LoginPage/> : <Navigate to="/"/>}/>
 					<Route path="/" element={<Navigate replace to="/login" />} />
 					<Route path = "/budgetplanner" exact element = {user ? <Dashboard/> : <Navigate to="/login"/>} />
 					<Route path = "/expensetracker" exact element = {user ? <Stats /> : <Navigate to="/login"/>} />
