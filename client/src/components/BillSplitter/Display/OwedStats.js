@@ -11,7 +11,9 @@ export default function OwedStats() {
 
    // fetch bill data 
   const { data: billData, isLoading, isError } = useQuery(["bills"], () => { 
-    return axios.get('http://localhost:8080/api/add-bill', { 
+    const url2 = 'http://localhost:8080/api/add-bill';
+    const url = 'https://orbital-5731-moolah.onrender.com/api/add-bill';
+    return axios.get(url, { 
     headers: { 
       'Authorization': `Bearer ${user.token}`
     }
