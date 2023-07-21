@@ -61,11 +61,11 @@
 
 
 .paid_button {
-  border-radius: 7px;
+  border-radius: 14px;
   font-size: 14px;
   border: none;
   vertical-align: middle;
-  width: 85px;
+  width: 90px;
   background: rgb(220, 220, 220);
   color: black;
 }
