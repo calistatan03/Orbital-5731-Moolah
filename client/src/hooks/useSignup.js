@@ -11,7 +11,9 @@ export const useSignup = () => {
     setIsLoading(true) 
     setError(null)
 
-    const response = await fetch('http://localhost:8080/api/users', { 
+    const url2 = "http://localhost:8080/api/users"
+    const url = "https://orbital-5731-moolah.onrender.com/api/users"
+    const response = await fetch(url, { 
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({firstName, lastName, email, password})

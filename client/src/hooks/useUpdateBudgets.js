@@ -8,7 +8,9 @@ export const useUpdateBudget = (id) => {
   const {user} = useAuthContext();
   return useMutation((id) => { 
 
-    return axios.put(`http://localhost:8080/api/add-budget/${id}`, { 
+    const url2 = `http://localhost:8080/api/add-budget/${id}`
+    const url = `https://orbital-5731-moolah.onrender.com/api/add-budget/${id}`
+    return axios.put(url, { 
       headers: { 
         'Authorization': `Bearer ${user.token}`
       }
