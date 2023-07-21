@@ -56,14 +56,14 @@ export default function BudgetForm(props) {
         const numOfMonths = durationInMonths(new Date(endDate), new Date())
         const numOfYears = durationInYears(new Date(endDate), new Date())
         const newEndDate = (enteredRecurrence === "Daily") ? addDays(new Date(endDate), numOfDays + 1) : 
+          enteredRecurrence === "Weekly" ? addWeeks(new Date(endDate), numOfWeeks + 1) : 
+          enteredRecurrence === "Monthly" ? addMonths(new Date(endDate), numOfMonths + 1) : 
+          addYears(new Date(endDate), numOfYears + 1)
+          console.log(new Date(newEndDate))
+        const startDate = (enteredRecurrence === "Daily") ? addDays(new Date(endDate), numOfDays) : 
           enteredRecurrence === "Weekly" ? addWeeks(new Date(endDate), numOfWeeks) : 
           enteredRecurrence === "Monthly" ? addMonths(new Date(endDate), numOfMonths) : 
           addYears(new Date(endDate), numOfYears)
-          console.log(new Date(newEndDate))
-        const startDate = (enteredRecurrence === "Daily") ? addDays(new Date(endDate), numOfDays) : 
-          enteredRecurrence === "Weekly" ? addWeeks(new Date(endDate), numOfWeeks - 1) : 
-          enteredRecurrence === "Monthly" ? addMonths(new Date(endDate), numOfMonths - 1) : 
-          addYears(new Date(endDate), numOfYears - 1)
         console.log(new Date(startDate))
           const budgetData = { 
             category: enteredCategory,
