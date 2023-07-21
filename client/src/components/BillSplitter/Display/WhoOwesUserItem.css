@@ -65,7 +65,9 @@
   font-size: 14px;
   border: none;
   vertical-align: middle;
-  width: 90px;
+  width: 85px;
+  background: rgb(220, 220, 220);
+  color: black;
 }
 
 .paid_button_container {
