@@ -61,21 +61,24 @@
 }
 
 
-.paid_button { 
+.paid_button {
   border-radius: 14px;
   font-size: 14px;
   border: none;
   vertical-align: middle;
   width: 90px;
   color: black;
+  margin-top: 0;
+  padding: 8px;
   background-color: rgb(220, 220, 220);
 }
 
-.paid_button_container { 
-  font-size: 0; 
+.paid_button_container {
+  font-size: 0;
   display: inline-block;
 
 }
+
 
 .owe-message { 
   display: block;

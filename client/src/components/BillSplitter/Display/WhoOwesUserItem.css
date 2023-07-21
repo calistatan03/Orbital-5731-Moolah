@@ -66,13 +66,16 @@
   border: none;
   vertical-align: middle;
   width: 90px;
-  background: rgb(220, 220, 220);
   color: black;
+  margin-top: 0;
+  padding: 8px;
+  background-color: rgb(220, 220, 220);
 }
 
 .paid_button_container {
   font-size: 0;
   display: inline-block;
+
 }
 
 .owe-message {

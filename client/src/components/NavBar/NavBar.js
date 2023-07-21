@@ -53,7 +53,7 @@ export default function NavBar() {
 						{user.firstName} {user.lastName}</button>
 							<div className="dropdown-content">
 								<li><div className="profile"><Link className="profile_link" to="/profile"><h3>Profile</h3></Link></div></li>
-								<li><div className="logout" onClick={handleLogout}><h3>Log out</h3></div></li>
+								<li><div className="logout_dropdown" onClick={handleLogout}><h3>Log out</h3></div></li>
 							</div>
 						</div>
 						</li>
