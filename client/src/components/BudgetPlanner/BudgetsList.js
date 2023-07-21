@@ -38,7 +38,7 @@ export default function BudgetsList({budgetData}) {
 
   async function deleteBudget(id) { 
     const url2 = 'https://localhost:8080/api/add-budget/${id}';
-    const url = 'https://orbital-5731-moolah.onrender.com/api/add-budget/${id}';
+    const url = `https://orbital-5731-moolah.onrender.com/api/add-budget/${id}`;
     await axios.delete(url, { 
       headers: { 
         'Authorization': `Bearer ${user.token}`
@@ -76,7 +76,7 @@ export default function BudgetsList({budgetData}) {
       const updatedBudget = {startDate: startDate, endDate: endDate}
       try { 
         const url2 = 'https://localhost:8080/api/add-budget/${budget._id}';
-        const url = 'https://orbital-5731-moolah.onrender.com/api/add-budget/${budget._id}';
+        const url = `https://orbital-5731-moolah.onrender.com/api/add-budget/${budget._id}`;
         const response =  axios.patch(url, updatedBudget, { 
         headers: { 
           'Authorization': `Bearer ${user.token}`
