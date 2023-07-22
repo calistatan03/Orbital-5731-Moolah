@@ -7,18 +7,17 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import TransactionCalendar from '../FeaturePage/TransactionCalendar';
+import { toast } from 'react-toastify';
 
 export default function Stats() {
   const [showDoughnutChart, setShowDoughnutChart] = useState(false); // State to manage the visibility of the chart
-  const [transactionList, setTransactionList] = useState([]);
+  const [transactions, setTransactions] = useState([]);
   
   const { user } = useAuthContext();
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.reload();
   };
-
-  const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -33,7 +32,7 @@ export default function Stats() {
           'Authorization': `Bearer ${user.token}`
         }
       });
-      setTransactionList(response.data);
+      setTransactions(response.data); // Update state with fetched transactions
     } catch (error) {
       console.error(error);
     }
@@ -47,19 +46,36 @@ export default function Stats() {
     setShowDoughnutChart((prevShow) => !prevShow); // Toggle the visibility of the chart
   };
 
+  const handleDeleteTransaction = async (id) => {
+    try {
+      const url = `https://orbital-5731-moolah.onrender.com/api/add-transaction/${id}`;
+      await axios.delete(url, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      setTransactions((prevTransactions) =>
+        prevTransactions.filter((transaction) => transaction.id !== id)
+      );
+      toast.success('Expense deleted successfully!');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="main_container">
       <NavBar />
       <div>
         {showDoughnutChart && <DoughnutChart transactions={transactions} onSaveTransactionData={handleSaveTransactionData} />}
 
-        {!showDoughnutChart && <TransactionCalendar transactions={transactionList} setTransactionList={setTransactionList} />}
+        {!showDoughnutChart && <TransactionCalendar transactions={transactions} onDeleteTransaction={handleDeleteTransaction} />}
       </div>
       <div className="button-container">
         <Link to="/add-transaction" className="add-button">
-            Add New Transaction Here
-          </Link>
-          <button className="view-stats-btn" onClick={handleToggleChart}>
+          Add New Transaction Here
+        </Link>
+        <button className="view-stats-btn" onClick={handleToggleChart}>
           {showDoughnutChart ? 'View Calendar' : 'View Statistics'}
         </button>
       </div>

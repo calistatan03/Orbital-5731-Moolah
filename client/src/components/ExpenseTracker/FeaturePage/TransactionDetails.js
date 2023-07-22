@@ -21,7 +21,11 @@ const modalStyle = {
   },
 };
 
-const TransactionDetails = ({ isOpen, onClose, event }) => {
+const TransactionDetails = ({ isOpen, onClose, event, onDelete}) => {
+  const handleDelete = () => {
+    onDelete(event._id); 
+    onClose();
+  };
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} style={modalStyle}>
       <div>
@@ -31,6 +35,9 @@ const TransactionDetails = ({ isOpen, onClose, event }) => {
         <p>Date: {moment(event.start).format('MMMM Do YYYY')}</p>
         <button className="close-btn" onClick={onClose} style={{ marginTop: '20px' }}>
           Close
+        </button>
+        <button className="delete-btn" onClick={handleDelete}>
+          Delete
         </button>
       </div>
     </Modal>
