@@ -28,6 +28,7 @@
   flex-direction: column;
   align-items: center;
   margin-right: 20px;
+  position: relative;
 }
 
 .view-stats-btn {
@@ -38,7 +39,6 @@
   background-color: #934CFA;
   color: #fff;
   cursor: pointer;
-  margin-bottom: 10px;
   width: 320px;
 }
 
