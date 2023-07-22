@@ -395,7 +395,7 @@ export default function DoughnutChart({transactions}) {
 )}
 
   {selectedDuration === 'year' && (
-    <>
+    <div className="filter-container">
       <label htmlFor="yearFilter">Year:</label>
       <select
         id="yearFilter"
@@ -408,7 +408,7 @@ export default function DoughnutChart({transactions}) {
           </option>
         ))}
       </select>
-    </>
+      </div>
   )}
 </div>
 
