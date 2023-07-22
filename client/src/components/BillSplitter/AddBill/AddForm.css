@@ -35,20 +35,19 @@
 }
 
 .new-bill__controls { 
-  margin-top: 3rem;
-  display: flex;
   flex-direction: column;
-  gap: 0.5px;
-  margin-bottom: 3rem;
-  justify-content: center;
   align-items: center;
+  margin-top: 2rem;
+  display: flex;
+  margin-bottom: 1rem;
 }
 
 .new-bill__controls label {
   font: inherit;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
   display: block;
+  font-weight: bold;
+  text-align: left;
+  justify-content: left;
 }
 
 .new-bill__controls select { 
@@ -79,7 +78,6 @@
     margin-bottom: 3rem;
     text-align: left;
     justify-content: center;
-    align-items: center;
 }
 
 .new-bill__control .form-input { 
