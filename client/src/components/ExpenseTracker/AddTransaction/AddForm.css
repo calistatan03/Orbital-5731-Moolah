@@ -1,4 +1,5 @@
 .transaction-form_wrapper {
+  height: 11rem;
   align-items: center;
   margin-top: 2rem;
 }
@@ -12,12 +13,13 @@
 }
 
 .new-transaction__controls {
-  display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 2rem;
+  display: flex;
   gap: 1rem;
   margin-bottom: 1rem;
-  text-align: center;
+  text-align: left;
 }
 
 .with-shadow {
@@ -25,6 +27,7 @@
 }
 
 .new-transaction__control label {
+  font: inherit;
   margin-bottom: 0.5rem;
   display: block;
   font-weight: bold;
