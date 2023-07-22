@@ -1,6 +1,15 @@
 import { render, screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
-import Signup from '../Signup/index';
 import axios from 'axios';
+import signupController from '../../../../server/controllers/Signup/signup';
+import SignupPage from '../Signup/SignupPage';
+
+const MockSignup = () => { 
+  return (
+    <BrowserRouter>
+      <SignupPage/>
+    </BrowserRouter>
+  )
+}
 
 // Begin the test
 describe("SignUp component", () => {
@@ -10,7 +19,7 @@ describe("SignUp component", () => {
     jest.spyOn(axios, "post").mockResolvedValueOnce({ data: { success: true } });
 
     // Render the SignUp component
-    const {getByTestId } = render(<Signup />);
+    const {getByTestId } = render(<SignupPage />);
 
     // Simulate user input
     const emailInput = getByTestId("email");
@@ -23,7 +32,7 @@ describe("SignUp component", () => {
     fireEvent.change(lastNameInput, { target: { value: "Smith" } })
 
     const passwordInput = getByTestId("password");
-    fireEvent.change(passwordInput, { target: { value: "password123" } });
+    fireEvent.change(passwordInput, { target: { value: "Password123!" } });
 
     // Simulate form submission
     const signUpForm = getByTestId("signup-form");
@@ -35,7 +44,7 @@ describe("SignUp component", () => {
     // Assert that the account creation request was made with the correct data
     expect(axios.post).toHaveBeenCalledWith("/api/user", {
       email: "test@example.com",
-      password: "password123",
+      password: "Password123!",
       firstName: "Tom",
       lastName: "Smith"
     });
@@ -53,7 +62,7 @@ describe("SignUp component", () => {
         email: "test@example.com",
         firstName: "Tom", 
         lastName: "Smith",
-        password: "password" // Invalid password (less than 6 characters)
+        password: "passwor" // Invalid password (less than 8 characters)
       },
     };
 

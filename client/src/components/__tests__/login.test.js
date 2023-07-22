@@ -1,42 +1,28 @@
-import { render, screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
-import Login from '../Login/index';
-import axios from 'axios';
+import LoginPage from "../Login/LoginPage"
+import { render, screen, fireEvent } from '@testing-library/react'
+import { AuthContextProvider } from "../../context/AuthContext"
+import HomePage from "../HomePage/HomePage"
 
-describe("Login component", () => { 
-  
-  it("rendered component", () => { 
-    const {getByTestId} = render(<Login/>);
-    const login = getByTestId("login-1")
-    expect(login).toBeTruthy(); 
-  });
+const MockLogin = () => { 
+  return (
+    <AuthContextProvider>
+      <LoginPage/>
+    </AuthContextProvider>
+  )
+}
 
-  it("allows user to log in with email and password", async () => { 
-
-    // Mock the axios.post method to simulate a successful login request
-    jest.spyOn(axios, "post").mockResolvedValueOnce({ data: { success: true } });
-
-    // Simulate user input 
-    const {getByTestId} = render(<Login/>);
-    const login = getByTestId("login-1")
-
-    const emailInput = getByTestId("email");
-    fireEvent.change(emailInput, {target: {value: "test@example.com"}})
-
-    const passwordInput = getByTestId("password");
-    fireEvent.change(passwordInput, { target: { value: "password123!" } });
-
-    // Simulate form submission 
-    const loginForm = getByTestId("login-form");
-    fireEvent.submit(loginForm);
-
-    // Wait for the login request to resolve
-    await waitFor(() => expect(axios.post).toHaveBeenCalledTimes(1));
-
-    // Assert that the login request was made with the correct credentials
-    expect(axios.post).toHaveBeenCalledWith("/api/user", {
-      email: "test@example.com",
-      password: "password123!",
-    });
+// integration test
+describe("Log in", () => { 
+  it('Should allow user to log in to account', async () => { 
+    render(<MockLogin/>);
+    const emailElement = screen.getByPlaceholderText(/Email/i)
+    const passwordElement = screen.getByPlaceholderText(/Password/i)
+    const buttonElement = screen.getByRole("button", { name: /Sign In/i})
+    
+    fireEvent.change(emailElement, {target: {value: "test@example.com"}})
+    fireEvent.change(passwordElement, {target: {value: "ABCabc123!"}})
+    fireEvent.click(buttonElement)
+    expect(<HomePage/>).toBeCalled()
   })
+} )
 
-});

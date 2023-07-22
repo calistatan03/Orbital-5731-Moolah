@@ -20,9 +20,8 @@ describe("Bill Splitter", () => {
     // Set up the test data
     const billData = {
       title: "Outing",
-      amount: 50,
-      numOfMembers: 2,
-      memberNames: [{memberName: "Mary"}], 
+      amount: 25,
+      memberName: 'Mary', 
       paidMember: "Me",
       date: new Date("24 June 2023"),
     };
@@ -35,9 +34,8 @@ describe("Bill Splitter", () => {
         message: "Budget added successfully",
         expense: {
           title: "Outing",
-          amount: 50,
-          numOfMembers: 2,
-          memberNames: [{memberName: "Mary"}], 
+          amount: 25,
+          memberName: 'Mary', 
           paidMember: "Me",
           date: new Date("24 June 2023"),
     }
@@ -60,35 +58,24 @@ describe("Bill Splitter", () => {
     const billAmount = 25;
     const whoOwesUserData = { 
       title: "Outing",
-      amount: 50,
-      numOfMembers: 2,
-      memberNames: [{memberName: "Mary"}], 
+      amount: 25,
+      memberName: 'Mary', 
       paidMember: "Me",
       date: new Date("24 June 2023"),
     }
 
     const UserOwesData = { 
       title: "Outing",
-      amount: 50,
-      numOfMembers: 2,
-      memberNames: [{memberName: "Mary"}], 
+      amount: 25,
+      memberName: 'Me', 
       paidMember: "Mary",
       date: new Date("24 June 2023"),
     }
 
 
-    const participants = [
-      { id: 1, name: "User A" },
-      { id: 2, name: "User B" },
-      { id: 3, name: "User C" },
-      { id: 4, name: "User D" },
-    ];
-
-
     // Call the function to calculate the bill split
     const billSplit1 = UseOweItem(UserOwesData);
     const billSplit2 = WhoOwesUserItem(whoOwesUserData);
-
 
     // Assert the calculated results
     expect(billSplit1.totalAmount).toBe(25);
