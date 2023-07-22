@@ -5,7 +5,7 @@ import "./index.css";
 import { useSignup } from '../../hooks/useSignup';
 import "./SignupPage.css";
 import moolahlogo2 from '../../images/moolahlogo2.png'
-
+import CircleIcon from '@mui/icons-material/Circle';
 
 export default function SignupPage() { 
   const [email, setEmail] = useState('')
@@ -95,7 +95,15 @@ export default function SignupPage() {
 							Sign Up
 						</button>
       </form>
-     <p className="mt-2 text-center text-sm text-gray-600 mt-4">
+			<div className="password_complexity_msg"> 
+				<h1>NOTE: Your password must:</h1>
+				<li><h2>Have at least 8 characters</h2></li>
+				<li><h2>Use upper and lower case characters</h2></li>
+				<li><h2>Use 1 or more numbers</h2></li>
+				<li><h2>Use at least one special charcter (!*@#^&%()$)</h2></li>
+			</div>
+			
+     <p className="mt-2 text-center text-sm text-gray-600 mt-3">
             Already have an account? {' '}
             <Link to="/login" className="link_btn">
                 Log in here
