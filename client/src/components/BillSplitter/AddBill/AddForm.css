@@ -8,6 +8,27 @@
   width: 20rem;
 }
 
+
+.error_message p { 
+  color: red;
+  text-align: center;
+  animation: blink-animate 1.5s linear infinite;
+}
+
+@keyframes blink-animate {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: .5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 .form-card { 
   border-radius: 10px;
   padding: 20px;
@@ -32,6 +53,7 @@
 
 .new-bill__controls select { 
   font: inherit;
+  margin-bottom: 2px;
     padding: 0.5rem;
     border-radius: 6px;
     border: 1px solid #ccc;

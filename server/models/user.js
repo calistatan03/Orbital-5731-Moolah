@@ -19,6 +19,11 @@ userSchema.methods.generateAuthToken = function () {
     return token
 };
 
+function containsSpecialChars(password) { 
+    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    return specialChars.test(password);
+}
+
 // static signup method 
 userSchema.statics.signup = async function(firstName, lastName, email, password) { 
 
@@ -27,6 +32,10 @@ userSchema.statics.signup = async function(firstName, lastName, email, password)
     // check whether firstName has been provided 
     if (!firstName) { 
         throw Error('No first name provided!')
+    }
+
+    if (!lastName) { 
+        throw Error('No last name provided')
     }
 
     // check whether email and password have been provided - no blank fields 
@@ -39,17 +48,36 @@ userSchema.statics.signup = async function(firstName, lastName, email, password)
         throw Error('Email is not valid')
     }
 
-    // check if password is strong enough
-    if (!validator.isStrongPassword(password)) { 
-        throw Error('Password not strong enough');
-    }
-
     const exists = await this.findOne({email})
 
     if (exists) { 
-        throw Error(`User with given email already exists!`)
+        throw Error(`User with given email already exists`)
     }
 
+
+    if (password.length < 8) { 
+        throw Error('Password must be at least 8 characters long')
+    }
+
+    // check if password contains lower and upper case 
+    if (password.search(/[a-z]/) < 0) { 
+        throw Error('Password needs to contain at least 1 lower case letter')
+    }
+
+    if (password.search(/[A-Z]/) < 0) { 
+        throw Error('Password needs to contain at least 1 upper case letter')
+    }
+    
+    // check if password contains special characters 
+    if (!containsSpecialChars(password)) { 
+        throw Error('Password needs to contain at least 1 special character')
+    }
+
+    // check if password contains one or more numbers 
+    if (password.search(/[0-9]/) < 0) { 
+        throw Error('Password needs to contain at least 1 number')
+    }
+    
     // hashing password 
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);

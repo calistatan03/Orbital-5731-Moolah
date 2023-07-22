@@ -23,7 +23,7 @@ export default function AddForm() {
   const [enteredDate, setEnteredDate] = useState('');
   const [error, setError] = useState('');
   const { user } = useAuthContext(); 
-  const { register, handleSubmit } = useForm();
+  const [formErrors, setFormErrors] = useState({})
   //const [memberNameList, setMemberNameList] = useState([{memberName: "Me"}])
   
 
@@ -47,8 +47,46 @@ export default function AddForm() {
     }
   }
 
+  const validate = () => { 
+    const errors = {};
+
+    // check title 
+    if (!enteredTitle) { 
+      errors.title = "Title is required!"
+    } 
+
+    // check amount
+    if (enteredAmount === 0) { 
+      errors.amount = "Amount cannot be $0!"
+    }
+
+    // check date 
+    if (!enteredDate) { 
+      errors.date = "Date is required!"
+    }
+
+    // check number of members 
+    if (enteredNumOfMembers <= 1) { 
+      errors.numOfMembers = "There must be at least 2 members in the group!"
+    }
+
+    // check names of members 
+    if (memberNames.length != enteredNumOfMembers-1) { 
+      errors.memberNames = "All member names must be provided!"
+    }
+
+    // check for paid member 
+    if (!paidMember) { 
+      errors.paidMember = "Select a member!"
+    }
+
+    return errors;
+    
+  }
+
   async function submitHandler(event) { 
     event.preventDefault();
+    setFormErrors(validate())
 
     
     // user paid for bill, others owe him/her 
@@ -136,6 +174,7 @@ export default function AddForm() {
               name="memberName"
               className="form-input with-shadow"
               type="text"
+              required
               placeholder= 'Member Name'
               onChange={(event) => addMemberHandler(event, i) }
               />)
@@ -168,52 +207,61 @@ export default function AddForm() {
           <h1>New Bill</h1>
           <label>Title</label>
           <input className="form-input with-shadow" type="text" value={enteredTitle} onChange={titleChangeHandler} />
+          <div className="error_message"><p>{formErrors.title}</p></div>
         </div>
 
         <div className="new-bill__controls">
           <label>Amount</label>
           <input 
             type="number" 
+            required
             className="form-input with-shadow"
             min="0.01" step="0.01" 
             value={enteredAmount} 
             onChange={amountChangeHandler} 
             />
+            <div className="error_message"><p>{formErrors.amount}</p></div>
         </div>
 
         <div className="new-bill__controls">
           <label>Date</label>
           <input 
             type="date"
+            required
             className="form-input with-shadow"
             min="2000-01-01"
             max="2030-01-01" 
             value={enteredDate}
             onChange={dateChangeHandler}
             />
+            <div className="error_message"><p>{formErrors.date}</p></div>
         </div>
 
         <div className="new-bill__controls">
           <label>Number of Members</label>
           <input 
             type="number"
+            required
             className="form-input with-shadow"
             min="1"
             step="1"
             value = {enteredNumOfMembers}
             onChange={numChangeHandler}
             />
+          <div className="error_message"><p>{formErrors.numOfMembers}</p></div>
         </div>
 
-        {enteredNumOfMembers > 1 ? <div className="new-bill__control">
+        {enteredNumOfMembers > 1 ? <div className="new-bill__controls">
         <label>Name of Other Members</label>
           {fields}
+          <div className="error_message"><p>{formErrors.memberNames}</p></div>
         </div> : <div></div> }
 
         <div className="new-bill__controls">
           <label>Paid By</label>
           <select id="paidMemberDropdown"
             value={paidMember}
+            required
             className="form-input with-shadow"
             onChange={paidMemberChangeHandler}
             style={{ width: '20rem', height: '2.5rem' }}>
@@ -221,13 +269,13 @@ export default function AddForm() {
               <option value="Me">Me</option>
               {options}
           </select>
+          <div className="error_message"><p>{formErrors.paidMember}</p></div>
         </div>
-
         <div className="actions">
           <button className="submit_btn" type='submit' onClick={submitHandler}>Split Bill</button>
           <Link to="/billsplitter">
           <button type="button" className="cancel_btn">
-            Cancel
+            Back
           </button>
           </Link>
         </div>

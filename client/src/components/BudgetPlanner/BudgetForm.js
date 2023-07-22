@@ -20,6 +20,7 @@ export default function BudgetForm(props) {
   const [enteredRecurrence, setEnteredRecurrence] = useState('Daily');
   const [enteredDate, setEnteredDate] = useState('');
   const [error, setError] = useState('');
+  const [formErrors, setFormErrors] = useState({})
 
   function categoryChangeHandler(event) {
     setEnteredCategory(event.target.value);
@@ -37,9 +38,33 @@ export default function BudgetForm(props) {
     setEnteredDate(event.target.value);
   }
 
+  const validate = () => { 
+    const errors = {};
+
+    // check title 
+    if (!enteredCategory) { 
+      errors.title = "Category is required!"
+    } 
+
+    // check amount
+    if (enteredAmount === 0) { 
+      errors.amount = "Amount cannot be $0!"
+    }
+
+    // check date 
+    if (!enteredDate) { 
+      errors.date = "Date is required!"
+    }    
+
+    return errors;
+    
+  }
+
   // submit post request and new budget data 
   async function submitHandler(event) { 
     event.preventDefault(); 
+    setFormErrors(validate);
+    
 
     if (user) { 
 
@@ -73,9 +98,9 @@ export default function BudgetForm(props) {
             endDate: new Date(newEndDate)
           };
 
-        const url2 = 'https://localhost:8080/api/add-budget';
+        const url2 = 'http://localhost:8080/api/add-budget';
         const url = 'https://orbital-5731-moolah.onrender.com/api/add-budget';
-        const response = await fetch(url, { 
+        const response = await fetch(url2, { 
           method: 'POST',
           body: JSON.stringify(budgetData),
           headers: { 
@@ -108,7 +133,7 @@ export default function BudgetForm(props) {
           endDate: new Date(endDate)
         };
 
-        const url2 = 'https://localhost:8080/api/add-budget';
+        const url2 = 'http://localhost:8080/api/add-budget';
         const url = 'https://orbital-5731-moolah.onrender.com/api/add-budget';
         const response = await fetch(url, { 
         method: 'POST',
@@ -175,18 +200,22 @@ export default function BudgetForm(props) {
             <input 
             placeholder="Groceries, Transport, Food..."
             type="text" 
+            required
             value={enteredCategory} 
             onChange={categoryChangeHandler}
             className="category_input with-shadow" />
+            <div className="error_message"><p>{formErrors.title}</p></div>
           </div>
           <div className="new-budget__control">
             <label>Amount</label>
             <input type='number' 
               min="0.01" 
               step="0.01" 
+              required
               value={enteredAmount}
               onChange={amountChangeHandler}
               className="amount_input with-shadow"/>
+              <div className="error_message"><p>{formErrors.amount}</p></div>
           </div>
           <div className="new-budget__control"> 
             <label>Recurrence</label>
@@ -205,11 +234,13 @@ export default function BudgetForm(props) {
               <label>Start Date</label>
               <input 
             type="date"
+            required
             className="date-input with-shadow"
             min="2000-01-01"
             max="2030-01-01" 
             value={enteredDate}
             onChange={dateChangeHandler}/>
+            <div className="error_message"><p>{formErrors.date}</p></div>
 
           </div>
         </div>

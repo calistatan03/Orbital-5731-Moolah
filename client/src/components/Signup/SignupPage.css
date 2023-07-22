@@ -61,3 +61,70 @@ button {
   color: white;
   text-decoration: underline;
 }
+
+.password_complexity_msg { 
+  border-color: black;
+  margin-top: 15px;
+  align-items: center;
+  align-self: center;
+  border-radius: 5px;
+}
+
+
+.password_complexity_msg h1 { 
+  text-align: center;
+  font-size: 12px;
+  font-family: inherit;
+  margin-top: 10px;
+  font-weight: normal;
+  color: red;
+  animation: blink-text 1.9s linear infinite;
+}
+
+@keyframes password_complexity_msg {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.password_complexity_msg li { 
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.password_complexity_msg li h2 { 
+  font-size: 10px; 
+  font-family: inherit; 
+  text-align: center;
+  font-weight: normal;
+}
+
+
+
+.bullet_pt { 
+  font-size: 10px;
+  width: 200px;
+  text-align: center;
+}
+
+.dot { 
+  font-size: 2px;
+  margin-right: 2px;
+}
+
+.note_msg {
+  width: 200px;
+  font-size: 10px;
+  text-align: center;
+}
