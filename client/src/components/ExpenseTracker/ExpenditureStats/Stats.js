@@ -48,6 +48,7 @@ export default function Stats() {
 
   const handleDeleteTransaction = async (id) => {
     try {
+      const url2 = `http://localhost:8080/api/add-transaction/${id}`
       const url = `https://orbital-5731-moolah.onrender.com/api/add-transaction/${id}`;
       await axios.delete(url, {
         headers: {

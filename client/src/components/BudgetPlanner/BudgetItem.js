@@ -88,8 +88,8 @@ export default function BudgetItem({budget, onDeleteBudget}) {
           <BiTrash></BiTrash>
         </span>
         </div>
-        <div className="statistics"> 
-          <BudgetStats budgetItemData={budgetItemData}/>
+        <div className="statistics with-shadow"> 
+          <BudgetStats className="budgetStats" width={"100%"} budgetItemData={budget}/>
         </div>
     </div>
     )
@@ -111,7 +111,7 @@ export default function BudgetItem({budget, onDeleteBudget}) {
            <ChartBar filteredTransactions = {filteredTransactions} budget={budget}/> 
         </span>
         <span className="statistics_span">
-          <button onClick={() => setExpand(true)} className="statistics_btn">View Statistics <ExpandMoreIcon/></button>
+          <button onClick={() => setExpand(true)} className="statistics_btn with-shadow">View Statistics <ExpandMoreIcon/></button>
         </span>
         <span className="delete-icon" onClick={() => deleteBudget(budget._id)}>
           <BiTrash></BiTrash>

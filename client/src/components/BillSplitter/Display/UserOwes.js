@@ -31,7 +31,9 @@ export default function UserOwes({userOwesData}) {
   // const filteredData = data.filter((bill) => bill.paidMember != "Me");
 
   async function deleteBill(id) { 
-    await axios.delete(`https://orbital-5731-moolah.onrender.com/api/add-bill/${id}`, { 
+    const url2 = `http://localhost:8080/api/add-bill${id}`
+    const url = `https://orbital-5731-moolah.onrender.com/api/add-bill/${id}`
+    await axios.delete(url, { 
       headers: { 
         'Authorization': `Bearer ${user.token}`
       }

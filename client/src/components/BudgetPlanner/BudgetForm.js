@@ -100,7 +100,7 @@ export default function BudgetForm(props) {
 
         const url2 = 'http://localhost:8080/api/add-budget';
         const url = 'https://orbital-5731-moolah.onrender.com/api/add-budget';
-        const response = await fetch(url2, { 
+        const response = await fetch(url, { 
           method: 'POST',
           body: JSON.stringify(budgetData),
           headers: { 

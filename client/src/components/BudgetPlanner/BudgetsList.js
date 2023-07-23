@@ -24,20 +24,10 @@ export default function BudgetsList({budgetData}) {
   
   //const { budgets, setBudgets} = useContext(BudgetsContext);
 
-  const deleteBudgetFunction = (id) => { 
-    const url2 = 'https://localhost:8080/api/add-budget/${id}';
-    const url = 'https://orbital-5731-moolah.onrender.com/api/add-budget/${id}';
-    return axios.delete(url, { 
-      headers: { 
-        'Authorization': `Bearer ${user.token}`
-      }
-    });
-  }
-
   const text="No budgets set yet. Set one now!"
 
   async function deleteBudget(id) { 
-    const url2 = 'https://localhost:8080/api/add-budget/${id}';
+    const url2 = `http://localhost:8080/api/add-budget/${id}`;
     const url = `https://orbital-5731-moolah.onrender.com/api/add-budget/${id}`;
     await axios.delete(url, { 
       headers: { 
@@ -75,7 +65,7 @@ export default function BudgetsList({budgetData}) {
 
       const updatedBudget = {startDate: startDate, endDate: endDate}
       try { 
-        const url2 = 'https://localhost:8080/api/add-budget/${budget._id}';
+        const url2 = `http://localhost:8080/api/add-budget/${budget._id}`;
         const url = `https://orbital-5731-moolah.onrender.com/api/add-budget/${budget._id}`;
         const response =  axios.patch(url, updatedBudget, { 
         headers: { 
