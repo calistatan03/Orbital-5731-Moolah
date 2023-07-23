@@ -31,6 +31,7 @@ function App() {
 			<ToastContainer
 				className="toast-position"
 				autoClose= {2000}
+				bodyClassName="toastBody"
 			/>
 			<QueryClientProvider client={client}>
 			<Router>

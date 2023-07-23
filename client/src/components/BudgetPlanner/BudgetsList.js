@@ -14,7 +14,7 @@ import { addDays, addWeeks, addMonths, addYears, durationInMonths, durationInYea
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function BudgetsList({budgetData}) { 
+export default function BudgetsList({loadingData, budgetData}) { 
 
   const { user } = useAuthContext();
   const queryClient = useQueryClient();
@@ -131,7 +131,7 @@ export default function BudgetsList({budgetData}) {
             return <BudgetItem onDeleteBudget={deleteBudget} budget={budget} />
         })}
         </ul>
-        </div>
+        </div> 
       </div>
   )
 

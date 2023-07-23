@@ -2,6 +2,10 @@
   height: 60%;
 }
 
+.container { 
+  background-color: white;
+}
+
 .who-owers-user-card { 
   width: 50%; 
 
